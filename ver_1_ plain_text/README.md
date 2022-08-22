@@ -53,7 +53,6 @@ terraform {
 ```
 - required_version
     - 실행 위치 디바이스의 테라폼 버전 관련 설정
-        - 
 
 - required_providers
     - registry.terraform.io/hashicorp/aws 에서 4.22.0 버전 사용
