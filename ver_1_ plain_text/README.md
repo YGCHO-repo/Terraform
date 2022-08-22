@@ -84,6 +84,8 @@ resource "aws_vpc" "this" {
 ```
 > 참고용 URL
 - https://www.terraform.io/language
+
+---
 #### resource vpc 블럭
 ```hcl
 resource "aws_vpc" "this" {
@@ -105,6 +107,8 @@ resource "aws_vpc" "this" {
 > 참고용 URl
 - https://www.terraform.io/language/resources/syntax
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
+
+---
 #### resource subnet 블럭
 ```hcl
 resource "aws_subnet" "main_pub_a_subnet" {
@@ -134,6 +138,7 @@ resource "aws_subnet" "main_pub_a_subnet" {
 - https://www.terraform.io/language/resources/syntax
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
 
+---
 #### resource igw(internet gateway) 블럭
 ```hcl
 resource "aws_internet_gateway" "this" {
@@ -154,6 +159,8 @@ resource "aws_internet_gateway" "this" {
 
 > 참고용 URl
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
+
+---
 #### resource natgw(nat gateway) 블럭
 ```hcl
 # EIP 생성
@@ -192,6 +199,7 @@ resource "aws_nat_gateway" "natgw_a" {
 > 참고용 URl
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
 
+---
 #### resource route_table 블럭
 ##### default route_table 로 알아보는 전체 식별자 Sample
 - 적절하게 필요한 정보를 설정하여 사용
@@ -214,6 +222,8 @@ resource "aws_default_route_table" "this" {
   # } ]
   tags = { Name = "test-tf-vpc-default-rtb" }
 ```
+
+---
 ##### 실제 설정 진행하는 route_table
 ```hcl
 # RTB 생성
