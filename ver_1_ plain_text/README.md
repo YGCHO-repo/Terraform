@@ -413,4 +413,12 @@ resource "aws_eip" "bastion_eip" {
   - instance
     - 생성된 EIP 리소스를 설정된 EC2 instance 에 Associate 진행
 
+
+> 참고 URL
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair
+- https://aws.amazon.com/ko/amazon-linux-ami/
+- https://aws.amazon.com/ko/ec2/instance-types/
+
 ---
+#### 

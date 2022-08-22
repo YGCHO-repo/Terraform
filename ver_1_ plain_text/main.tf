@@ -733,7 +733,7 @@ resource "aws_lb" "front_alb" {
     aws_subnet.main_pub_c_subnet.id
   ]
   security_groups = [
-    aws_security_group.front_alb_sg.id
+    aws_security_group.front_alb_sg.id, 
   ]
   #     depends_on = [ 
   #         aws_lb_target_group.front_alb_tg
