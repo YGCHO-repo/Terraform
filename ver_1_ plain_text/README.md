@@ -421,4 +421,45 @@ resource "aws_eip" "bastion_eip" {
 - https://aws.amazon.com/ko/ec2/instance-types/
 
 ---
-#### 
+#### ELB (Load_Balancers) (ALB) 블럭
+```hcl
+resource "aws_lb" "front_alb" {
+  name               = "test-tf-ext-front-alb"
+  internal           = false # Public
+  load_balancer_type = "application"
+  subnets = [
+    aws_subnet.main_pub_a_subnet.id,
+    aws_subnet.main_pub_c_subnet.id
+  ]
+  security_groups = [
+    aws_security_group.front_alb_sg.id, 
+  ]
+  tags = {Name = "test-tf-ext-front-alb"}
+}
+```
+- resource "aws_lb" "front_alb" {...} 블럭 생성 진행
+  - name
+    - ALB의 Name 설정
+  - internal
+    - 해당 식별자의 type는 bool 이다. 
+    - false 설정시 Public
+      - AWS console의 Scheme : internet-facing 동일
+    - true 설정시 Private
+      - AWS console의 Scheme : internal 동일
+  - load_balancer_type
+    - application 타입으로 설정 
+      - 추가적으로 해당 식별자의 표현값은 3개 존재 
+        - application (ALB)
+        - natwork (NLB)
+        - gateway (GLB)
+  - subnets
+    - 해당 ALB에 associate 진행 하고자 하는 subnet 설정
+    - 위의 코드는 AZ(subnet) 2곳 설정 
+      - A_zone(ap-northeast-2a) , C_zone(ap-northeast-2c)
+  - security_groups
+    - 해당 ALB에서 사용 하고자 하는 SG 설정
+
+> 참고 URL
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb
+
+---
