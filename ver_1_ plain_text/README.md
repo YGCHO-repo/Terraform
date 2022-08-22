@@ -5,7 +5,7 @@
 ### 파일 구성
 1. main.tf 
 
-------
+---
 ### 테라폼 명령어 
 ```
 실행
@@ -18,6 +18,7 @@ $ terraform plan
 $ terraform apply
 ```
 
+---
 ### 사용된 리소스 블럭
 ```
 1. terraform    block
@@ -28,13 +29,14 @@ $ terraform apply
 - 테라폼 구조 관련 URL
     - https://www.terraform.io/intro
 
+---
 ## 사전 준비
 - Terraform Command 실행을 위한 디바이스 환경 설정
   - terraform 설치 
   - VS code 와 같은 texteditor(IDE) 설치
   - AWS CLI 설치 및 credentials(AK / SK) 설정 
 
-
+---
 ## main.tf 
 ### terraform 블럭
 ```hcl
@@ -56,6 +58,7 @@ terraform {
 - required_providers
     - registry.terraform.io/hashicorp/aws 에서 4.22.0 버전 사용
 
+---
 ### provider 블럭
 ```hcl
 
@@ -65,6 +68,7 @@ providre "aws" {
 ```
 - provider 는 "aws" 로 사용 , 리전은 "ap-northeast-2" KR 리전으로 사용 을 선언
 
+---
 ### resource 블럭
 - resource 블럭은 실제 AWS 에 존재하는 서비스를 생성/삭제 등과 같은 액션을 가능 하도록 하는 블럭
 
