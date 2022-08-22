@@ -155,7 +155,7 @@ resource "aws_internet_gateway" "this" {
         - aws_vpc.this.id
         - { Name = "test-tf-vpc-igw" }
 
-> 위의 예제와 같이 설정된 "aws_vpc" "this"를 vpc_id 식별자에 표현값으로 참조 하거나, tags 처럼 사용자가 직접 설정 하여 Code를 작성한다.
+> 위의 예제와 같이 설정된 "aws_vpc" "this"를 vpc_id 식별자에 표현값으로 참조 하거나,   tags 처럼 사용자가 직접 설정 하여 Code를 작성한다.
 
 > 참고용 URl
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
@@ -258,3 +258,37 @@ resource "aws_route_table_association" "pub_a_main_rtb" {
 
 ---
 #### Security_group 블럭
+```hcl
+resource "aws_security_group" "bastion_sg" {
+  description = "Bastion Server Security group"
+  name        = "Bastion-SG"
+  vpc_id      = aws_vpc.this.id
+
+  # ingress{
+  #     description = "SSH Inbound Port"
+  #     protocol = "tcp"
+  #     from_port = 22
+  #     to_port = 22
+  #     cidr_blocks = ["0.0.0.0/0"]
+  # }
+  egress {
+    description = "SSH Outbound Port"
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
+
+  }
+  tags = { Name = "test-tf-bastion-sg" }
+}
+```
+- resource "aws_security_group" "bastion_sg" {...} 블럭 생성 진행
+  - description
+    - 생성 하고자 하는 SG의 설명문 항목
+  - name
+    - 생성 하고자 하는 SG의 이름 항목
+  - vpc_id
+    - 생성 하고자 하는 SG의 생성영역 VPC기준
+    - SG의 경우 각각 VPC에 종속 되는 리소스
+
+
