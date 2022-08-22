@@ -34,10 +34,4 @@ override.tf.json
 .history/*
 
 
-<<<<<<< HEAD
 .DS_Store
-=======
-
-
-.DS_Store
->>>>>>> 440f9e9e985f62963722fa12f14b682cf8bdc060
