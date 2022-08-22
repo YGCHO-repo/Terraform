@@ -351,7 +351,7 @@ resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {
   - security_group_id
     - 해당 블럭을 내용을 어떤 SG에 설정할지 대상을 설정
   - cidr_blocks
-    - [ ] 리스트 형식으로 입력
+    - _[ ]_ 리스트 형식으로 입력
     - "0.0.0.0/0" 전체 IP 영역 및 특정 IP
       - Sample로 작성하였기에 Megazoen UTM 장비의 공인 IP도 작성
 
