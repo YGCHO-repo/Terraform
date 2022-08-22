@@ -35,7 +35,7 @@ $ terraform apply
 
 
 ## main.tf 
-#### terraform 블럭
+### terraform 블럭
 ```hcl
 
 terraform {
@@ -77,7 +77,8 @@ resource "aws_vpc" "this" {
     <IDENTIFIER> = <EXPRESSION>
 }
 ```
-
+> 참고용 URL
+- https://www.terraform.io/language
 #### resource vpc 블럭
 ```hcl
 resource "aws_vpc" "this" {
@@ -96,6 +97,9 @@ resource "aws_vpc" "this" {
         - "10.50.0.0/16"
         - { "Name" = "test-tf-vpc" }
 
+> 참고용 URl
+- https://www.terraform.io/language/resources/syntax
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
 #### resource subnet 블럭
 ```hcl
 resource "aws_subnet" "main_pub_a_subnet" {
@@ -121,6 +125,10 @@ resource "aws_subnet" "main_pub_a_subnet" {
         - "ap-northeast-2a"
         - { Name = "test-tf-ap-northeast-2a-public-main-subnet" }
 
+> 참고용 URl
+- https://www.terraform.io/language/resources/syntax
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
+
 #### resource igw(internet gateway) 블럭
 ```hcl
 resource "aws_internet_gateway" "this" {
@@ -139,14 +147,18 @@ resource "aws_internet_gateway" "this" {
 
 > 위의 예제와 같이 설정된 "aws_vpc" "this"를 vpc_id 식별자에 표현값으로 참조 하거나, tags 처럼 사용자가 직접 설정 하여 Code를 작성한다.
 
+> 참고용 URl
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
 #### resource natgw(nat gateway) 블럭
 ```hcl
+# EIP 생성
 resource "aws_eip" "natgw_a_eip" {
   vpc = true
   lifecycle { create_before_destroy = true }
   tags = { Name = "test-tf-vpc-ap-northeast-2a-nat-eip" }
 }
 
+# NAT G/W 생성
 resource "aws_nat_gateway" "natgw_a" {
   allocation_id     = aws_eip.natgw_a_eip.id
   subnet_id         = aws_subnet.main_pub_a_subnet.id
@@ -172,4 +184,61 @@ resource "aws_nat_gateway" "natgw_a" {
   - depends_on
     - 명시적으로 [aws_eip.natgw_a_eip] 생성이 정상적으로 이뤄진후, 해당 리소스가 생성 되로록 설정
 
+> 참고용 URl
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
 
+#### resource route_table 블럭
+##### default route_table 로 알아보는 전체 식별자 Sample
+- 적절하게 필요한 정보를 설정하여 사용
+```hcl
+resource "aws_default_route_table" "this" {
+  default_route_table_id = aws_vpc.this.default_route_table_id
+  # route = [ {
+  #   cidr_block = "10.50.1.0/24"
+  #   core_network_arn = "value"
+  #   destination_prefix_list_id = "value"
+  #   egress_only_gateway_id = "value"
+  #   gateway_id = "value"
+  #   instance_id = "value"
+  #   ipv6_cidr_block = "value"
+  #   nat_gateway_id = "value"
+  #   network_interface_id = "value"
+  #   transit_gateway_id = "value"
+  #   vpc_endpoint_id = "value"
+  #   vpc_peering_connection_id = "value"
+  # } ]
+  tags = { Name = "test-tf-vpc-default-rtb" }
+```
+##### 실제 설정 진행하는 route_table
+```hcl
+# RTB 생성
+resource "aws_route_table" "pub_a_main_rtb" {
+  vpc_id = aws_vpc.this.id
+  tags   = { Name = "test-tf-vpc-ap-northeast-2a-public-main-rtb" }
+}
+
+# RTB to Subnet association 
+resource "aws_route_table_association" "pub_a_main_rtb" {
+  route_table_id = aws_route_table.pub_a_main_rtb.id
+  subnet_id      = aws_subnet.main_pub_a_subnet.id
+  # gateway_id = aws_internet_gateway.this.id
+}
+```
+- resource "aws_route_table" "pub_a_main_rtb" {...} 블럭 생성 진행
+  - vpc_id
+    - 위에서 생성한 VPC 정보값 참조 설정
+
+- resource "aws_route_table_association" "pub_a_main_rtb" {...} 블럭 생성 진행
+  - route_table_id
+    - 생성된 RTB 의 id 참조하여 생성
+  - subnet_id
+    - 생성된 서브넷 의 id 참조하여 생성
+  - gateway_id
+    - IGW 및 NAT 연결 가능한 식별자 설정을 보여주고자 작성
+    - 해당 항목은 subnet_id 와 중복하여 설정 불가.
+
+> 참고용 URl
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association
+
+#### Security_group 블럭
