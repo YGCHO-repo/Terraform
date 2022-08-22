@@ -66,11 +66,11 @@ providre "aws" {
     region = "ap-northeat-2"
 }
 ```
-- provider 는 "aws" 로 사용 , 리전은 "ap-northeast-2" KR 리전으로 사용 을 선언
+- provider 는 "aws"로 사용, 리전은 "ap-northeast-2" Seoul 리전으로 사용을 선언
 
 ---
 ### resource 블럭
-- resource 블럭은 실제 AWS 에 존재하는 서비스를 생성/삭제 등과 같은 액션을 가능 하도록 하는 블럭
+- resource 블럭은 실제 AWS에 존재하는 서비스를 생성/삭제 등과 같은 액션을 가능하도록 하는 블럭
 
 #### resource 블럭의 구조
 ```hcl
@@ -96,7 +96,7 @@ resource "aws_vpc" "this" {
 - 블럭 타입은 "resource", 블럭 라벨 1은 "aws_vpc" , 블럭 라벨 2는 "this"
     - 블럭 라벨 2는 Code 작성자가 임의로 설정 가능하다.
 
-- 식별자는 2개가, 표현값도 2개 설정 되어 있다. 
+- 식별자는 2개, 표현값도 2개 설정되어 있다. 
     - 식별자 
         - cidr_block
         - tags
@@ -121,7 +121,8 @@ resource "aws_subnet" "main_pub_a_subnet" {
 ...(생략) (필요한 서브넷의 갯수 만큼 설정)
 ```
 - 블럭 타입은 "resource", 블럭 라벨 1은 "aws_subnet" , 블럭 라벨 2는 "main_pub_a_subnet"
-- 식별자는 4개, 표현값도 4개로 구성 되어 있다.
+
+- 식별자는 4개, 표현값도 4개로 구성되어 있다.
     - 식별자 
         - vpc_id
         - cidr_block
