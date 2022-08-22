@@ -452,7 +452,7 @@ resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {
   security_group_id = aws_security_group.bastion_sg.id
 
   # SSH 통신 허용 IP 입력
-  cidr_blocks = ["0.0.0.0/16", "211.60.50.190/32"]
+  cidr_blocks = ["0.0.0.0/0", "211.60.50.190/32"]
   /* 
   211.60.50.190 = Megazone Office IP
  */

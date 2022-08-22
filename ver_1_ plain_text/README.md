@@ -155,7 +155,7 @@ resource "aws_internet_gateway" "this" {
         - aws_vpc.this.id
         - { Name = "test-tf-vpc-igw" }
 
-> 위의 예제와 같이 설정된 "aws_vpc" "this"를 vpc_id 식별자에 표현값으로 참조 하거나,   tags 처럼 사용자가 직접 설정 하여 Code를 작성한다.
+> 위의 예제와 같이 설정된 "aws_vpc" "this"를 vpc_id 식별자에 표현값으로 참조 하거나, tags 처럼 사용자가 직접 설정 하여 Code를 작성한다.
 
 > 참고용 URl
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
@@ -277,7 +277,6 @@ resource "aws_security_group" "bastion_sg" {
     from_port   = 0
     to_port     = 0
     cidr_blocks = ["0.0.0.0/0"]
-
   }
   tags = { Name = "test-tf-bastion-sg" }
 }
@@ -291,4 +290,73 @@ resource "aws_security_group" "bastion_sg" {
     - 생성 하고자 하는 SG의 생성영역 VPC기준
     - SG의 경우 각각 VPC에 종속 되는 리소스
 
+- SG 블럭에서의 내부 블럭을 2개 작성, 1개 적용으로 작성 하였다. 
+  - 내부 블럭에서 ingress , egress 는 SG의 inbound , outbound 와 동일하다.
+    - ingress -> inbound
+    - egress -> outbound
+
+- ingress (주석 되어 있음)
+  - description
+    - 해당 SG의 inbound rule 의 설명문
+  - protocol
+    - "tcp"
+  - from_port
+    - 포트 설정 : 어디서부터 (시작점)
+  - to_port
+    - 포트 설정 : 어디까지 (종료점)
+  cidr_blocks
+    - [ ] 리스트 형식으로 입력
+    - "0.0.0.0/0" 전체 IP 영역
+  
+- egress
+  - protocol
+    - "-1"
+      - 전체 프로토콜에 대해서 가능/불가능하게 설정
+  - (해당 rule을 설정시 Outbound는 전체 허용)
+
+> 참고용 URL
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
+
+---
+#### Security_group_rule 블럭
+```hcl
+resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {
+  description       = "SSH - Bastion Server inbound rule"
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  security_group_id = aws_security_group.bastion_sg.id
+
+  # SSH 통신 허용 IP 입력
+  cidr_blocks = ["0.0.0.0/0", "211.60.50.190/32"]
+  /* 
+  211.60.50.190 = Megazone Office IP
+ */
+}
+```
+- resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {...} 블럭 생성 진행
+  - description
+    - 해당 SG의 inbound rule 의 설명문
+  - type
+    - ingress 
+       - 내용을 기반으로 설명시 **resource "aws_security_group" "bastion_sg" {...}** 블럭의   inbound rule을 설정
+    - 타입에는 2가지 존재 
+      - 1. ingress
+      - 2. egress
+  - from_port
+    - 포트 설정 : 어디서부터 (시작점)
+  - to_port
+    - 포트 설정 : 어디까지 (종료점)
+  - security_group_id
+    - 해당 블럭을 내용을 어떤 SG에 설정할지 대상을 설정
+  - cidr_blocks
+    - [ ] 리스트 형식으로 입력
+    - "0.0.0.0/0" 전체 IP 영역 및 특정 IP
+      - Sample로 작성하였기에 Megazoen UTM 장비의 공인 IP도 작성
+
+> 참고 URL
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
+
+---
 
