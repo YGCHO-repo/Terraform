@@ -304,8 +304,8 @@ resource "aws_security_group" "bastion_sg" {
     - 포트 설정 : 어디서부터 (시작점)
   - to_port
     - 포트 설정 : 어디까지 (종료점)
-  cidr_blocks
-    - [ ] 리스트 형식으로 입력
+  - cidr_blocks
+    - _[ ]_ 리스트 형식으로 입력
     - "0.0.0.0/0" 전체 IP 영역
   
 - egress
