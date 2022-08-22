@@ -398,8 +398,10 @@ resource "aws_eip" "bastion_eip" {
   - security_groups
     - EC2 instance 생성시 Attach 진행 하는 SG
     - 표현값의 경우 "${aws_security_group.bastion_sg.id}" or aws_security_group.bastion_sg.id 사용가능
-    * 표현값의 경우 "${aws_security_group.bastion_sg.id}" or aws_security_group.bastion_sg.id 사용가능       ㄴ아런아ㅣㅁ러ㄹㄹ
-  - 
+  - key_name
+    - EC2 instance 생성시 적용 *.pem key (key_pair)
+    - **빠른 진행을 위해서 기존 AWS key_pair 사용**
+    - 
 
 
 
