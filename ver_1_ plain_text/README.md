@@ -256,4 +256,5 @@ resource "aws_route_table_association" "pub_a_main_rtb" {
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association
 
+---
 #### Security_group 블럭
