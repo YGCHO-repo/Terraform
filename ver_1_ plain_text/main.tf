@@ -598,7 +598,8 @@ resource "aws_instance" "bastion" {
   ami               = "ami-0fd0765afb77bcca7"
   availability_zone = "ap-northeast-2a"
   instance_type     = "t2.micro"
-  security_groups   = ["${aws_security_group.bastion_sg.id}"]
+  # security_groups   = ["${aws_security_group.bastion_sg.id}", ]
+  security_groups   = [aws_security_group.bastion_sg.id, ]
   key_name          = "tf_test_key"
   subnet_id         = aws_subnet.main_pub_a_subnet.id
 

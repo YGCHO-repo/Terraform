@@ -359,4 +359,50 @@ resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
 
 ---
+#### EC2(Instance) 블럭
+```hcl
+resource "aws_instance" "bastion" {
+  ami               = "ami-0fd0765afb77bcca7"
+  availability_zone = "ap-northeast-2a"
+  instance_type     = "t2.micro"
+# security_groups   = ["${aws_security_group.bastion_sg.id}", ]
+  security_groups   = [aws_security_group.bastion_sg.id, ]
+  key_name          = "tf_test_key"
+  subnet_id         = aws_subnet.main_pub_a_subnet.id
 
+  ebs_block_device {
+    device_name = "/dev/xvda"
+    volume_size = 8
+    volume_type = "gp3"
+    # delete_on_termination = true
+    tags = { Name = "test-tf-ap-northeast-2a-bastion" }
+  }
+  lifecycle { create_before_destroy = true }
+  # disable_api_termination = true
+  tags = { Name = "test-tf-ap-northeast-2a-bastion" }
+}
+
+resource "aws_eip" "bastion_eip" {
+  vpc      = true
+  instance = aws_instance.bastion.id
+  tags     = { Name = "test-tf-vpc-ap-northeast-2a-bastion-eip" }
+}
+```
+- resource "aws_instance" "bastion" {...} 블럭 생성 진행
+  - ami
+    - EC2 instance 생성시 필요한 AMI 이미지
+  - availability_zone
+    - EC2 instance 생성시 위치 하는 AZ
+  - instance_type
+    - EC2 instance 생성시 type
+  - security_groups
+    - EC2 instance 생성시 Attach 진행 하는 SG
+    - 표현값의 경우 "${aws_security_group.bastion_sg.id}" or aws_security_group.bastion_sg.id 사용가능
+  - 
+
+
+
+
+
+
+- resource "aws_eip" "bastion_eip" {...} 블럭 생성 진행
