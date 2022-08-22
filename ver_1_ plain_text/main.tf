@@ -100,7 +100,9 @@ resource "aws_internet_gateway" "this" {
 }
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#                           NAT G/W EIP
+#                             NAT G/W
+# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#                         NAT G/W and EIP
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 resource "aws_eip" "natgw_a_eip" {
   vpc = true
@@ -113,9 +115,6 @@ resource "aws_eip" "natgw_c_eip" {
   tags = { Name = "test-tf-vpc-ap-northeast-2c-nat-eip" }
 }
 
-# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-#                          NAT G/W 생성
-# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 resource "aws_nat_gateway" "natgw_a" {
   allocation_id     = aws_eip.natgw_a_eip.id
   subnet_id         = aws_subnet.main_pub_a_subnet.id
