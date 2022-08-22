@@ -463,3 +463,30 @@ resource "aws_lb" "front_alb" {
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb
 
 ---
+#### ALB Target_group 블럭
+```hcl
+resource "aws_lb_target_group" "front_alb_tg" {
+  name        = "test-tf-front-alb-tg"
+  vpc_id      = aws_vpc.this.id
+  target_type = "instance"
+  port        = 80
+  protocol    = "HTTP"
+}
+
+resource "aws_lb_target_group_attachment" "front_alb_tg_a_attch" {
+  target_group_arn = aws_lb_target_group.front_alb_tg.arn
+  port             = 80
+  target_id        = aws_instance.web_a.id
+}
+```
+
+
+
+
+
+
+
+> 참고 URL
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group_attachment
+
