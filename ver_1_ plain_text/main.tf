@@ -603,8 +603,7 @@ resource "aws_instance" "bastion" {
   key_name          = "tf_test_key"
   subnet_id         = aws_subnet.main_pub_a_subnet.id
 
-  ebs_block_device {
-    device_name = "/dev/xvda"
+  root_block_device {
     volume_size = 8
     volume_type = "gp3"
     # delete_on_termination = true

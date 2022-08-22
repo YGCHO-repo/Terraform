@@ -370,8 +370,7 @@ resource "aws_instance" "bastion" {
   key_name          = "tf_test_key"
   subnet_id         = aws_subnet.main_pub_a_subnet.id
 
-  ebs_block_device {
-    device_name = "/dev/xvda"
+  root_block_device {
     volume_size = 8
     volume_type = "gp3"
     # delete_on_termination = true
@@ -400,12 +399,18 @@ resource "aws_eip" "bastion_eip" {
     - 표현값의 경우 "${aws_security_group.bastion_sg.id}" or aws_security_group.bastion_sg.id 사용가능
   - key_name
     - EC2 instance 생성시 적용 *.pem key (key_pair)
-    - __**빠른 진행을 위해서 기존 AWS key_pair 사용**__
-    - 
-
-
-
-
-
+    - **빠른 진행을 위해서 기존 AWS key_pair 사용**
+  - subnet_id
+    - EC2 instance 가 생성 되는 subnet 위치
+  
+  - root_block_device {...} 내부 블럭
+    - EC2 instance 생성시 기본 EBS(root_block)
+    - "gp3" 타입의 "8" Gib 로 생성
+  - delete_on_termination (주석)
+    - 해당 설정문은 AWS의 **"termination protection"** 설정 옵션
 
 - resource "aws_eip" "bastion_eip" {...} 블럭 생성 진행
+  - instance
+    - 생성된 EIP 리소스를 설정된 EC2 instance 에 Associate 진행
+
+---
