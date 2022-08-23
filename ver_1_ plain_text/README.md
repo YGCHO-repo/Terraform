@@ -30,17 +30,9 @@ $ terraform apply
     - https://www.terraform.io/intro
 
 ---
-## 사전 준비
-- Terraform Command 실행을 위한 디바이스 환경 설정
-  - terraform 설치 
-  - VS code 와 같은 texteditor(IDE) 설치
-  - AWS CLI 설치 및 credentials(AK / SK) 설정 
-
----
 ## main.tf 
 ### terraform 블럭
 ```hcl
-
 terraform {
   required_version = ">= 1.2.2"
   required_providers {
@@ -287,7 +279,7 @@ resource "aws_security_group" "bastion_sg" {
   - name
     - 생성 하고자 하는 SG의 이름 항목
   - vpc_id
-    - 생성 하고자 하는 SG의 생성영역 VPC기준
+    - 생성 하고자 하는 SG의 생성 영역 VPC기준
     - SG의 경우 각각 VPC에 종속 되는 리소스
 
 - SG 블럭에서의 내부 블럭을 2개 작성, 1개 적용으로 작성 하였다. 
@@ -311,7 +303,8 @@ resource "aws_security_group" "bastion_sg" {
 - egress
   - protocol
     - "-1"
-      - 전체 프로토콜에 대해서 가능/불가능하게 설정
+      - 전체 프로토콜에 대해서 가능하게 설정
+      - "-1" 은 전체 프로토콜 범위를 뜻함
   - (해당 rule을 설정시 Outbound는 전체 허용)
 
 > 참고용 URL
@@ -479,11 +472,25 @@ resource "aws_lb_target_group_attachment" "front_alb_tg_a_attch" {
   target_id        = aws_instance.web_a.id
 }
 ```
+- resource "aws_lb_target_group" "front_alb_tg" {...} 블럭 생성 진행
+  - name
+    - TG의 Name 설정
+  - vpc_id
+    - 위에서 생성한 VPC의 id값을 참조
+    - [resource] aws_vpc.this 의 id 값(속성) 참조
+  - target_type
+    - TG의 타입을 instance 로 설정
+  - port
+    - 통신 하고자 하는 port 설정
+  - protocol
+    - 통신 하고자 하는 port 와 함께 프로토콜 설정
+      - 통상 80:HTTP , 443:HTTPS 사용
 
-
-
-
-
+- resource "aws_lb_target_group_attachment" "front_alb_tg_a_attach" {...} 블럭 생성 진행
+  - target_group_arn
+    - 위에서 생성한 TG 의 arn(Amazon resource name) 값 설정
+      - Resource를 생성(설정) 진행시 각 resource 의 attributes 값의         ID or arn 을 선택적으로 사용해야 한다.
+  - 
 
 
 > 참고 URL

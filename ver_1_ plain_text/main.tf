@@ -784,22 +784,22 @@ resource "aws_lb_target_group" "backend_alb_tg" {
 # ++++++++++++++++++++++++++++++++++++++++++++++
 # ALB Target Group Attachment
 # ++++++++++++++++++++++++++++++++++++++++++++++
-resource "aws_lb_target_group_attachment" "front_alb_tg_a_attch" {
+resource "aws_lb_target_group_attachment" "front_alb_tg_a_attach" {
   target_group_arn = aws_lb_target_group.front_alb_tg.arn
   port             = 80
   target_id        = aws_instance.web_a.id
 }
-resource "aws_lb_target_group_attachment" "front_alb_tg_c_attch" {
+resource "aws_lb_target_group_attachment" "front_alb_tg_c_attach" {
   target_group_arn = aws_lb_target_group.front_alb_tg.arn
   port             = 80
   target_id        = aws_instance.web_c.id
 }
-resource "aws_lb_target_group_attachment" "backend_alb_tg_a_attch" {
+resource "aws_lb_target_group_attachment" "backend_alb_tg_a_attach" {
   target_group_arn = aws_lb_target_group.backend_alb_tg.arn
   port             = 8080
   target_id        = aws_instance.was_a.id
 }
-resource "aws_lb_target_group_attachment" "backend_alb_tg_c_attch" {
+resource "aws_lb_target_group_attachment" "backend_alb_tg_c_attach" {
   target_group_arn = aws_lb_target_group.backend_alb_tg.arn
   port             = 8080
   target_id        = aws_instance.was_c.id
