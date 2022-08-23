@@ -414,7 +414,7 @@ resource "aws_eip" "bastion_eip" {
 - https://aws.amazon.com/ko/ec2/instance-types/
 
 -----
-### **ELB(ALB)**
+### **ELB(Elastic Load Balancing)**
 #### ALB(Application_Load_Balancers) 블럭
 ```hcl
 resource "aws_lb" "front_alb" {
