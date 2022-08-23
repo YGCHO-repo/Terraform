@@ -946,11 +946,13 @@ resource "aws_rds_cluster_instance" "this" {
   # engine_version = "5.6.mysql_aurora.1.17.9"
   # engine_version = "5.7.mysql_aurora.2.03.2"
 
+  # // DB instance access 관련 / false 기본
   # publicly_accessible = false
 
-
+  # // DB 변경 사항을 즉시 적용 할지 여부 / false 기본 / false 설정시 다음 유지보수때(재시작/메인터넌스) 적용
   # apply_immediately = false
 
+  # // 
   # copy_tags_to_snapshot = false
   
   # lifecycle {
