@@ -412,7 +412,7 @@ resource "aws_eip" "bastion_eip" {
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair
 
-> 참고용 URL  (AWS)
+> 참고용 URL (AWS)
 - https://aws.amazon.com/ko/amazon-linux-ami/
 - https://aws.amazon.com/ko/ec2/instance-types/
 
@@ -589,24 +589,28 @@ resource "aws_db_parameter_group" "this" {
 ```
 - **resource "aws_rds_cluster_parameter_group" "this" {...} 블럭 생성 진행**
   - name
-    - 
+    - 해당 Cluster_parameter_group의 name 설정
   - family
-    - 
+    - 해당 Cluster_parameter_group의 family 설정
 
-  - parameter 내부 블럭
+  - parameter 내부 블럭 (속성 값 변경 예제)
     - name
-      -
+      - 해당 Cluster_parameter_group의 속성의 nanme 설정
     - value
-      - 
+      - 해당 Cluster_parameter_group의 속성의 value 설정
+
 - **resource "aws_db_parameter_group" "this" {...} 블럭 생성 진행**
-  - 
-
-
-
+  - name
+    - 해당 db_parameter_group의 name 설정
+  - family
+    - 해당 db_parameter_group의 family 설정
 
 > 참고용 URL  
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_parameter_group
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_parameter_group
 
-> 참고용 URL  (AWS)
+> 참고용 URL (AWS)
 - https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
+- https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
+- https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html (확인용)
+- https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html (확인용)

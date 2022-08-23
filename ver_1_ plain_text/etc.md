@@ -4,6 +4,6 @@
   - VS code 와 같은 texteditor(IDE) 설치
   - AWS CLI 설치 및 credentials(AK / SK) 설정 
 
----
+-----
 
 
