@@ -410,7 +410,8 @@ resource "aws_eip" "bastion_eip" {
 > 참고 URL
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair
-> > 참고 URL (AWS)
+
+> 참고 URL (AWS)
 - https://aws.amazon.com/ko/amazon-linux-ami/
 - https://aws.amazon.com/ko/ec2/instance-types/
 
@@ -601,5 +602,6 @@ resource "aws_db_parameter_group" "this" {
 - 
 - 
 - 
-> > 참고 URL 
-> > - https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
+
+> 참고 URL (AWS)
+- https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
