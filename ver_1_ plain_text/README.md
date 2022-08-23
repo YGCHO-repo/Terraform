@@ -26,8 +26,9 @@ $ terraform apply
 3. resource     block
 ```
 
-- 테라폼 구조 관련 URL
-    - https://www.terraform.io/intro
+> 참고 URL 
+> > - 테라폼 구조 관련 URL
+- https://www.terraform.io/intro
 
 -----
 ## main.tf 
