@@ -913,10 +913,10 @@ resource "aws_rds_cluster" "rds_aurora_cluster" {
 
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
 
-  skip_final_snapshot       = false
-  final_snapshot_identifier = false
+  skip_final_snapshot       = true
+  # final_snapshot_identifier = ""
 
-  backup_retention_period = 1
+  # backup_retention_period = 1
   # preferred_backup_window = 
   # preferred_maintenance_window = 
 

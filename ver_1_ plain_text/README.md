@@ -110,7 +110,7 @@ resource "aws_subnet" "main_pub_a_subnet" {
   tags              = { Name = "test-tf-ap-northeast-2a-public-main-subnet" }
 }
 
-...(생략) (필요한 서브넷의 갯수 만큼 설정)
+...(생략) (필요한 갯수 만큼 설정)
 ```
 - 블럭 타입은 "resource", 블럭 라벨 1은 "aws_subnet" , 블럭 라벨 2는 "main_pub_a_subnet"
 
@@ -171,6 +171,7 @@ resource "aws_nat_gateway" "natgw_a" {
   depends_on        = [aws_eip.natgw_a_eip]
   tags              = { Name = "test-tf-vpc-ap-northeast-2a-main-natgw" }
 }
+...(생략) (필요한 갯수 만큼 설정)
 ```
 - NAT Gateway 의 경우 Public 으로 생성 진행
 - Public으로 생성시 EIP가 필요하여 EIP 설정후 대상 NAT Gateway에 Attach
@@ -231,6 +232,7 @@ resource "aws_route_table_association" "pub_a_main_rtb" {
   subnet_id      = aws_subnet.main_pub_a_subnet.id
   # gateway_id = aws_internet_gateway.this.id
 }
+...(생략) (필요한 갯수 만큼 설정)
 ```
 - **resource "aws_route_table" "pub_a_main_rtb" {...} 블럭 생성 진행**
   - vpc_id
@@ -273,6 +275,7 @@ resource "aws_security_group" "bastion_sg" {
   }
   tags = { Name = "test-tf-bastion-sg" }
 }
+...(생략) (필요한 서브넷의 갯수 만큼 설정)
 ```
 - **resource "aws_security_group" "bastion_sg" {...} 블럭 생성 진행**
   - description
@@ -328,6 +331,7 @@ resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {
   211.60.50.190 = Megazone Office IP
  */
 }
+...(생략) (필요한 서브넷의 갯수 만큼 설정)
 ```
 - **resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {...} 블럭 생성 진행**
   - description
@@ -380,6 +384,7 @@ resource "aws_eip" "bastion_eip" {
   instance = aws_instance.bastion.id
   tags     = { Name = "test-tf-vpc-ap-northeast-2a-bastion-eip" }
 }
+...(생략) (필요한 서브넷의 갯수 만큼 설정)
 ```
 - **resource "aws_instance" "bastion" {...} 블럭 생성 진행**
   - ami
@@ -433,6 +438,7 @@ resource "aws_lb" "front_alb" {
   ]
   tags = {Name = "test-tf-ext-front-alb"}
 }
+...(생략) (필요한 서브넷의 갯수 만큼 설정)
 ```
 - **resource "aws_lb" "front_alb" {...} 블럭 생성 진행**
   - name
@@ -518,6 +524,7 @@ resource "aws_lb_listener" "front_alb_listener" {
   }
   tags = { Name = "test-tf-vpc-front-alb-listener" }
 }
+...(생략) (필요한 서브넷의 갯수 만큼 설정)
 ```
 - **resource "aws_lb_listener" "front_alb_listener" {...} 블럭 생성 진행**
   - load_balancer_arn
@@ -561,7 +568,7 @@ resource "aws_db_subnet_group" "this" {
     - 위의 코드는 AZ(subnet) 2곳 설정 
       - A_zone(ap-northeast-2a) , C_zone(ap-northeast-2c)
 
-> 참조 URL
+> 참고용 URL
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_subnet_group
 
 -----
@@ -619,27 +626,24 @@ resource "aws_db_parameter_group" "this" {
 #### RDS cluster(Aurora) 블럭
 ```hcl
 resource "aws_rds_cluster" "rds_aurora_cluster" {
-  cluster_identifier        = "test-tf-rds-aurora-cluster"
-  db_subnet_group_name      = aws_db_subnet_group.this.id
+  cluster_identifier               = "test-tf-rds-aurora-cluster"
+  db_subnet_group_name             = aws_db_subnet_group.this.id
   
-  engine                    = "aurora-mysql"
-  engine_version            = "8.0.mysql_aurora.3.02.0"
+  engine                           = "aurora-mysql"
+  engine_version                   = "8.0.mysql_aurora.3.02.0"
   
-  availability_zones        = ["ap-northeast-2a", "ap-northeast-2c"]
+  availability_zones               = ["ap-northeast-2a", "ap-northeast-2c"]
 
-  database_name             = "testterraformdb"
-  master_username           = "admin"
-  master_password           = "DBAdmin1004"
+  database_name                    = "testterraformdb"
+  master_username                  = "admin"
+  master_password                  = "DBAdmin1004"
 
-  port                      = 3306
+  port = 3306
 
-  vpc_security_group_ids    = [aws_security_group.rds_sg.id]
+  vpc_security_group_ids           = [aws_security_group.rds_sg.id]
 
-  skip_final_snapshot       = false
-  final_snapshot_identifier = false
-
-  backup_retention_period   = 1
-
+  skip_final_snapshot              = true
+  
   db_cluster_parameter_group_name  = aws_rds_cluster_parameter_group.this.id
   db_instance_parameter_group_name = aws_db_parameter_group.this.id
 }
@@ -649,10 +653,12 @@ resource "aws_rds_cluster" "rds_aurora_cluster" {
     - 클러스터의 식별자(명칭) 설정
   - db_subnet_group_name
     - 위에서 생성한 subnet_group 설정
+  
   - engine
     - 클러스터에서 사용할 aurora 엔진 설정
   - engine_version
     - 클러스터에서 사용할 aurora 엔진 버전 설정
+  
   - availability_zones
     - 클러스터에서 사용할 AZs(가용역역)를 설정
              
@@ -666,4 +672,69 @@ resource "aws_rds_cluster" "rds_aurora_cluster" {
   - port
     - 클러스터에서 통신 하고자 하는 port 설정
             
-  - 
+  - vpc_security_group_ids
+    - **[ ]** 리스트 형식으로 입력
+    - 클러스터에서 사용 하고자 하는 SG 설정
+  
+  - skip_final_snapshot
+    - 마지막 스냅샷 생성 여부 설정
+    - ture 설정시 스냅샷 생성 안함
+      - default 설정값은 **false**
+      - false 설정시 **final_snapshot_identifier = " "** 식별자/표현값 참조하여 스냅샷 생성
+  
+  - db_cluster_parameter_group_name
+    - 위에서 생성한 클러스터 파라미터 그룹을 설정
+  - db_instance_parameter_group_name
+    - 위에서 생성한 파라미터 그룹을 설정
+
+> 참고용 URL
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster
+
+-----
+#### RDS db_instance (Aurora) 블럭
+```hcl
+resource "aws_rds_cluster_instance" "this" {
+  count      = 2
+  identifier = "test-tf-rds-aurora-${count.index}"
+  
+  cluster_identifier = aws_rds_cluster.rds_aurora_cluster.id
+  db_subnet_group_name    = aws_db_subnet_group.this.id
+
+  instance_class = "db.t3.medium"
+
+  engine         = "aurora-mysql"
+  engine_version = "8.0.mysql_aurora.3.02.0"
+  # engine_version = "5.6.mysql_aurora.1.17.9"
+  # engine_version = "5.7.mysql_aurora.2.03.2"
+
+  publicly_accessible = false
+
+  apply_immediately = false
+
+  copy_tags_to_snapshot = false
+
+  db_parameter_group_name = aws_db_parameter_group.this.id
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+> 참고용 URL
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance
