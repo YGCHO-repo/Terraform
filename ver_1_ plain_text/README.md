@@ -27,7 +27,7 @@ $ terraform apply
 ```
 
 > 참고용 URL  
-> >테라폼 구조 관련 URL
+> >테라폼 구조 관련
 - https://www.terraform.io/intro
 
 -----
@@ -593,6 +593,11 @@ resource "aws_db_parameter_group" "this" {
   - family
     - 
 
+  - parameter 내부 블럭
+    - name
+      -
+    - value
+      - 
 - **resource "aws_db_parameter_group" "this" {...} 블럭 생성 진행**
   - 
 
@@ -600,9 +605,8 @@ resource "aws_db_parameter_group" "this" {
 
 
 > 참고용 URL  
-- 
-- 
-- 
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_parameter_group
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_parameter_group
 
 > 참고용 URL  (AWS)
 - https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
