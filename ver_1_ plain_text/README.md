@@ -601,4 +601,5 @@ resource "aws_db_parameter_group" "this" {
 - 
 - 
 - 
-- https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
+> > 참고 URL 
+> > - https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
