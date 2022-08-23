@@ -896,7 +896,7 @@ resource "aws_db_parameter_group" "this" {
 # ++++++++++++++++++++++++++++++++++++++++++++++
 #                   RDS 생성 (Aurora)
 # ++++++++++++++++++++++++++++++++++++++++++++++
-resource "aws_rds_cluster" "rds_aurora_cluster" {
+resource "aws_rds_cluster" "this" {
   cluster_identifier = "test-tf-rds-aurora-cluster"
   db_subnet_group_name             = aws_db_subnet_group.this.id
   
@@ -935,7 +935,7 @@ resource "aws_rds_cluster_instance" "this" {
   count      = 2
   identifier = "test-tf-rds-aurora-${count.index}"
   # identifier_prefix = 
-  cluster_identifier = aws_rds_cluster.rds_aurora_cluster.id
+  cluster_identifier = aws_rds_cluster.this.id
   db_subnet_group_name    = aws_db_subnet_group.this.id
 
 

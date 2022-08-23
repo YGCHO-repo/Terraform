@@ -625,7 +625,7 @@ resource "aws_db_parameter_group" "this" {
 -----
 #### RDS cluster(Aurora) 블럭
 ```hcl
-resource "aws_rds_cluster" "rds_aurora_cluster" {
+resource "aws_rds_cluster" "this" {
   cluster_identifier               = "test-tf-rds-aurora-cluster"
   db_subnet_group_name             = aws_db_subnet_group.this.id
   
@@ -648,16 +648,16 @@ resource "aws_rds_cluster" "rds_aurora_cluster" {
   db_instance_parameter_group_name = aws_db_parameter_group.this.id
 }
 ```
-- **resource "aws_rds_cluster" "rds_aurora_cluster" {...} 블럭 생성 진행**
+- **resource "aws_rds_cluster" "this" {...} 블럭 생성 진행**
   - cluster_identifier
     - 클러스터의 식별자(명칭) 설정
   - db_subnet_group_name
     - 위에서 생성한 subnet_group 설정
   
   - engine
-    - 클러스터에서 사용할 aurora 엔진 설정
+    - 클러스터에서 사용할 엔진 설정
   - engine_version
-    - 클러스터에서 사용할 aurora 엔진 버전 설정
+    - 클러스터에서 사용할 엔진 버전 설정
   
   - availability_zones
     - 클러스터에서 사용할 AZs(가용역역)를 설정
@@ -697,7 +697,7 @@ resource "aws_rds_cluster_instance" "this" {
   count      = 2
   identifier = "test-tf-rds-aurora-${count.index}"
   
-  cluster_identifier = aws_rds_cluster.rds_aurora_cluster.id
+  cluster_identifier = aws_rds_cluster.this.id
   db_subnet_group_name    = aws_db_subnet_group.this.id
 
   instance_class = "db.t3.medium"
@@ -716,7 +716,26 @@ resource "aws_rds_cluster_instance" "this" {
   db_parameter_group_name = aws_db_parameter_group.this.id
 }
 ```
+- **resource "aws_rds_cluster_instance" "this" {...} 블럭 생성 진행**
+  - count
+    - 생성 하고자 하는 인스턴스 갯수
+  - identifier
+    - 생성 하고자 하는 인서턴스의 식별자(명칭/이름)
+      - count.index 사용하여 생성되는 순번 지정
+  
+  - cluster_identifier
+    - 위에서 생성한 클러스터 설정
+  - db_subnet_group_name
+    - 위에서 생성한 서브넷 그룹 설정
+  
+  - instance_class
+    - RDS 인스턴스 생성시 type 설정
 
+  - engine
+    - RDS 인스턴스 생성시 엔진 설정
+  - engine_version
+    - RDS 인스턴스 생성시 엔진 버전 설정
+    
 
 
 
@@ -738,3 +757,6 @@ resource "aws_rds_cluster_instance" "this" {
 
 > 참고용 URL
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance
+
+> 참고용 URL (AWS)
+- https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html
