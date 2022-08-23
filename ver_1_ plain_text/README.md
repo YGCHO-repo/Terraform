@@ -26,8 +26,8 @@ $ terraform apply
 3. resource     block
 ```
 
-> 참고 URL 
-> > - 테라폼 구조 관련 URL
+> 참고용 URL  
+> >테라폼 구조 관련 URL
 - https://www.terraform.io/intro
 
 -----
@@ -74,7 +74,7 @@ resource "aws_vpc" "this" {
     <IDENTIFIER> = <EXPRESSION>
 }
 ```
-> 참고용 URL
+> 참고용 URL 
 - https://www.terraform.io/language
 
 -----
@@ -96,7 +96,7 @@ resource "aws_vpc" "this" {
         - "10.50.0.0/16"
         - { "Name" = "test-tf-vpc" }
 
-> 참고용 URl
+> 참고용 URL 
 - https://www.terraform.io/language/resources/syntax
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
 
@@ -127,7 +127,7 @@ resource "aws_subnet" "main_pub_a_subnet" {
         - "ap-northeast-2a"
         - { Name = "test-tf-ap-northeast-2a-public-main-subnet" }
 
-> 참고용 URl
+> 참고용 URL 
 - https://www.terraform.io/language/resources/syntax
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
 
@@ -150,7 +150,7 @@ resource "aws_internet_gateway" "this" {
 
 > 위의 예제와 같이 설정된 "aws_vpc" "this"를 vpc_id 식별자에 표현값으로 참조 하거나, tags 처럼 사용자가 직접 설정 하여 Code를 작성한다.
 
-> 참고용 URl
+> 참고용 URL 
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
 
 -----
@@ -189,7 +189,7 @@ resource "aws_nat_gateway" "natgw_a" {
   - depends_on
     - 명시적으로 [aws_eip.natgw_a_eip] 생성이 정상적으로 이뤄진후, 해당 리소스가 생성 되로록 설정
 
-> 참고용 URl
+> 참고용 URL 
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
 
 -----
@@ -245,7 +245,7 @@ resource "aws_route_table_association" "pub_a_main_rtb" {
     - IGW 및 NAT 연결 가능한 식별자 설정을 보여주고자 작성
     - 해당 항목은 subnet_id 와 중복하여 설정 불가.
 
-> 참고용 URl
+> 참고용 URL 
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association
 
@@ -308,7 +308,7 @@ resource "aws_security_group" "bastion_sg" {
       - "-1" 은 전체 프로토콜 범위를 뜻함
   - (해당 rule을 설정시 Outbound는 전체 허용)
 
-> 참고용 URL
+> 참고용 URL 
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
 
 -----
@@ -349,7 +349,7 @@ resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {
     - "0.0.0.0/0" 전체 IP 영역 및 특정 IP
       - Sample로 작성하였기에 Megazoen UTM 장비의 공인 IP도 작성
 
-> 참고용 URL 
+> 참고용 URL  
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
 
 -----
@@ -408,11 +408,11 @@ resource "aws_eip" "bastion_eip" {
     - 생성된 EIP 리소스를 설정된 EC2 instance 에 Associate 진행
 
 
-> 참고용 URL 
+> 참고용 URL  
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair
 
-> 참고용 URL (AWS)
+> 참고용 URL  (AWS)
 - https://aws.amazon.com/ko/amazon-linux-ami/
 - https://aws.amazon.com/ko/ec2/instance-types/
 
@@ -456,7 +456,7 @@ resource "aws_lb" "front_alb" {
   - security_groups
     - 해당 ALB에서 사용 하고자 하는 SG 설정
 
-> 참고용 URL 
+> 참고용 URL  
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb
 
 -----
@@ -500,7 +500,7 @@ resource "aws_lb_target_group_attachment" "front_alb_tg_a_attch" {
     - 통신 하고자 하는 대상 설정 (EC2 instance)
       - **resource "aws_lb_target_group" "front_alb_tg" {...} 블럭** 에서 target_type 을 instance 로 설정 참조
 
-> 참고용 URL 
+> 참고용 URL  
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group_attachment
 
@@ -531,7 +531,7 @@ resource "aws_lb_listener" "front_alb_listener" {
       - 액션의 타입을 **"forward"**(전달) 설정
         - 타입은 **"forward"**, **"redirect"**, **"fixed-response"**, **"authenticate-cognito"**, **"authenticate-oidc"** 가 있다.
 
-> 참고용 URL 
+> 참고용 URL  
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_rule
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_certificate
@@ -599,10 +599,10 @@ resource "aws_db_parameter_group" "this" {
 
 
 
-> 참고용 URL 
+> 참고용 URL  
 - 
 - 
 - 
 
-> 참고용 URL (AWS)
+> 참고용 URL  (AWS)
 - https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
