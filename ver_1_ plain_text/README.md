@@ -733,7 +733,7 @@ resource "aws_rds_cluster_instance" "this" {
   - engine_version
     - RDS 인스턴스 생성시 엔진 버전 설정
       - 선택 가능한 엔진 버전
-        - 1.  "8.0.mysql_aurora.3.02.0"
+        - **1.**  "8.0.mysql_aurora.3.02.0"
         - 2. "5.6.mysql_aurora.1.17.9"
         - 3. "5.7.mysql_aurora.2.03.2"
 
