@@ -175,11 +175,11 @@ resource "aws_nat_gateway" "natgw_a" {
 - NAT Gateway 의 경우 Public 으로 생성 진행
 - Public으로 생성시 EIP가 필요하여 EIP 설정후 대상 NAT Gateway에 Attach
 
-- **resource "aws_eip" "natgw_a_eip" {...} 블럭 생성 진행**
++ **resource "aws_eip" "natgw_a_eip" {...} 블럭 생성 진행**
   - 해당 블럭의 내용중 lifecycle은 resource 블럭의 Meta-Arguments 값이다. 
     - 기존에 EIP가 존재하다고 가정하면, 기존 EIP를 유지한 상태에서 신규로 생성 및 연결후 기존 EIP를 제거 설정 구문
 
-- **resource "aws_nat_gateway" "natgw_a" {...} 블럭 생성 진행**
++ **resource "aws_nat_gateway" "natgw_a" {...} 블럭 생성 진행**
   - allocation_id
     - 생성된 EIP 연결 설정
   - subnet_id
@@ -233,11 +233,11 @@ resource "aws_route_table_association" "pub_a_main_rtb" {
 }
 ...(생략) (필요한 갯수 만큼 설정)
 ```
-- **resource "aws_route_table" "pub_a_main_rtb" {...} 블럭 생성 진행**
++ **resource "aws_route_table" "pub_a_main_rtb" {...} 블럭 생성 진행**
   - vpc_id
     - 위에서 생성한 VPC 정보값 참조 설정
 
-- **resource "aws_route_table_association" "pub_a_main_rtb" {...} 블럭 생성 진행**
++ **resource "aws_route_table_association" "pub_a_main_rtb" {...} 블럭 생성 진행**
   - route_table_id
     - 생성된 RTB 의 id 참조하여 설정
   - subnet_id
@@ -276,7 +276,7 @@ resource "aws_security_group" "bastion_sg" {
 }
 ...(생략) (필요한 서브넷의 갯수 만큼 설정)
 ```
-- **resource "aws_security_group" "bastion_sg" {...} 블럭 생성 진행**
++ **resource "aws_security_group" "bastion_sg" {...} 블럭 생성 진행**
   - description
     - 생성 하고자 하는 SG의 설명문 항목
   - name
@@ -332,7 +332,7 @@ resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {
 }
 ...(생략) (필요한 서브넷의 갯수 만큼 설정)
 ```
-- **resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {...} 블럭 생성 진행**
++ **resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {...} 블럭 생성 진행**
   - description
     - 해당 SG의 inbound rule 의 설명문
   - type
@@ -385,7 +385,7 @@ resource "aws_eip" "bastion_eip" {
 }
 ...(생략) (필요한 서브넷의 갯수 만큼 설정)
 ```
-- **resource "aws_instance" "bastion" {...} 블럭 생성 진행**
++ **resource "aws_instance" "bastion" {...} 블럭 생성 진행**
   - ami
     - EC2 instance 생성시 필요한 AMI 이미지
   - availability_zone
@@ -407,7 +407,7 @@ resource "aws_eip" "bastion_eip" {
   - delete_on_termination (주석)
     - 해당 설정문은 AWS의 __**"termination protection"**__ 설정 옵션
 
-- **resource "aws_eip" "bastion_eip" {...} 블럭 생성 진행**
++ **resource "aws_eip" "bastion_eip" {...} 블럭 생성 진행**
   - instance
     - 생성된 EIP 리소스를 설정된 EC2 instance 에 Associate 진행
 
@@ -439,7 +439,7 @@ resource "aws_lb" "front_alb" {
 }
 ...(생략) (필요한 서브넷의 갯수 만큼 설정)
 ```
-- **resource "aws_lb" "front_alb" {...} 블럭 생성 진행**
++ **resource "aws_lb" "front_alb" {...} 블럭 생성 진행**
   - name
     - ALB의 Name 설정
   - internal
@@ -481,7 +481,7 @@ resource "aws_lb_target_group_attachment" "front_alb_tg_a_attch" {
   target_id        = aws_instance.web_a.id
 }
 ```
-- **resource "aws_lb_target_group" "front_alb_tg" {...} 블럭 생성 진행**
++ **resource "aws_lb_target_group" "front_alb_tg" {...} 블럭 생성 진행**
   - name
     - TG의 Name 설정
   - vpc_id
@@ -495,7 +495,7 @@ resource "aws_lb_target_group_attachment" "front_alb_tg_a_attch" {
     - 통신 하고자 하는 port 와 함께 프로토콜 설정
       - 통상 80:HTTP , 443:HTTPS 사용
 
-- **resource "aws_lb_target_group_attachment" "front_alb_tg_a_attach" {...} 블럭 생성 진행**
++ **resource "aws_lb_target_group_attachment" "front_alb_tg_a_attach" {...} 블럭 생성 진행**
   - target_group_arn
     - 위에서 생성한 TG 의 arn(Amazon resource name) 값 설정
       - Resource를 생성(설정) 진행시 각 resource 의 attributes 값의 ID or arn 을 선택적으로 사용해야 한다.
@@ -503,7 +503,7 @@ resource "aws_lb_target_group_attachment" "front_alb_tg_a_attch" {
     - 통신 하고자 하는 port 설정
   - target_id
     - 통신 하고자 하는 대상 설정 (EC2 instance)
-      - **resource "aws_lb_target_group" "front_alb_tg" {...} 블럭** 에서 target_type 을 instance 로 설정 참조
+      + **resource "aws_lb_target_group" "front_alb_tg" {...} 블럭** 에서 target_type 을 instance 로 설정 참조
 
 > 참고용 URL  
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group
@@ -525,7 +525,7 @@ resource "aws_lb_listener" "front_alb_listener" {
 }
 ...(생략) (필요한 서브넷의 갯수 만큼 설정)
 ```
-- **resource "aws_lb_listener" "front_alb_listener" {...} 블럭 생성 진행**
++ **resource "aws_lb_listener" "front_alb_listener" {...} 블럭 생성 진행**
   - load_balancer_arn
     - 위에서 생성된 ALB 리소스의 arn 설정
   - port
@@ -556,7 +556,7 @@ resource "aws_db_subnet_group" "this" {
   tags = { Name = "test-tf-rds-subnet-group" }
 }
 ```
-- **resource "aws_db_subnet_group" "this" {...} 블럭 생성 진행**
++ **resource "aws_db_subnet_group" "this" {...} 블럭 생성 진행**
   - description
     - 해당 RDS subnet_group의 설명문
   - name
@@ -593,7 +593,7 @@ resource "aws_db_parameter_group" "this" {
   family = "aurora-mysql8.0"
 }
 ```
-- **resource "aws_rds_cluster_parameter_group" "this" {...} 블럭 생성 진행**
++ **resource "aws_rds_cluster_parameter_group" "this" {...} 블럭 생성 진행**
   - name
     - 해당 Cluster_parameter_group의 name 설정
   - family
@@ -605,7 +605,7 @@ resource "aws_db_parameter_group" "this" {
     - value
       - 해당 Cluster_parameter_group의 속성의 value 설정
 
-- **resource "aws_db_parameter_group" "this" {...} 블럭 생성 진행**
++ **resource "aws_db_parameter_group" "this" {...} 블럭 생성 진행**
   - name
     - 해당 db_parameter_group의 name 설정
   - family
@@ -647,7 +647,7 @@ resource "aws_rds_cluster" "this" {
   db_instance_parameter_group_name = aws_db_parameter_group.this.id
 }
 ```
-- **resource "aws_rds_cluster" "this" {...} 블럭 생성 진행**
++ **resource "aws_rds_cluster" "this" {...} 블럭 생성 진행**
   - cluster_identifier
     - 클러스터의 식별자(명칭) 설정
   - db_subnet_group_name
@@ -712,7 +712,7 @@ resource "aws_rds_cluster_instance" "this" {
   db_parameter_group_name = aws_db_parameter_group.this.id
 }
 ```
-- **resource "aws_rds_cluster_instance" "this" {...} 블럭 생성 진행**
++ **resource "aws_rds_cluster_instance" "this" {...} 블럭 생성 진행**
   - count
     - 생성 하고자 하는 인스턴스 갯수
   - identifier
