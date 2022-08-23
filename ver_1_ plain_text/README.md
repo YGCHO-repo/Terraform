@@ -348,7 +348,7 @@ resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {
     - "0.0.0.0/0" 전체 IP 영역 및 특정 IP
       - Sample로 작성하였기에 Megazoen UTM 장비의 공인 IP도 작성
 
-> 참고 URL
+> 참고용 URL 
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
 
 -----
@@ -407,11 +407,11 @@ resource "aws_eip" "bastion_eip" {
     - 생성된 EIP 리소스를 설정된 EC2 instance 에 Associate 진행
 
 
-> 참고 URL
+> 참고용 URL 
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair
 
-> 참고 URL (AWS)
+> 참고용 URL (AWS)
 - https://aws.amazon.com/ko/amazon-linux-ami/
 - https://aws.amazon.com/ko/ec2/instance-types/
 
@@ -455,7 +455,7 @@ resource "aws_lb" "front_alb" {
   - security_groups
     - 해당 ALB에서 사용 하고자 하는 SG 설정
 
-> 참고 URL
+> 참고용 URL 
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb
 
 -----
@@ -499,7 +499,7 @@ resource "aws_lb_target_group_attachment" "front_alb_tg_a_attch" {
     - 통신 하고자 하는 대상 설정 (EC2 instance)
       - **resource "aws_lb_target_group" "front_alb_tg" {...} 블럭** 에서 target_type 을 instance 로 설정 참조
 
-> 참고 URL
+> 참고용 URL 
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group_attachment
 
@@ -530,7 +530,7 @@ resource "aws_lb_listener" "front_alb_listener" {
       - 액션의 타입을 **"forward"**(전달) 설정
         - 타입은 **"forward"**, **"redirect"**, **"fixed-response"**, **"authenticate-cognito"**, **"authenticate-oidc"** 가 있다.
 
-> 참고 URL
+> 참고용 URL 
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_rule
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_certificate
@@ -598,10 +598,10 @@ resource "aws_db_parameter_group" "this" {
 
 
 
-> 참고 URL 
+> 참고용 URL 
 - 
 - 
 - 
 
-> 참고 URL (AWS)
+> 참고용 URL (AWS)
 - https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
