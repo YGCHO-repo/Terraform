@@ -1,11 +1,11 @@
 # Code guide 
 ## main.tf 파일 하나로 code 되어 있음.
 
----
+-----
 ### 파일 구성
 1. main.tf 
 
----
+-----
 ### 테라폼 명령어 
 ```
 실행
@@ -18,7 +18,7 @@ $ terraform plan
 $ terraform apply
 ```
 
----
+-----
 ### 사용된 리소스 블럭
 ```
 1. terraform    block
@@ -29,7 +29,7 @@ $ terraform apply
 - 테라폼 구조 관련 URL
     - https://www.terraform.io/intro
 
----
+-----
 ## main.tf 
 ### terraform 블럭
 ```hcl
@@ -49,7 +49,7 @@ terraform {
 - required_providers
     - registry.terraform.io/hashicorp/aws 에서 4.22.0 버전 사용
 
----
+-----
 ### provider 블럭
 ```hcl
 
@@ -59,7 +59,7 @@ providre "aws" {
 ```
 - provider 는 "aws"로 사용, 리전은 "ap-northeast-2" Seoul 리전으로 사용을 선언
 
----
+-----
 ### resource 블럭
 - resource 블럭은 실제 AWS에 존재하는 서비스를 생성/삭제 등과 같은 액션을 가능하도록 하는 블럭
 
@@ -76,7 +76,7 @@ resource "aws_vpc" "this" {
 > 참고용 URL
 - https://www.terraform.io/language
 
----
+-----
 #### resource vpc 블럭
 ```hcl
 resource "aws_vpc" "this" {
@@ -99,7 +99,7 @@ resource "aws_vpc" "this" {
 - https://www.terraform.io/language/resources/syntax
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
 
----
+-----
 #### resource subnet 블럭
 ```hcl
 resource "aws_subnet" "main_pub_a_subnet" {
@@ -130,7 +130,7 @@ resource "aws_subnet" "main_pub_a_subnet" {
 - https://www.terraform.io/language/resources/syntax
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
 
----
+-----
 #### resource igw(internet gateway) 블럭
 ```hcl
 resource "aws_internet_gateway" "this" {
@@ -152,7 +152,7 @@ resource "aws_internet_gateway" "this" {
 > 참고용 URl
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
 
----
+-----
 #### resource natgw(nat gateway) 블럭
 ```hcl
 # EIP 생성
@@ -191,7 +191,7 @@ resource "aws_nat_gateway" "natgw_a" {
 > 참고용 URl
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
 
----
+-----
 #### resource route_table 블럭
 ##### default route_table 로 알아보는 전체 식별자 Sample
 - 적절하게 필요한 정보를 설정하여 사용
@@ -215,7 +215,7 @@ resource "aws_default_route_table" "this" {
   tags = { Name = "test-tf-vpc-default-rtb" }
 ```
 
----
+-----
 ##### 실제 설정 진행하는 route_table
 ```hcl
 # RTB 생성
@@ -248,7 +248,7 @@ resource "aws_route_table_association" "pub_a_main_rtb" {
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association
 
----
+-----
 #### Security_group 블럭
 ```hcl
 resource "aws_security_group" "bastion_sg" {
@@ -310,7 +310,7 @@ resource "aws_security_group" "bastion_sg" {
 > 참고용 URL
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
 
----
+-----
 #### Security_group_rule 블럭
 ```hcl
 resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {
@@ -351,7 +351,7 @@ resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {
 > 참고 URL
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
 
----
+-----
 #### EC2(Instance) 블럭
 ```hcl
 resource "aws_instance" "bastion" {
@@ -392,7 +392,7 @@ resource "aws_eip" "bastion_eip" {
     - 표현값의 경우 "${aws_security_group.bastion_sg.id}" or aws_security_group.bastion_sg.id 사용가능
   - key_name
     - EC2 instance 생성시 적용 *.pem key (key_pair)
-    - **빠른 진행을 위해서 기존 AWS key_pair 사용**
+    - __**빠른 진행을 위해서 기존 AWS key_pair 사용**__
   - subnet_id
     - EC2 instance 가 생성 되는 subnet 위치
   
@@ -400,7 +400,7 @@ resource "aws_eip" "bastion_eip" {
     - EC2 instance 생성시 기본 EBS(root_block)
     - "gp3" 타입의 "8" Gib 로 생성
   - delete_on_termination (주석)
-    - 해당 설정문은 AWS의 **"termination protection"** 설정 옵션
+    - 해당 설정문은 AWS의 __**"termination protection"**__ 설정 옵션
 
 - **resource "aws_eip" "bastion_eip" {...} 블럭 생성 진행**
   - instance
@@ -413,7 +413,8 @@ resource "aws_eip" "bastion_eip" {
 - https://aws.amazon.com/ko/amazon-linux-ami/
 - https://aws.amazon.com/ko/ec2/instance-types/
 
----
+-----
+### **ELB(ALB)**
 #### ELB (Load_Balancers) (ALB) 블럭
 ```hcl
 resource "aws_lb" "front_alb" {
@@ -455,7 +456,7 @@ resource "aws_lb" "front_alb" {
 > 참고 URL
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb
 
----
+-----
 #### ALB Target_group 블럭
 ```hcl
 resource "aws_lb_target_group" "front_alb_tg" {
@@ -490,10 +491,60 @@ resource "aws_lb_target_group_attachment" "front_alb_tg_a_attch" {
   - target_group_arn
     - 위에서 생성한 TG 의 arn(Amazon resource name) 값 설정
       - Resource를 생성(설정) 진행시 각 resource 의 attributes 값의 ID or arn 을 선택적으로 사용해야 한다.
-  - 
-
+  - port
+    - 통신 하고자 하는 port 설정
+  - target_id
+    - 통신 하고자 하는 대상 설정 (EC2 instance)
+      - **resource "aws_lb_target_group" "front_alb_tg" {...} 블럭** 에서 target_type 을 instance 로 설정 참조
 
 > 참고 URL
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group_attachment
 
+-----
+#### ALB listener 블럭
+```hcl
+resource "aws_lb_listener" "front_alb_listener" {
+  load_balancer_arn = aws_lb.front_alb.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.front_alb_tg.arn
+  }
+  tags = { Name = "test-tf-vpc-front-alb-listener" }
+}
+```
+- **resource "aws_lb_listener" "front_alb_listener" {...} 블럭 생성 진행**
+  - load_balancer_arn
+    - 위에서 생성된 ALB 리소스의 arn 설정
+  - port
+    - 통신 하고자 하는 port 설정
+  - protocol
+    - 통신 하고자 하는 프로토콜 설정 
+  - __**default_action 내부 블럭**__
+    - type
+      - 액션의 타입을 **"forward"**(전달) 설정
+        - 액션 타입은 **"forward"**, **"redirect"**, **"fixed-response"**, **"authenticate-cognito"**, **"authenticate-oidc"** 가 있다.
+
+> 참고 URL
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_rule
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_certificate
+
+-----
+### **RDS(aurora)**
+#### RDS subnet_group 블럭
+```hcl
+resource "aws_db_subnet_group" "this" {
+  description = "RDS Aurora Database subnet group"
+  name        = "test-tf-rds-subnet-group"
+  subnet_ids = [
+    aws_subnet.rds_pri_a_subnet.id,
+    aws_subnet.rds_pri_c_subnet.id
+  ]
+
+  tags = { Name = "test-tf-rds-subnet-group" }
+}
+```
