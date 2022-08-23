@@ -592,7 +592,7 @@ resource "aws_db_parameter_group" "this" {
     - 해당 Cluster_parameter_group의 name 설정
   - family
     - 해당 Cluster_parameter_group의 family 설정
-
+   
   - parameter 내부 블럭 (속성 값 변경 예제)
     - name
       - 해당 Cluster_parameter_group의 속성의 nanme 설정
