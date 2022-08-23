@@ -614,3 +614,56 @@ resource "aws_db_parameter_group" "this" {
 - https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
 - https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html (확인용)
 - https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html (확인용)
+
+-----
+#### RDS cluster(Aurora) 블럭
+```hcl
+resource "aws_rds_cluster" "rds_aurora_cluster" {
+  cluster_identifier        = "test-tf-rds-aurora-cluster"
+  db_subnet_group_name      = aws_db_subnet_group.this.id
+  
+  engine                    = "aurora-mysql"
+  engine_version            = "8.0.mysql_aurora.3.02.0"
+  
+  availability_zones        = ["ap-northeast-2a", "ap-northeast-2c"]
+
+  database_name             = "testterraformdb"
+  master_username           = "admin"
+  master_password           = "DBAdmin1004"
+
+  port                      = 3306
+
+  vpc_security_group_ids    = [aws_security_group.rds_sg.id]
+
+  skip_final_snapshot       = false
+  final_snapshot_identifier = false
+
+  backup_retention_period   = 1
+
+  db_cluster_parameter_group_name  = aws_rds_cluster_parameter_group.this.id
+  db_instance_parameter_group_name = aws_db_parameter_group.this.id
+}
+```
+- **resource "aws_rds_cluster" "rds_aurora_cluster" {...} 블럭 생성 진행**
+  - cluster_identifier
+    - 클러스터의 식별자(명칭) 설정
+  - db_subnet_group_name
+    - 위에서 생성한 subnet_group 설정
+  - engine
+    - 클러스터에서 사용할 aurora 엔진 설정
+  - engine_version
+    - 클러스터에서 사용할 aurora 엔진 버전 설정
+  - availability_zones
+    - 클러스터에서 사용할 AZs(가용역역)를 설정
+             
+  - database_name
+    - 데이터베이스의 name 설정
+  - master_username
+    - 데이터베이스의 사용자(계정) 설정
+  - master_password
+    - 데이터베이스의 사용자 인증용 암호 설정
+            
+  - port
+    - 클러스터에서 통신 하고자 하는 port 설정
+            
+  - 
