@@ -946,12 +946,12 @@ resource "aws_rds_cluster_instance" "this" {
   # engine_version = "5.6.mysql_aurora.1.17.9"
   # engine_version = "5.7.mysql_aurora.2.03.2"
 
-  publicly_accessible = false
+  # publicly_accessible = false
 
 
-  apply_immediately = false
+  # apply_immediately = false
 
-  copy_tags_to_snapshot = false
+  # copy_tags_to_snapshot = false
   
   # lifecycle {
   #   create_before_destroy = true

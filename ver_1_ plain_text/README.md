@@ -702,13 +702,10 @@ resource "aws_rds_cluster_instance" "this" {
 
   instance_class = "db.t3.medium"
 
-  engine         = "aurora-mysql"
-  engine_version = "8.0.mysql_aurora.3.02.0"
-  # engine_version = "5.6.mysql_aurora.1.17.9"
-  # engine_version = "5.7.mysql_aurora.2.03.2"
-
-  publicly_accessible = false
-
+  engine            = "aurora-mysql"
+  engine_version    = "8.0.mysql_aurora.3.02.0"
+  
+  
   apply_immediately = false
 
   copy_tags_to_snapshot = false
@@ -735,25 +732,10 @@ resource "aws_rds_cluster_instance" "this" {
     - RDS 인스턴스 생성시 엔진 설정
   - engine_version
     - RDS 인스턴스 생성시 엔진 버전 설정
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      - 선택 가능한 엔진 버전
+        - 1.  "8.0.mysql_aurora.3.02.0"
+        - 2. "5.6.mysql_aurora.1.17.9"
+        - 3. "5.7.mysql_aurora.2.03.2"
 
 > 참고용 URL
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance
