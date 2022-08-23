@@ -489,7 +489,8 @@ resource "aws_lb_target_group_attachment" "front_alb_tg_a_attch" {
 - resource "aws_lb_target_group_attachment" "front_alb_tg_a_attach" {...} 블럭 생성 진행
   - target_group_arn
     - 위에서 생성한 TG 의 arn(Amazon resource name) 값 설정
-      - Resource를 생성(설정) 진행시 각 resource 의 attributes 값의         ID or arn 을 선택적으로 사용해야 한다.
+      - Resource를 생성(설정) 진행시 각 resource 의 attributes 값의 
+        ID or arn 을 선택적으로 사용해야 한다.
   - 
 
 
