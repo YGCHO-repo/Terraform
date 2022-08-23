@@ -415,7 +415,7 @@ resource "aws_eip" "bastion_eip" {
 
 -----
 ### **ELB(ALB)**
-#### ELB (Load_Balancers) (ALB) 블럭
+#### ALB(Application_Load_Balancers) 블럭
 ```hcl
 resource "aws_lb" "front_alb" {
   name               = "test-tf-ext-front-alb"
