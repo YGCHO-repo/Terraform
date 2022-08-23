@@ -297,7 +297,7 @@ resource "aws_security_group" "bastion_sg" {
   - to_port
     - 포트 설정 : 어디까지 (종료점)
   - cidr_blocks
-    - _[ ]_ 리스트 형식으로 입력
+    - _**[ ]**_ 리스트 형식으로 입력
     - "0.0.0.0/0" 전체 IP 영역
   
 - egress
@@ -344,7 +344,7 @@ resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {
   - security_group_id
     - 해당 블럭을 내용을 어떤 SG에 설정할지 대상을 설정
   - cidr_blocks
-    - _[ ]_ 리스트 형식으로 입력
+    - _**[ ]**_ 리스트 형식으로 입력
     - "0.0.0.0/0" 전체 IP 영역 및 특정 IP
       - Sample로 작성하였기에 Megazoen UTM 장비의 공인 IP도 작성
 
@@ -415,7 +415,7 @@ resource "aws_eip" "bastion_eip" {
 
 -----
 ### **ELB(Elastic Load Balancing)**
-#### ALB(Application_Load_Balancers) 블럭
+#### ALB(Application Load Balancers) 블럭
 ```hcl
 resource "aws_lb" "front_alb" {
   name               = "test-tf-ext-front-alb"
@@ -526,7 +526,7 @@ resource "aws_lb_listener" "front_alb_listener" {
   - __**default_action 내부 블럭**__
     - type
       - 액션의 타입을 **"forward"**(전달) 설정
-        - 액션 타입은 **"forward"**, **"redirect"**, **"fixed-response"**, **"authenticate-cognito"**, **"authenticate-oidc"** 가 있다.
+        - 타입은 **"forward"**, **"redirect"**, **"fixed-response"**, **"authenticate-cognito"**, **"authenticate-oidc"** 가 있다.
 
 > 참고 URL
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener
@@ -534,7 +534,7 @@ resource "aws_lb_listener" "front_alb_listener" {
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_certificate
 
 -----
-### **RDS(aurora)**
+### **RDS(Relational Database Service)**
 #### RDS subnet_group 블럭
 ```hcl
 resource "aws_db_subnet_group" "this" {
@@ -548,3 +548,13 @@ resource "aws_db_subnet_group" "this" {
   tags = { Name = "test-tf-rds-subnet-group" }
 }
 ```
+- **resource "aws_db_subnet_group" "this" {...} 블럭 생성 진행**
+  - description
+    - 해당 RDS subnet_group의 설명문
+  - name
+    - subnet_group의 name 설정
+  - subnet_ids
+    - _**[ ]**_ 리스트 형식으로 입력
+    - _[ ]_ 리스트 형식으로 입력
+    - *[ ]* 리스트 형식으로 입력
+    - __[ ]__ 리스트 형식으로 입력
