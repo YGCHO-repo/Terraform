@@ -53,7 +53,6 @@ terraform {
 -----
 ### provider 블럭
 ```hcl
-
 providre "aws" {
     region = "ap-northeat-2"
 }
