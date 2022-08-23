@@ -237,9 +237,9 @@ resource "aws_route_table_association" "pub_a_main_rtb" {
 
 - **resource "aws_route_table_association" "pub_a_main_rtb" {...} 블럭 생성 진행**
   - route_table_id
-    - 생성된 RTB 의 id 참조하여 생성
+    - 생성된 RTB 의 id 참조하여 설정
   - subnet_id
-    - 생성된 서브넷 의 id 참조하여 생성
+    - 생성된 서브넷 의 id 참조하여 설정
   - gateway_id
     - IGW 및 NAT 연결 가능한 식별자 설정을 보여주고자 작성
     - 해당 항목은 subnet_id 와 중복하여 설정 불가.
@@ -297,7 +297,7 @@ resource "aws_security_group" "bastion_sg" {
   - to_port
     - 포트 설정 : 어디까지 (종료점)
   - cidr_blocks
-    - _**[ ]**_ 리스트 형식으로 입력
+    - **[ ]** 리스트 형식으로 입력
     - "0.0.0.0/0" 전체 IP 영역
   
 - egress
@@ -344,7 +344,7 @@ resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {
   - security_group_id
     - 해당 블럭을 내용을 어떤 SG에 설정할지 대상을 설정
   - cidr_blocks
-    - _**[ ]**_ 리스트 형식으로 입력
+    - **[ ]** 리스트 형식으로 입력
     - "0.0.0.0/0" 전체 IP 영역 및 특정 IP
       - Sample로 작성하였기에 Megazoen UTM 장비의 공인 IP도 작성
 
@@ -410,6 +410,7 @@ resource "aws_eip" "bastion_eip" {
 > 참고 URL
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair
+> > 참고 URL (AWS)
 - https://aws.amazon.com/ko/amazon-linux-ami/
 - https://aws.amazon.com/ko/ec2/instance-types/
 
@@ -544,7 +545,6 @@ resource "aws_db_subnet_group" "this" {
     aws_subnet.rds_pri_a_subnet.id,
     aws_subnet.rds_pri_c_subnet.id
   ]
-
   tags = { Name = "test-tf-rds-subnet-group" }
 }
 ```
@@ -554,8 +554,51 @@ resource "aws_db_subnet_group" "this" {
   - name
     - subnet_group의 name 설정
   - subnet_ids
-    - _**[ ]**_ 리스트 형식으로 입력
-    - _[ ]_ 리스트 형식으로 입력
-    - *[ ]* 리스트 형식으로 입력
-    - __[ ]__ 리스트 형식으로 입력
     - **[ ]** 리스트 형식으로 입력
+    - 생성된 서브넷 의 id 참조하여 설정
+    - 위의 코드는 AZ(subnet) 2곳 설정 
+      - A_zone(ap-northeast-2a) , C_zone(ap-northeast-2c)
+
+> 참조 URL
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_subnet_group
+
+-----
+#### RDS parameter_group 블럭
+```hcl
+resource "aws_rds_cluster_parameter_group" "this" {
+  name   = "test-tf-aurora-mysql8-0"
+  family = "aurora-mysql8.0"
+
+  parameter {
+    name  = "character_set_server"
+    value = "utf8"
+  }
+
+  parameter {
+    name  = "character_set_client"
+    value = "utf8"
+  }
+}
+
+resource "aws_db_parameter_group" "this" {
+  name   = "test-tf-aurora-mysql8-0"
+  family = "aurora-mysql8.0"
+}
+```
+- **resource "aws_rds_cluster_parameter_group" "this" {...} 블럭 생성 진행**
+  - name
+    - 
+  - family
+    - 
+
+- **resource "aws_db_parameter_group" "this" {...} 블럭 생성 진행**
+  - 
+
+
+
+
+> 참고 URL 
+- 
+- 
+- 
+- https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
