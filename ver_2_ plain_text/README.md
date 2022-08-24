@@ -9,14 +9,14 @@
 ├── main.tf
 ├── provider.tf
 ├── vpc.tf
-├── subnets.tf
+├── subnet.tf
 ├── internat_gateway.tf
-├── nat_gateways.tf
-├── route_tables.tf
-├── route_tables_rule.tf
-├── security_groups.tf
+├── nat_gateway.tf
+├── route_table.tf
+├── route_table_rule.tf
+├── security_group.tf
 ├── security_group_rule.tf
-├── ec2_instances.tf
+├── ec2_instance.tf
 ├── elb_alb.tf
 ├── elb_alb_tg.tf
 ├── elb_alb_listener.tf
@@ -84,7 +84,6 @@ terraform {
 
 -----
 ## provider.tf
-### provider 블럭
 ```hcl
 providre "aws" {
     region = "ap-northeat-2"
@@ -94,7 +93,6 @@ providre "aws" {
 
 ----- 
 ## vpc.tf
-### resource vpc 블럭
 ```hcl
 resource "aws_vpc" "this" {
   cidr_block = "10.50.0.0/16"
@@ -113,8 +111,7 @@ resource "aws_vpc" "this" {
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
 
 -----
-## subnets.tf
-### resource subnet 블럭
+## subnet.tf
 ```hcl
 resource "aws_subnet" "main_pub_a_subnet" {
   vpc_id            = aws_vpc.this.id
@@ -143,7 +140,6 @@ resource "aws_subnet" "main_pub_a_subnet" {
 
 -----
 ## internet_gateway.tf
-### resource igw(internet gateway) 블럭
 ```hcl
 resource "aws_internet_gateway" "this" {
   vpc_id = aws_vpc.this.id
@@ -162,8 +158,7 @@ resource "aws_internet_gateway" "this" {
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
 
 -----
-## nat_gateways.tf
-### resource natgw(nat gateway) 블럭
+## nat_gateway.tf
 ```hcl
 # EIP 생성
 resource "aws_eip" "natgw_a_eip" {
@@ -202,8 +197,7 @@ resource "aws_nat_gateway" "natgw_a" {
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
 
 -----
-## route_tables.tf
-### resource route_table 블럭
+## route_table.tf
 ```hcl
 # RTB 생성
 resource "aws_route_table" "pub_a_main_rtb" {
@@ -237,8 +231,7 @@ resource "aws_route_table_association" "pub_a_main_rtb" {
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association
 
 -----
-## security_groups.tf
-### Security_group 블럭
+## security_group.tf
 ```hcl
 resource "aws_security_group" "bastion_sg" {
   description = "Bastion Server Security group"
@@ -301,3 +294,4 @@ resource "aws_security_group" "bastion_sg" {
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
 
 -----
+## security_group_rule
