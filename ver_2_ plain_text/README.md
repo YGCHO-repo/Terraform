@@ -34,7 +34,7 @@
 
 -----
 ### 테라폼 명령어
-```sh
+```bash
 실행
 $ terraform init 
 
