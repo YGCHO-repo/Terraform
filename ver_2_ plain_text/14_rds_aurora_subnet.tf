@@ -11,3 +11,4 @@ resource "aws_db_subnet_group" "this" {
 
   tags = { Name = "test-tf-rds-subnet-group" }
 }
+

@@ -14,5 +14,3 @@ resource "aws_internet_gateway" "this" {
 #     internet_gateway_id = aws_internet_gateway.this.id
 #     depends_on = [ aws_internet_gateway.this ]
 # }
-
-

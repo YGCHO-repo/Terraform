@@ -136,4 +136,3 @@ resource "aws_instance" "was_c" {
   # disable_api_termination = true
   tags = { Name = "test-tf-ap-northeast-2c-was" }
 }
-
