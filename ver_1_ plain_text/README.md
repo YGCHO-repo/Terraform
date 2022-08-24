@@ -150,7 +150,7 @@ resource "aws_internet_gateway" "this" {
         - aws_vpc.this.id
         - { Name = "test-tf-vpc-igw" }
 
-> 위의 예제와 같이 설정된 "aws_vpc" "this"를 vpc_id 식별자에 표현값으로 참조 하거나, tags 처럼 사용자가 직접 설정 하여 Code를 작성한다.
+> **위의 예제와 같이 설정된 "aws_vpc" "this"를 vpc_id 식별자에 표현값으로 참조 하거나, tags 처럼 사용자가 직접 설정 하여 Code를 작성한다.**
 
 > 참고용 URL 
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
