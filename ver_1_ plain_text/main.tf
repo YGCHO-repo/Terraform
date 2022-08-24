@@ -968,6 +968,3 @@ resource "aws_rds_cluster_instance" "this" {
   
   # tags = 
 }
-# output "vpc_id" {
-#   value = aws_vpc.this.id
-# }
