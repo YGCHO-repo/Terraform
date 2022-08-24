@@ -30,7 +30,7 @@
     - terraform.tfstate.backup
 
 ### 테라폼 명령어
-```hcl
+```
 실행
 $ terraform init 
 
