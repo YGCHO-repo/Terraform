@@ -295,3 +295,109 @@ resource "aws_security_group" "bastion_sg" {
 
 -----
 ## security_group_rule
+```hcl
+resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {
+  description       = "SSH - Bastion Server inbound rule"
+  type              = "ingress"
+  from_port         = 22
+  to_port           = 22
+  protocol          = "tcp"
+  security_group_id = aws_security_group.bastion_sg.id
+
+  # SSH 통신 허용 IP 입력
+  cidr_blocks = ["0.0.0.0/0", "211.60.50.190/32"]
+  /* 
+  211.60.50.190 = Megazone Office IP
+ */
+}
+...(생략) (필요한 서브넷의 갯수 만큼 설정)
+```
++ **resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {...} 블럭 생성 진행**
+  - description
+    - 해당 SG의 inbound rule 의 설명문
+  - type
+    - ingress 
+       - 내용을 기반으로 설명시 **resource "aws_security_group" "bastion_sg" {...}** 블럭의   inbound rule을 설정
+    - 타입에는 2가지 존재 
+      - 1. ingress
+      - 2. egress
+  - from_port
+    - 포트 설정 : 어디서부터 (시작점)
+  - to_port
+    - 포트 설정 : 어디까지 (종료점)
+  - security_group_id
+    - 해당 블럭을 내용을 어떤 SG에 설정할지 대상을 설정
+  - cidr_blocks
+    - **[ ]** 리스트 형식으로 입력
+    - "0.0.0.0/0" 전체 IP 영역 및 특정 IP
+      - Sample로 작성하였기에 Megazoen UTM 장비의 공인 IP도 작성
+
+> 참고용 URL  
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
+
+-----
+## ec2_instance.tf
+```hcl
+resource "aws_instance" "bastion" {
+  ami               = "ami-0fd0765afb77bcca7"
+  availability_zone = "ap-northeast-2a"
+  instance_type     = "t2.micro"
+# security_groups   = ["${aws_security_group.bastion_sg.id}", ]
+  security_groups   = [aws_security_group.bastion_sg.id, ]
+  key_name          = "tf_test_key"
+  subnet_id         = aws_subnet.main_pub_a_subnet.id
+
+  root_block_device {
+    volume_size = 8
+    volume_type = "gp3"
+    # delete_on_termination = true
+    tags = { Name = "test-tf-ap-northeast-2a-bastion" }
+  }
+  lifecycle { create_before_destroy = true }
+  # disable_api_termination = true
+  tags = { Name = "test-tf-ap-northeast-2a-bastion" }
+}
+
+resource "aws_eip" "bastion_eip" {
+  vpc      = true
+  instance = aws_instance.bastion.id
+  tags     = { Name = "test-tf-vpc-ap-northeast-2a-bastion-eip" }
+}
+...(생략) (필요한 서브넷의 갯수 만큼 설정)
+```
++ **resource "aws_instance" "bastion" {...} 블럭 생성 진행**
+  - ami
+    - EC2 instance 생성시 필요한 AMI 이미지
+  - availability_zone
+    - EC2 instance 생성시 위치 하는 AZ
+  - instance_type
+    - EC2 instance 생성시 type
+  - security_groups
+    - EC2 instance 생성시 Attach 진행 하는 SG
+    - 표현값의 경우 "${aws_security_group.bastion_sg.id}" or aws_security_group.bastion_sg.id 사용가능
+  - key_name
+    - EC2 instance 생성시 적용 *.pem key (key_pair)
+    - __**빠른 진행을 위해서 기존 AWS key_pair 사용**__
+  - subnet_id
+    - EC2 instance 가 생성 되는 subnet 위치
+  
+  - root_block_device {...} 내부 블럭
+    - EC2 instance 생성시 기본 EBS(root_block)
+    - "gp3" 타입의 "8" Gib 로 생성
+  - delete_on_termination (주석)
+    - 해당 설정문은 AWS의 __**"termination protection"**__ 설정 옵션
+
++ **resource "aws_eip" "bastion_eip" {...} 블럭 생성 진행**
+  - instance
+    - 생성된 EIP 리소스를 설정된 EC2 instance 에 Associate 진행
+
+
+> 참고용 URL  
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair
+
+> 참고용 URL (AWS)
+- https://aws.amazon.com/ko/amazon-linux-ami/
+- https://aws.amazon.com/ko/ec2/instance-types/
+
+-----
