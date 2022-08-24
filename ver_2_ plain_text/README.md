@@ -118,8 +118,31 @@ resource "aws_vpc" "this" {
 
 
 
+- .
+- ├── main.tf
+- ├── provider.tf
+- ├── vpc.tf
+- ├── subnet.tf
+- ├── internat_gateway.tf
+- ├── nat_gateways.tf
+- ├── route_tables.tf
+- ├── route_tables_rule.tf
+- ├── security_group.tf
+- ├── security_group_rule.tf
+- ├── ec2_instances.tf
+- ├── elb_alb.tf
+- ├── elb_alb_tg.tf
+- ├── elb_alb_listener.tf
+- ├── elb_alb_listener_rule.tf
+- ├── rds_aurora_subnet.tf
+- ├── rds_aurora_pg.tf
+- ├── rds_aurora.tf
+- ├── output.tf
+- └── README.md
+
+```
 .
-├── main.tf
+- ├── main.tf
 ├── provider.tf
 ├── vpc.tf
 ├── subnet.tf
@@ -139,6 +162,5 @@ resource "aws_vpc" "this" {
 ├── rds_aurora.tf
 ├── output.tf
 └── README.md
-
-
+```
 
