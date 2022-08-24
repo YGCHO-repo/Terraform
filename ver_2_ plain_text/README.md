@@ -182,8 +182,8 @@ resource "aws_nat_gateway" "natgw_a" {
 }
 ...(생략) (필요한 갯수 만큼 설정)
 ```
-- NAT Gateway 의 경우 Public 으로 생성 진행
-- Public으로 생성시 EIP가 필요하여 EIP 설정후 대상 NAT Gateway에 Attach
+> **NAT Gateway 의 경우 Public 으로 생성 진행**
+> **Public으로 생성시 EIP가 필요하여 EIP 설정후 대상 NAT Gateway에 Attach**
 
 + **resource "aws_eip" "natgw_a_eip" {...} 블럭 생성 진행**
   - 해당 블럭의 내용중 lifecycle은 resource 블럭의 Meta-Arguments 값이다. 
