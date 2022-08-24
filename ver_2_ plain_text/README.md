@@ -142,7 +142,7 @@ resource "aws_vpc" "this" {
 
 ```
 .
-- ├── main.tf
+├── main.tf
 ├── provider.tf
 ├── vpc.tf
 ├── subnet.tf
