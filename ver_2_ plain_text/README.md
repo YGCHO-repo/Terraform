@@ -24,7 +24,7 @@
 
 > 향후 생성 추가 되는 파일
 - terraform plan 명령어 적용시 
-    - planfile 
+    - planfile     
         <plan 적용시 생성되는 파일>
 - terraform apply 명령어 적용시
     - terraform.tfstate
