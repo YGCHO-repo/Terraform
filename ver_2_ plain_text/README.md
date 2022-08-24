@@ -21,6 +21,8 @@
 - rds_aurora_pg.tf
 - rds_aurora.tf
 - output.tf
+     
+     
 
 > **향후 생성 추가 되는 파일**
 - terraform plan 명령어 적용시 
