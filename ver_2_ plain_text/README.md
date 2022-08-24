@@ -23,12 +23,12 @@
 - output.tf
 
 > **향후 생성 추가 되는 파일**
-    - terraform plan 명령어 적용시 
-        - planfile  <파일명>     
+- terraform plan 명령어 적용시 
+    - planfile  <파일명>     
 
-    - terraform apply 명령어 적용시
-        - terraform.tfstate  <파일명>
-        - terraform.tfstate.backup  <파일명>
+- terraform apply 명령어 적용시
+    - terraform.tfstate  <파일명>
+    - terraform.tfstate.backup  <파일명>
 
 -----
 ### 테라폼 명령어
