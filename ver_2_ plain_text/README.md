@@ -405,3 +405,124 @@ resource "aws_eip" "bastion_eip" {
 - https://aws.amazon.com/ko/ec2/instance-types/
 
 -----
+## elb_alb.tf
+```hcl
+resource "aws_lb" "front_alb" {
+  name               = "test-tf-ext-front-alb"
+  internal           = false # Public
+  load_balancer_type = "application"
+  subnets = [
+    aws_subnet.main_pub_a_subnet.id,
+    aws_subnet.main_pub_c_subnet.id
+  ]
+  security_groups = [
+    aws_security_group.front_alb_sg.id, 
+  ]
+  tags = {Name = "test-tf-ext-front-alb"}
+}
+...(생략) (필요한 서브넷의 갯수 만큼 설정)
+```
++ **resource "aws_lb" "front_alb" {...} 블럭 생성 진행**
+  - name
+    - ALB의 Name 설정
+  - internal
+    - 해당 식별자의 type는 bool 이다. 
+    - false 설정시 Public
+      - AWS console의 Scheme : internet-facing 동일
+    - true 설정시 Private
+      - AWS console의 Scheme : internal 동일
+  - load_balancer_type
+    - application 타입으로 설정 
+      - 추가적으로 해당 식별자의 표현값은 3개 존재 
+        - application (ALB)
+        - natwork (NLB)
+        - gateway (GLB)
+  - subnets
+    - 해당 ALB에 associate 진행 하고자 하는 subnet 설정
+    - 위의 코드는 AZ(subnet) 2곳 설정 
+      - A_zone(ap-northeast-2a) , C_zone(ap-northeast-2c)
+  - security_groups
+    - 해당 ALB에서 사용 하고자 하는 SG 설정
+
+> 참고용 URL  
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb
+
+-----
+## elb_alb_tg.tf
+```hcl
+resource "aws_lb_target_group" "front_alb_tg" {
+  name        = "test-tf-front-alb-tg"
+  vpc_id      = aws_vpc.this.id
+  target_type = "instance"
+  port        = 80
+  protocol    = "HTTP"
+}
+
+resource "aws_lb_target_group_attachment" "front_alb_tg_a_attch" {
+  target_group_arn = aws_lb_target_group.front_alb_tg.arn
+  port             = 80
+  target_id        = aws_instance.web_a.id
+}
+```
++ **resource "aws_lb_target_group" "front_alb_tg" {...} 블럭 생성 진행**
+  - name
+    - TG의 Name 설정
+  - vpc_id
+    - 위에서 생성한 VPC의 id값을 참조
+    - [resource] aws_vpc.this 의 id 값(속성) 참조
+  - target_type
+    - TG의 타입을 instance 로 설정
+  - port
+    - 통신 하고자 하는 port 설정
+  - protocol
+    - 통신 하고자 하는 port 와 함께 프로토콜 설정
+      - 통상 80:HTTP , 443:HTTPS 사용
+
++ **resource "aws_lb_target_group_attachment" "front_alb_tg_a_attach" {...} 블럭 생성 진행**
+  - target_group_arn
+    - 위에서 생성한 TG 의 arn(Amazon resource name) 값 설정
+      - Resource를 생성(설정) 진행시 각 resource 의 attributes 값의 ID or arn 을 선택적으로 사용해야 한다.
+  - port
+    - 통신 하고자 하는 port 설정
+  - target_id
+    - 통신 하고자 하는 대상 설정 (EC2 instance)
+      + **resource "aws_lb_target_group" "front_alb_tg" {...} 블럭** 에서 target_type 을 instance 로 설정 참조
+
+> 참고용 URL  
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group_attachment
+
+-----
+## elb_alb_listener.tf
+```hcl
+resource "aws_lb_listener" "front_alb_listener" {
+  load_balancer_arn = aws_lb.front_alb.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.front_alb_tg.arn
+  }
+  tags = { Name = "test-tf-vpc-front-alb-listener" }
+}
+...(생략) (필요한 서브넷의 갯수 만큼 설정)
+```
++ **resource "aws_lb_listener" "front_alb_listener" {...} 블럭 생성 진행**
+  - load_balancer_arn
+    - 위에서 생성된 ALB 리소스의 arn 설정
+  - port
+    - 통신 하고자 하는 port 설정
+  - protocol
+    - 통신 하고자 하는 프로토콜 설정 
+  - __**default_action 내부 블럭**__
+    - type
+      - 액션의 타입을 **"forward"**(전달) 설정
+        - 타입은 **"forward"**, **"redirect"**, **"fixed-response"**, **"authenticate-cognito"**, **"authenticate-oidc"** 가 있다.
+
+> 참고용 URL  
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_rule
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_certificate
+
+-----
