@@ -187,7 +187,7 @@ resource "aws_nat_gateway" "natgw_a" {
   - connectivity_type
     - NAT G/W의 통신 방식 설정
   - depends_on
-    - 명시적으로 [aws_eip.natgw_a_eip] 생성이 정상적으로 이뤄진후, 해당 리소스가 생성 되로록 설정
+    - 명시적으로 [aws_eip.natgw_a_eip] 생성이 정상적으로 이뤄진 후, 해당 리소스가 생성 되로록 설정
 
 > 참고용 URL 
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
@@ -278,11 +278,11 @@ resource "aws_security_group" "bastion_sg" {
 ```
 + **resource "aws_security_group" "bastion_sg" {...} 블럭 생성 진행**
   - description
-    - 생성 하고자 하는 SG의 설명문 항목
+    - 생성하고자 하는 SG의 설명문 항목
   - name
-    - 생성 하고자 하는 SG의 이름 항목
+    - 생성하고자 하는 SG의 이름 항목
   - vpc_id
-    - 생성 하고자 하는 SG의 생성 영역 VPC기준
+    - 생성하고자 하는 SG의 생성 영역 VPC기준
     - SG의 경우 각각 VPC에 종속 되는 리소스
 
 - SG 블럭에서의 내부 블럭을 2개 작성, 1개 적용으로 작성 하였다. 
@@ -714,9 +714,9 @@ resource "aws_rds_cluster_instance" "this" {
 ```
 + **resource "aws_rds_cluster_instance" "this" {...} 블럭 생성 진행**
   - count
-    - 생성 하고자 하는 인스턴스 갯수
+    - 생성하고자 하는 인스턴스 갯수
   - identifier
-    - 생성 하고자 하는 인서턴스의 식별자(명칭/이름)
+    - 생성하고자 하는 인스턴스의 식별자(명칭/이름)
       - count.index 사용하여 생성되는 순번 지정
   
   - cluster_identifier
