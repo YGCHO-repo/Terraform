@@ -4,25 +4,29 @@
 
 -----
 ### 파일 구성
-- main.tf
-- provider.tf
-- vpc.tf
-- subnet.tf
-- internat_gateway.tf
-- nat_gateways.tf
-- route_tables.tf
-- route_tables_rule.tf
-- security_group.tf
-- security_group_rule.tf
-- ec2_instances.tf
-- elb_alb.tf
-- elb_alb_tg.tf
-- elb_alb_listener.tf
-- elb_alb_listener_rule.tf
-- rds_aurora_subnet.tf
-- rds_aurora_pg.tf
-- rds_aurora.tf
-- output.tf
+```
+.
+├── main.tf
+├── provider.tf
+├── vpc.tf
+├── subnet.tf
+├── internat_gateway.tf
+├── nat_gateways.tf
+├── route_tables.tf
+├── route_tables_rule.tf
+├── security_group.tf
+├── security_group_rule.tf
+├── ec2_instances.tf
+├── elb_alb.tf
+├── elb_alb_tg.tf
+├── elb_alb_listener.tf
+├── elb_alb_listener_rule.tf
+├── rds_aurora_subnet.tf
+├── rds_aurora_pg.tf
+├── rds_aurora.tf
+├── output.tf
+└── README.md
+```
      
      
 > **향후 생성 추가 되는 파일**
@@ -103,64 +107,40 @@ resource "aws_vpc" "this" {
     - "10.50.0.0/16"
 - tags
     - { "Name" = "test-tf-vpc" }
+        - 기본 Name Tag 설정
 
 > 참고용 URL 
 - https://www.terraform.io/language/resources/syntax
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
 
 -----
+## subnet.tf
+### resource subnet 블럭
+```hcl
+resource "aws_subnet" "main_pub_a_subnet" {
+  vpc_id            = aws_vpc.this.id
+  cidr_block        = "10.50.10.0/24"
+  availability_zone = "ap-northeast-2a"
+  tags              = { Name = "test-tf-ap-northeast-2a-public-main-subnet" }
+}
 
-
-
-
-
-
-
-
-
-- .
-- ├── main.tf
-- ├── provider.tf
-- ├── vpc.tf
-- ├── subnet.tf
-- ├── internat_gateway.tf
-- ├── nat_gateways.tf
-- ├── route_tables.tf
-- ├── route_tables_rule.tf
-- ├── security_group.tf
-- ├── security_group_rule.tf
-- ├── ec2_instances.tf
-- ├── elb_alb.tf
-- ├── elb_alb_tg.tf
-- ├── elb_alb_listener.tf
-- ├── elb_alb_listener_rule.tf
-- ├── rds_aurora_subnet.tf
-- ├── rds_aurora_pg.tf
-- ├── rds_aurora.tf
-- ├── output.tf
-- └── README.md
-
+...(생략) (필요한 갯수 만큼 설정)
 ```
-.
-├── main.tf
-├── provider.tf
-├── vpc.tf
-├── subnet.tf
-├── internat_gateway.tf
-├── nat_gateways.tf
-├── route_tables.tf
-├── route_tables_rule.tf
-├── security_group.tf
-├── security_group_rule.tf
-├── ec2_instances.tf
-├── elb_alb.tf
-├── elb_alb_tg.tf
-├── elb_alb_listener.tf
-├── elb_alb_listener_rule.tf
-├── rds_aurora_subnet.tf
-├── rds_aurora_pg.tf
-├── rds_aurora.tf
-├── output.tf
-└── README.md
-```
++ **resource "aws_subnet" "main_pub_a_subnet" {...} 블럭 생성 진행**
+- vpc_id
+    - aws_vpc_.this.id
+    - 바로 위에 설정한 "resouce" "aws_vpc" "this" 의 코드 블럭(생성된 정보값)의 id 값을 참조하도록 설정
+- cidr_block
+    - "10.50.10.0/24"
+- availability_zone
+    - "ap-northeast-2a"
+- tags
+    - { Name = "test-tf-ap-northeast-2a-public-main-subnet" }
+        - 기본 Name Tag 설정
+
+> 참고용 URL 
+- https://www.terraform.io/language/resources/syntax
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
+
+
 
