@@ -2,6 +2,7 @@
 
 ## AWS resource(service) 단위로 *.tf 파일 구성
 
+-----
 ### 파일 구성
 - main.tf
 - provider.tf
@@ -33,7 +34,7 @@
 
 -----
 ### 테라폼 명령어
-```
+```sh
 실행
 $ terraform init 
 
