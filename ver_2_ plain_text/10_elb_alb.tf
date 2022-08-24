@@ -41,4 +41,3 @@ resource "aws_lb" "backend_alb" {
 
   # tags = ""
 }
-

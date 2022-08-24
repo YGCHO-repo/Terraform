@@ -59,3 +59,4 @@ resource "aws_route" "pri_c_was_rtb_rt" {
 #     depends_on = [ aws_route_table.pri_c_rds_rtb ]
 # }
  */
+ 

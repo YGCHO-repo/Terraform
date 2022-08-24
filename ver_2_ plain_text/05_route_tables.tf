@@ -138,3 +138,4 @@ resource "aws_route_table_association" "pri_c_rds_rtb" {
   subnet_id      = aws_subnet.rds_pri_c_subnet.id
   # gateway_id = aws_nat_gateway.natgw_c.id
 }
+
