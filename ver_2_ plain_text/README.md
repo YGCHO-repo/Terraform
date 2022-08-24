@@ -24,11 +24,13 @@
 
 > 향후 생성 추가 되는 파일
 - terraform plan 명령어 적용시 
-    - planfile <plan 적용시 생성되는 파일>
+    - planfile 
+        <plan 적용시 생성되는 파일>
 - terraform apply 명령어 적용시
     - terraform.tfstate
     - terraform.tfstate.backup
 
+-----
 ### 테라폼 명령어
 ```
 실행
