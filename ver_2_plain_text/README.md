@@ -734,6 +734,15 @@ output "vpc_id" {
   value = aws_vpc.this.id
 }
 ```
++ **output "vpc" {...} 블럭 생성 진행**
+- value
+  - 생성된 vpc resource 블럭의 정보 설정
+    - vpc resource 블럭의 전체 정보 확인 가능
+
++ **output "vpc_id" {...} 블럭 생성 진행**
+- value
+  - 생성된 vpc resource 블럭의 ID 정보 설정
+    - vpc resource 블럭의 ID 값만 확인 가능
 
 
 
