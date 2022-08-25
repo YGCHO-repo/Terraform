@@ -750,6 +750,7 @@ output "vpc_id" {
 Outputs:
 
 vpc = {
+  "id" = "vpc-0f592693b3c730bb3"
   "arn" = "arn:aws:ec2:ap-northeast-2:561132301435:vpc/vpc-0f592693b3c730bb3"
   "assign_generated_ipv6_cidr_block" = false
   "cidr_block" = "10.50.0.0/16"
@@ -761,7 +762,6 @@ vpc = {
   "enable_classiclink_dns_support" = false
   "enable_dns_hostnames" = false
   "enable_dns_support" = true
-  "id" = "vpc-0f592693b3c730bb3"
   "instance_tenancy" = "default"
   "ipv4_ipam_pool_id" = tostring(null)
   "ipv4_netmask_length" = tonumber(null)
