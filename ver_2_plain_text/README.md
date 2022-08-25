@@ -745,7 +745,7 @@ output "vpc_id" {
     - vpc resource 블럭의 ID 값만 확인 가능
 
 
-
+#### output 적용시 확인 내용 (Sample)
 ```hcl
 Outputs:
 
