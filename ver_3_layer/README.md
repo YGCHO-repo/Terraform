@@ -1,31 +1,8 @@
 # Code guide
-
 ## AWS resource(서비스) 단위로 폴더 구성
 
-### 폴더 구성
-```
-.
-├── 00_S3
-│   └── *.tf
-│
-├── 01_VPC
-│   └── *.tf
-│
-├── 02_SG
-│   └── *.tf
-│
-├── 03_EC2
-│   └── *.tf
-│
-├── 04_ALB
-│   └── *.tf
-│
-└─── 05_RDS
-     └── *.tf
-```
-
 -----
-### 파일 구성
+### 폴더 및 파일 구성
 ```
 .
 ├── 00_S3
@@ -80,8 +57,31 @@
     ├── rds_aurora_pg.tf
     └── rds_aurora_subnet.tf
 ```
+> **향후 생성 추가 되는 파일**
+- terraform plan 명령어 적용시 생성 파일
+```
+└── planfile
+```
+
+- terraform apply 명령어 적용시
+  - 1. S3 생성시 local에 생성
+  - 2. S3 제외 다른 폴더에 있는 리소스는 원격에 생성 (AWS S3 bucket)
+```
+├── terraform.tfstate
+└── terraform.tfstate.backup (apply 2회 적용시 생성)      
+```
 
 -----
+### 테라폼 명령어
+```
+실행
+$ terraform init 
 
+계획
+$ terraform plan -out=planfile
 
+적용
+$ terraform apply planfile
+```
 
+-----
