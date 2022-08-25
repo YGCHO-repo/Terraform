@@ -64,8 +64,8 @@
 ```
 
 - terraform apply 명령어 적용시
-  - 1. S3 생성시 local에 생성
-  - 2. S3 제외 다른 폴더에 있는 리소스는 원격에 생성 (AWS S3 bucket)
+  - 1.   S3 생성시 local에 생성
+  - 2.   S3 제외 다른 폴더에 있는 리소스는 원격에 생성 (AWS S3 bucket)
 ```
 ├── terraform.tfstate
 └── terraform.tfstate.backup (apply 2회 적용시 생성)      
