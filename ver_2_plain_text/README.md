@@ -722,3 +722,55 @@ resource "aws_rds_cluster_instance" "this" {
 
 > 참고용 URL (AWS)
 - https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html
+
+-----
+## output.tf
+```hcl
+output "vpc" {
+  value = aws_vpc.this
+}
+
+output "vpc_id" {
+  value = aws_vpc.this.id
+}
+```
+
+
+
+```hcl
+Outputs:
+
+vpc = {
+  "arn" = "arn:aws:ec2:ap-northeast-2:561132301435:vpc/vpc-0f592693b3c730bb3"
+  "assign_generated_ipv6_cidr_block" = false
+  "cidr_block" = "10.50.0.0/16"
+  "default_network_acl_id" = "acl-0cc9631d8c731f548"
+  "default_route_table_id" = "rtb-00460c4c12d833c80"
+  "default_security_group_id" = "sg-076955b9d78fc5554"
+  "dhcp_options_id" = "dopt-06bd316d"
+  "enable_classiclink" = false
+  "enable_classiclink_dns_support" = false
+  "enable_dns_hostnames" = false
+  "enable_dns_support" = true
+  "id" = "vpc-0f592693b3c730bb3"
+  "instance_tenancy" = "default"
+  "ipv4_ipam_pool_id" = tostring(null)
+  "ipv4_netmask_length" = tonumber(null)
+  "ipv6_association_id" = ""
+  "ipv6_cidr_block" = ""
+  "ipv6_cidr_block_network_border_group" = ""
+  "ipv6_ipam_pool_id" = ""
+  "ipv6_netmask_length" = 0
+  "main_route_table_id" = "rtb-00460c4c12d833c80"
+  "owner_id" = "561132301435"
+  "tags" = tomap({
+    "Name" = "test-tf-vpc"
+  })
+  "tags_all" = tomap({
+    "Name" = "test-tf-vpc"
+  })
+}
+
+
+vpc_id = "vpc-0f592693b3c730bb3"
+```
