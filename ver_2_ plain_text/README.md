@@ -526,3 +526,199 @@ resource "aws_lb_listener" "front_alb_listener" {
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_certificate
 
 -----
+## rds_aurora_subnet.tf
+```hcl
+resource "aws_db_subnet_group" "this" {
+  description = "RDS Aurora Database subnet group"
+  name        = "test-tf-rds-subnet-group"
+  subnet_ids = [
+    aws_subnet.rds_pri_a_subnet.id,
+    aws_subnet.rds_pri_c_subnet.id
+  ]
+  tags = { Name = "test-tf-rds-subnet-group" }
+}
+```
++ **resource "aws_db_subnet_group" "this" {...} 블럭 생성 진행**
+  - description
+    - 해당 RDS subnet_group의 설명문
+  - name
+    - subnet_group의 name 설정
+  - subnet_ids
+    - **[ ]** 리스트 형식으로 입력
+    - 생성된 서브넷 의 id 참조하여 설정
+    - 위의 코드는 AZ(subnet) 2곳 설정 
+      - A_zone(ap-northeast-2a) , C_zone(ap-northeast-2c)
+
+> 참고용 URL
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_subnet_group
+
+-----
+## rds_aurora_pg.tf
+```hcl
+resource "aws_rds_cluster_parameter_group" "this" {
+  name   = "test-tf-aurora-mysql8-0"
+  family = "aurora-mysql8.0"
+
+  parameter {
+    name  = "character_set_server"
+    value = "utf8"
+  }
+
+  parameter {
+    name  = "character_set_client"
+    value = "utf8"
+  }
+}
+
+resource "aws_db_parameter_group" "this" {
+  name   = "test-tf-aurora-mysql8-0"
+  family = "aurora-mysql8.0"
+}
+```
++ **resource "aws_rds_cluster_parameter_group" "this" {...} 블럭 생성 진행**
+  - name
+    - 해당 Cluster_parameter_group의 name 설정
+  - family
+    - 해당 Cluster_parameter_group의 family 설정
+     
+  - parameter 내부 블럭 (속성 값 변경 예제)
+    - name
+      - 해당 Cluster_parameter_group의 속성의 nanme 설정
+    - value
+      - 해당 Cluster_parameter_group의 속성의 value 설정
+
++ **resource "aws_db_parameter_group" "this" {...} 블럭 생성 진행**
+  - name
+    - 해당 db_parameter_group의 name 설정
+  - family
+    - 해당 db_parameter_group의 family 설정
+
+> 참고용 URL  
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_parameter_group
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_parameter_group
+
+> 참고용 URL (AWS)
+- https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
+- https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
+- https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html (확인용)
+- https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html (확인용)
+
+-----
+## rds_aurora.tf
+```hcl
+resource "aws_rds_cluster" "this" {
+  cluster_identifier               = "test-tf-rds-aurora-cluster"
+  db_subnet_group_name             = aws_db_subnet_group.this.id
+  
+  engine                           = "aurora-mysql"
+  engine_version                   = "8.0.mysql_aurora.3.02.0"
+  
+  availability_zones               = ["ap-northeast-2a", "ap-northeast-2c"]
+
+  database_name                    = "testterraformdb"
+  master_username                  = "admin"
+  master_password                  = "DBAdmin1004"
+
+  port = 3306
+
+  vpc_security_group_ids           = [aws_security_group.rds_sg.id]
+
+  skip_final_snapshot              = true
+  
+  db_cluster_parameter_group_name  = aws_rds_cluster_parameter_group.this.id
+  db_instance_parameter_group_name = aws_db_parameter_group.this.id
+}
+```
++ **resource "aws_rds_cluster" "this" {...} 블럭 생성 진행**
+  - cluster_identifier
+    - 클러스터의 식별자(명칭) 설정
+  - db_subnet_group_name
+    - 위에서 생성한 subnet_group 설정
+  
+  - engine
+    - 클러스터에서 사용할 엔진 설정
+  - engine_version
+    - 클러스터에서 사용할 엔진 버전 설정
+  
+  - availability_zones
+    - 클러스터에서 사용할 AZs(가용역역)를 설정
+             
+  - database_name
+    - 데이터베이스의 name 설정
+  - master_username
+    - 데이터베이스의 사용자(계정) 설정
+  - master_password
+    - 데이터베이스의 사용자 인증용 암호 설정
+            
+  - port
+    - 클러스터에서 통신 하고자 하는 port 설정
+            
+  - vpc_security_group_ids
+    - **[ ]** 리스트 형식으로 입력
+    - 클러스터에서 사용 하고자 하는 SG 설정
+  
+  - skip_final_snapshot
+    - 마지막 스냅샷 생성 여부 설정
+    - ture 설정시 스냅샷 생성 안함
+      - default 설정값은 **false**
+      - false 설정시 **final_snapshot_identifier = " "** 식별자/표현값 참조하여 스냅샷 생성
+  
+  - db_cluster_parameter_group_name
+    - 위에서 생성한 클러스터 파라미터 그룹을 설정
+  - db_instance_parameter_group_name
+    - 위에서 생성한 파라미터 그룹을 설정
+
+> 참고용 URL
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster
+
+-----
+```hcl
+resource "aws_rds_cluster_instance" "this" {
+  count      = 2
+  identifier = "test-tf-rds-aurora-${count.index}"
+  
+  cluster_identifier = aws_rds_cluster.this.id
+  db_subnet_group_name    = aws_db_subnet_group.this.id
+
+  instance_class = "db.t3.medium"
+
+  engine            = "aurora-mysql"
+  engine_version    = "8.0.mysql_aurora.3.02.0"
+  
+  
+  apply_immediately = false
+
+  copy_tags_to_snapshot = false
+
+  db_parameter_group_name = aws_db_parameter_group.this.id
+}
+```
++ **resource "aws_rds_cluster_instance" "this" {...} 블럭 생성 진행**
+  - count
+    - 생성하고자 하는 인스턴스 갯수
+  - identifier
+    - 생성하고자 하는 인스턴스의 식별자(명칭/이름)
+      - count.index 사용하여 생성되는 순번 지정
+  
+  - cluster_identifier
+    - 위에서 생성한 클러스터 설정
+  - db_subnet_group_name
+    - 위에서 생성한 서브넷 그룹 설정
+  
+  - instance_class
+    - RDS 인스턴스 생성시 type 설정
+
+  - engine
+    - RDS 인스턴스 생성시 엔진 설정
+  - engine_version
+    - RDS 인스턴스 생성시 엔진 버전 설정
+      - 선택 가능한 엔진 버전
+        - **1.** - 8.0.mysql_aurora.3.02.0
+        - **2.** - 5.6.mysql_aurora.1.17.9
+        - **3.** - 5.7.mysql_aurora.2.03.2
+
+> 참고용 URL
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance
+
+> 참고용 URL (AWS)
+- https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html
