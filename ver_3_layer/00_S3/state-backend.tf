@@ -1,12 +1,15 @@
+# ++++++++++++++++++++++++++++++++++++++
+#            S3 Bucket 생성
+# ++++++++++++++++++++++++++++++++++++++
 resource "aws_s3_bucket" "terraform_state_backend" {
-  bucket = var.s3_bucket
+  bucket = "test-terraform-state-backend-yg"
 
   # Terraform destroy시 에러 및 삭제 불가
   # lifecycle {
   #   prevent_destroy = true
   # }
 
-  tags = merge(var.tags, tomap({ Name = format("%s", var.s3_bucket) }))
+  tags = {Name = "test-terraform-state-backend-yg"}
 }
 
 resource "aws_s3_bucket_versioning" "this" {
@@ -17,8 +20,7 @@ resource "aws_s3_bucket_versioning" "this" {
 }
 resource "aws_s3_bucket_acl" "name" {
   bucket = aws_s3_bucket.terraform_state_backend.id
-  acl    = var.s3_acl
-  # acl = "private"
+  acl    = "private"
 }
 resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
   bucket = aws_s3_bucket.terraform_state_backend.id
@@ -31,7 +33,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
 }
 
 resource "aws_dynamodb_table" "terraform_state_locks" {
-  name         = var.dynamodb_table
+  name         = "test-terraform-state-locks"
   billing_mode = "PAY_PER_REQUEST"
   hash_key     = "LockID"
 
@@ -39,6 +41,5 @@ resource "aws_dynamodb_table" "terraform_state_locks" {
     name = "LockID"
     type = "S"
   }
-
-  tags = merge(var.tags, tomap({ Name = format("%s", var.dynamodb_table) }))
+  tags = { Name = "test-terraform-state-locks" }
 }
