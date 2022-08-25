@@ -9,8 +9,7 @@
 │   ├── main.tf
 │   ├── outputs.tf
 │   ├── provider.tf
-│   ├── state-backend.tf
-│   └── variables.tf
+│   └── state-backend.tf
 │
 ├── 01_VPC
 │   ├── internat_gateway.tf
@@ -85,4 +84,20 @@ $ terraform apply planfile
 ```
 
 -----
+### 사용된 리소스 블럭
+```
+1. terraform    block
+2. provider     block
+3. resource     block
+4. output       block
+5. data         block
+```
 
+> 참고용 URL  
+> >테라폼 구조 관련
+- https://www.terraform.io/intro
+- https://www.terraform.io/language
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+
+
+-----
