@@ -71,6 +71,17 @@
 ```
 
 -----
+### 참고 사항
+```
+S3 생성은 local backend
+
+나머지는 remote backend
+
+
+
+```
+
+-----
 ### 테라폼 명령어
 ```
 실행
@@ -85,7 +96,6 @@ $ terraform apply planfile
 적용 완료시 설정값 확인 (*.tfstate 파일)
 $ terraform refresh
 $ terraform show
-
 ```
 
 -----
