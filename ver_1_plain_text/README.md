@@ -32,6 +32,8 @@ $ terraform apply
 > 참고용 URL  
 > >테라폼 구조 관련
 - https://www.terraform.io/intro
+- https://www.terraform.io/language
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 
 -----
 ## main.tf 
