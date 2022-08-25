@@ -77,10 +77,15 @@
 $ terraform init 
 
 계획
-$ terraform plan -out=planfile
+$ terraform plan -refresh=false -out=planfile
 
 적용
 $ terraform apply planfile
+
+적용 완료시 설정값 확인 (*.tfstate 파일)
+$ terraform refresh
+$ terraform show
+
 ```
 
 -----
@@ -98,6 +103,5 @@ $ terraform apply planfile
 - https://www.terraform.io/intro
 - https://www.terraform.io/language
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs
-
 
 -----
