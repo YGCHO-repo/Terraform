@@ -434,7 +434,7 @@ terraform {
 ```
 - **backend**
   - key
-    - S3 bucket의 위치/파일명 을 설정
+    - S3 bucket의 위치/파일명을 설정
       - test-terraform-state-backend-yg/sg/terraform.tfstate 
         - "test-terraform-state-backend-yg" S3 bucket의 sg 폴더에 terraform.tfstate 파일 저장
 
@@ -449,3 +449,45 @@ terraform {
 - https://www.terraform.io/language/settings/backends/configuration
 
 -----
+### data.tf
+```hcl
+data "terraform_remote_state" "vpc" {
+  backend = "s3"
+  config = {
+    bucket = "test-terraform-state-backend-yg"
+    key    = "vpc/terraform.tfstate"
+    region = "ap-northeast-2"
+  }
+}
+```
++ **data "terraform_remote_state" "vpc" {...} 블럭 생성 진행**
+  - backend
+    - 백엔드는 S3로 설정
+  - config
+    - 백엔드의 설정값을 설정
+    - 설정용 내부 블럭
+      - bucket 
+        - 참고하고자 하는 S3 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### security_group.tf
+
+
+
+
+
+### output.tf
