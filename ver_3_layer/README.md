@@ -366,16 +366,24 @@ output "natgw_c_id" {
 + **output "vpc_id" {...} 블럭 생성 진행**
   - value
     - aws_vpc.this.id
-      - vpc.tf 파일 **resource "aws_vpc" "this" {...} 블럭** 에서 생성된 정보를 **output**에 기록
+      - vpc.tf 파일 **resource "aws_vpc" "this" {...} 블럭** 에서 생성된 정보중 id 값을 **output**에 기록
 
 + **output "pub_a_subnet_id" {...} 블럭 생성 진행**
   - value
     - aws_subnet.main_pub_a_subnet.id
-      - subnet.tf 파일 **resource "aws_subnet" "main_pub_a_subnet" {...} 블럭** 에서 생성된 정보를 **output**에 기록 __**...(생략)**__
+      - subnet.tf 파일 **resource "aws_subnet" "main_pub_a_subnet" {...} 블럭** 에서 생성된 정보중 id 값을 **output**에 기록
+> ...(동일 파일 내용 생략)
 
++ **output "igw_id" {...} 블럭 생성 진행**
+  - value
+    - aws_internet_gateway.this.id
+      - intetnet_gateway.tf 파일 **resource "aws_internet_gateway" "this" {...} 블럭** 에서 생성된 정보중 id 값을 **output**에 기록
 
-
-
++ **output "natgw_a_id" {...} 블럭 생성 진행**
+  - value
+    - aws_nat_gateway.natgw_a.id
+      - nat_gateway.tf 파일 **resource "aws_nat_gateway" "natgw_a" {...} 블럭** 에서 생성된 정보중 id 값을 **output**에 기록
+> ...(동일 파일 내용 생략)
 
 > 참고용 URL
 - https://www.terraform.io/language/values/outputs
