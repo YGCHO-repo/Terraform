@@ -76,9 +76,6 @@
 S3 생성은 local backend
 
 나머지는 remote backend
-
-
-
 ```
 
 -----
@@ -115,3 +112,9 @@ $ terraform show
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 
 -----
+
+## s3 folder
+### main.tf
+```hcl
+
+```
