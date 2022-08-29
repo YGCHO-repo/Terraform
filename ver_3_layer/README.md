@@ -467,7 +467,11 @@ data "terraform_remote_state" "vpc" {
     - 백엔드의 설정값을 설정
     - 설정용 내부 블럭
       - bucket 
-        - 참고하고자 하는 S3 
+        - 참고하고자 하는 S3를 설정
+      - key
+        - 참고하고자 하는 S3의 key값 설정
+          - 위에서 생성항 01_vpc 폴더의 *.tf 파일들의 생성값(output)값
+          - 생성된 정보값은 __**terraform.tfstate**__ 파일 참고
 
 
 
