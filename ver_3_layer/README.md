@@ -132,7 +132,7 @@ $ terraform apply planfile
 ```
 
 -----
-### 00_S3/main.tf
+### main.tf
 ```hcl
 terraform {
   required_version = ">= 1.2.2"
@@ -159,6 +159,96 @@ provider "aws" {
 - provider 는 "aws"로 사용, 리전은 "ap-northeast-2" Seoul 리전으로 사용을 설정
 
 -----
+### state-backend.tf
+```hcl
+resource "aws_s3_bucket" "this" {
+  bucket = "test-terraform-state-backend-yg"
+  tags = {Name = "test-terraform-state-backend-yg"}
+}
+
+resource "aws_s3_bucket_versioning" "this" {
+  bucket = aws_s3_bucket.this.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+resource "aws_s3_bucket_acl" "this" {
+  bucket = aws_s3_bucket.this.id
+  acl    = "private"
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "this" {
+  bucket = aws_s3_bucket.this.id
+  rule {
+    # bucket_key_enabled = 
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
+
+resource "aws_dynamodb_table" "this" {
+  name         = "test-terraform-state-locks"
+  billing_mode = "PAY_PER_REQUEST"
+  hash_key     = "LockID"
+
+  attribute {
+    name = "LockID"
+    type = "S"
+  }
+  tags = { Name = "test-terraform-state-locks" }
+}
+
+```
++ **resource "aws_s3_bucket" "this" {...} 블럭 생성 진행**
+- bucket
+  - 생성 진행할 bucket 설정
+
++ **resource "aws_s3_bucket_versioning" "this" {...} 블럭 생성 진행**
+- bucket
+  - 위에서 생성한 bucket 설정
+- versioning_configuration
+  - Versioning 활성화 여부 확인 내부 블럭
+    - "Enabled" 진행
+
++ **resource "aws_s3_bucket_acl" "this" {...} 블럭 생성 진행**
+- bucket
+  - 위에서 생성한 bucket 설정
+- acl
+  - bucket의 타입(public / private) 설정
+    - "private" 설정 진행
++ **resource "aws_s3_bucket_server_side_encryption_configuration" "this" {...} 블럭 생성 진행**
++ **resource "aws_dynamodb_table" "this" {...} 블럭 생성 진행**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### vpc.tf
 ```hcl
 resource "aws_vpc" "this" {
@@ -296,68 +386,5 @@ resource "aws_route_table_association" "pub_a_main_rtb" {
 > 참고용 URL 
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association
-
------
-### security_group.tf
-```hcl
-resource "aws_security_group" "bastion_sg" {
-  description = "Bastion Server Security group"
-  name        = "Bastion-SG"
-  vpc_id      = aws_vpc.this.id
-
-  # ingress{
-  #     description = "SSH Inbound Port"
-  #     protocol = "tcp"
-  #     from_port = 22
-  #     to_port = 22
-  #     cidr_blocks = ["0.0.0.0/0"]
-  # }
-  egress {
-    description = "SSH Outbound Port"
-    protocol    = "-1"
-    from_port   = 0
-    to_port     = 0
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  tags = { Name = "test-tf-bastion-sg" }
-}
-...(생략) (필요한 서브넷의 갯수 만큼 설정)
-```
-+ **resource "aws_security_group" "bastion_sg" {...} 블럭 생성 진행**
-  - description
-    - 생성하고자 하는 SG의 설명문 항목
-  - name
-    - 생성하고자 하는 SG의 이름 항목
-  - vpc_id
-    - 생성하고자 하는 SG의 생성 영역 VPC기준
-    - SG의 경우 각각 VPC에 종속 되는 리소스
-
-- SG 블럭에서의 내부 블럭을 2개 작성, 1개 적용으로 작성 하였다. 
-  - 내부 블럭에서 ingress , egress 는 SG의 inbound , outbound 와 동일하다.
-    - ingress -> inbound
-    - egress -> outbound
-
-- ingress (주석 되어 있음)
-  - description
-    - 해당 SG의 inbound rule 의 설명문
-  - protocol
-    - "tcp"
-  - from_port
-    - 포트 설정 : 어디서부터 (시작점)
-  - to_port
-    - 포트 설정 : 어디까지 (종료점)
-  - cidr_blocks
-    - **[ ]** 리스트 형식으로 입력
-    - "0.0.0.0/0" 전체 IP 영역
-  
-- egress
-  - protocol
-    - "-1"
-      - 전체 프로토콜에 대해서 가능하게 설정
-      - "-1" 은 전체 프로토콜 범위를 뜻함
-  - (해당 rule을 설정시 Outbound는 전체 허용)
-
-> 참고용 URL 
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
 
 -----
