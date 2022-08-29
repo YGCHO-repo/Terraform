@@ -7,7 +7,7 @@
 .
 ├── 00_S3
 │   ├── main.tf
-│   ├── outputs.tf
+│   ├── output.tf
 │   ├── provider.tf
 │   └── state-backend.tf
 │
@@ -17,8 +17,8 @@
 │   ├── nat_gateways.tf
 │   ├── output.tf
 │   ├── provider.tf
-│   ├── route_tables.tf
-│   ├── route_tables_rule.tf
+│   ├── route_table.tf
+│   ├── route_table_rule.tf
 │   ├── subnet.tf
 │   └── vpc.tf
 │
