@@ -262,7 +262,7 @@ resource "aws_dynamodb_table" "this" {
 ```
 > 명령어
 ```
-$ cd 00_VPC
+$ cd 01_VPC
 
 $ terraform init 
 $ terraform plan -refresh=false -out=planfile
@@ -389,5 +389,63 @@ output "natgw_c_id" {
 - https://www.terraform.io/language/values/outputs
 - https://www.terraform.io/language/state/remote
 - https://www.terraform.io/language/state/remote-state-data
+
+-----
+##  SG Folder
+> 폴더 항목
+```
+ 02_SG
+ ├── data.tf
+ ├── main.tf
+ ├── output.tf
+ ├── provider.tf
+ ├── security_group.tf
+ └── security_group_rule.tf
+```
+> 명령어
+```
+$ cd 02_SG
+
+$ terraform init 
+$ terraform plan -refresh=false -out=planfile
+$ terraform apply planfile
+```
+
+-----
+### main.tf
+```hcl
+terraform {
+  required_version = ">= 1.2.2"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "4.22.0"
+    }
+  }
+ 
+  backend "s3" {
+    bucket         = "test-terraform-state-backend-yg"
+    dynamodb_table = "test-terraform-state-locks"
+    key            = "sg/terraform.tfstate"
+    region         = "ap-northeast-2"
+    encrypt        = true
+  }
+}
+```
+- **backend**
+  - key
+    - S3 bucket의 위치/파일명 을 설정
+      - test-terraform-state-backend-yg/sg/terraform.tfstate 
+        - "test-terraform-state-backend-yg" S3 bucket 에 sg 폴더에 terraform.tfstate 저장
+
+
+
+
+
+> 참고용 URL
+- https://www.terraform.io/language/state/remote-state-data
+- https://www.terraform.io/language/settings
+- https://www.terraform.io/language/settings/backends/s3
+- https://www.terraform.io/language/settings/backends/configuration
 
 -----
