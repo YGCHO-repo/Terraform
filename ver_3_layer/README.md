@@ -365,10 +365,14 @@ output "natgw_c_id" {
 ```
 + **output "vpc_id" {...} 블럭 생성 진행**
   - value
-    - vpc.tf 파일 **resource "aws_vpc" "this" {...} 블럭** 에서 생성된 정보를 output에 기록
+    - aws_vpc.this.id
+      - vpc.tf 파일 **resource "aws_vpc" "this" {...} 블럭** 에서 생성된 정보를 **output**에 기록
 
-
-aws_vpc.this.id
++ **output "pub_a_subnet_id" {...} 블럭 생성 진행**
+  - value
+    - aws_subnet.main_pub_a_subnet.id
+      - subnet.tf 파일 **resource "aws_subnet" "main_pub_a_subnet" {...} 블럭** 에서 생성된 정보를 **output**에 기록
+...(생략)
 
 
 
