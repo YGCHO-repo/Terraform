@@ -305,9 +305,9 @@ terraform {
   - dynamodb_table
     - 활용하고자 하는 dynamodb 테이블 설정
   - key
-    - S3 bucket의 위치/파일명 을 설정
+    - S3 bucket의 위치/파일명을 설정
   - region
-    - S3 bucket의 지역명(리전) 을 설정
+    - S3 bucket의 지역명(리전)을 설정
   - encrypt
     - encrypt 사용 여부 설정
 
@@ -467,28 +467,43 @@ data "terraform_remote_state" "vpc" {
       - key
         - 참고하고자 하는 S3의 key값 설정
           - 위에서 생성항 01_vpc 폴더의 *.tf 파일들의 생성값(output)값
-          - 생성된 정보값은 **_terraform.tfstate_** 파일 참고   이렇게
-
-
-          이렇게
+          - 생성된 정보값은 **_terraform.tfstate_** 파일 참고
+      - region
+        - S3 bucket의 지역명(리전)을 설정
 
 -----
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### security_group.tf
+```hcl
+resource "aws_security_group" "bastion_sg" {
+  description = "Bastion Server Security group"
+  name        = "Bastion-SG"
+
+  vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
+
+   egress {
+    description = "SSH Outbound Port"
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0", "10.50.0.0/16"]
+  }
+  tags = { Name = "test-tf-yg-bastion-sg" }
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
