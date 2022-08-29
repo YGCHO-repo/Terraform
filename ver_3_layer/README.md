@@ -114,6 +114,7 @@ $ terraform show
 -----
 
 ## s3 Folder
+> 폴더 항목
 ```
  00_S3
  ├── main.tf
@@ -121,7 +122,17 @@ $ terraform show
  ├── provider.tf
  └── state-backend.tf
 ```
-### main.tf
+> 명령어
+```
+$ cd 00_S3
+
+$ terraform init 
+$ terraform plan -refresh=false -out=planfile
+$ terraform apply planfile
+```
+
+-----
+### 00_S3/main.tf
 ```hcl
 terraform {
   required_version = ">= 1.2.2"
