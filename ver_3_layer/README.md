@@ -363,7 +363,7 @@ output "natgw_c_id" {
   value = aws_nat_gateway.natgw_c.id
 }
 ```
-- + **output "vpc_id" {...} 블럭 생성 진행**
++ **output "vpc_id" {...} 블럭 생성 진행**
   - value
     - vpc.tf 파일 **resource "aws_vpc" "this" {...} 블럭** 에서 생성된 정보를 output에 기록
 
