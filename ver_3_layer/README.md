@@ -114,6 +114,13 @@ $ terraform show
 -----
 
 ## s3 Folder
+```
+ 00_S3
+ ├── main.tf
+ ├── outputs.tf
+ ├── provider.tf
+ └── state-backend.tf
+```
 ### main.tf
 ```hcl
 terraform {
@@ -205,5 +212,141 @@ resource "aws_internet_gateway" "this" {
 
 > 참고용 URL 
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
+
+-----
+### nat_gateway.tf
+```hcl
+# EIP 생성
+resource "aws_eip" "natgw_a_eip" {
+  vpc = true
+  lifecycle { create_before_destroy = true }
+  tags = { Name = "test-tf-vpc-ap-northeast-2a-nat-eip" }
+}
+
+# NAT G/W 생성
+resource "aws_nat_gateway" "natgw_a" {
+  allocation_id     = aws_eip.natgw_a_eip.id
+  subnet_id         = aws_subnet.main_pub_a_subnet.id
+  connectivity_type = "public"
+  depends_on        = [aws_eip.natgw_a_eip]
+  tags              = { Name = "test-tf-vpc-ap-northeast-2a-main-natgw" }
+}
+...(생략) (필요한 갯수 만큼 설정)
+```
+> **NAT Gateway 의 경우 Public 으로 생성 진행 Public으로 생성시 EIP가 필요하여 EIP 설정후 대상 NAT Gateway에 Attach**
+
++ **resource "aws_eip" "natgw_a_eip" {...} 블럭 생성 진행**
+  - 해당 블럭의 내용중 lifecycle은 resource 블럭의 Meta-Arguments 값이다. 
+    - 기존에 EIP가 존재하다고 가정하면, 기존 EIP를 유지한 상태에서 신규로 생성 및 연결후 기존 EIP를 제거 설정 구문
+
++ **resource "aws_nat_gateway" "natgw_a" {...} 블럭 생성 진행**
+  - allocation_id
+    - 생성된 EIP 연결 설정
+  - subnet_id
+    - 위에서 생성한 Subnet 연결 설정
+  - connectivity_type
+    - NAT G/W의 통신 방식 설정
+  - depends_on
+    - 명시적으로 [aws_eip.natgw_a_eip] 생성이 정상적으로 이뤄진 후, 해당 리소스가 생성 되로록 설정
+
+> 참고용 URL 
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
+
+-----
+### route_table.tf
+```hcl
+# RTB 생성
+resource "aws_route_table" "pub_a_main_rtb" {
+  vpc_id = aws_vpc.this.id
+  tags   = { Name = "test-tf-vpc-ap-northeast-2a-public-main-rtb" }
+}
+
+# RTB to Subnet association 
+resource "aws_route_table_association" "pub_a_main_rtb" {
+  route_table_id = aws_route_table.pub_a_main_rtb.id
+  subnet_id      = aws_subnet.main_pub_a_subnet.id
+  # gateway_id = aws_internet_gateway.this.id
+}
+...(생략) (필요한 갯수 만큼 설정)
+```
++ **resource "aws_route_table" "pub_a_main_rtb" {...} 블럭 생성 진행**
+  - vpc_id
+    - 위에서 생성한 VPC 정보값 참조 설정
+
++ **resource "aws_route_table_association" "pub_a_main_rtb" {...} 블럭 생성 진행**
+  - route_table_id
+    - 생성된 RTB 의 id 참조하여 설정
+  - subnet_id
+    - 생성된 서브넷 의 id 참조하여 설정
+  - gateway_id
+    - IGW 및 NAT 연결 가능한 식별자 설정을 보여주고자 작성
+    - 해당 항목은 subnet_id 와 중복하여 설정 불가.
+
+> 참고용 URL 
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association
+
+-----
+### security_group.tf
+```hcl
+resource "aws_security_group" "bastion_sg" {
+  description = "Bastion Server Security group"
+  name        = "Bastion-SG"
+  vpc_id      = aws_vpc.this.id
+
+  # ingress{
+  #     description = "SSH Inbound Port"
+  #     protocol = "tcp"
+  #     from_port = 22
+  #     to_port = 22
+  #     cidr_blocks = ["0.0.0.0/0"]
+  # }
+  egress {
+    description = "SSH Outbound Port"
+    protocol    = "-1"
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = { Name = "test-tf-bastion-sg" }
+}
+...(생략) (필요한 서브넷의 갯수 만큼 설정)
+```
++ **resource "aws_security_group" "bastion_sg" {...} 블럭 생성 진행**
+  - description
+    - 생성하고자 하는 SG의 설명문 항목
+  - name
+    - 생성하고자 하는 SG의 이름 항목
+  - vpc_id
+    - 생성하고자 하는 SG의 생성 영역 VPC기준
+    - SG의 경우 각각 VPC에 종속 되는 리소스
+
+- SG 블럭에서의 내부 블럭을 2개 작성, 1개 적용으로 작성 하였다. 
+  - 내부 블럭에서 ingress , egress 는 SG의 inbound , outbound 와 동일하다.
+    - ingress -> inbound
+    - egress -> outbound
+
+- ingress (주석 되어 있음)
+  - description
+    - 해당 SG의 inbound rule 의 설명문
+  - protocol
+    - "tcp"
+  - from_port
+    - 포트 설정 : 어디서부터 (시작점)
+  - to_port
+    - 포트 설정 : 어디까지 (종료점)
+  - cidr_blocks
+    - **[ ]** 리스트 형식으로 입력
+    - "0.0.0.0/0" 전체 IP 영역
+  
+- egress
+  - protocol
+    - "-1"
+      - 전체 프로토콜에 대해서 가능하게 설정
+      - "-1" 은 전체 프로토콜 범위를 뜻함
+  - (해당 rule을 설정시 Outbound는 전체 허용)
+
+> 참고용 URL 
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
 
 -----
