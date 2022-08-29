@@ -202,22 +202,22 @@ resource "aws_dynamodb_table" "this" {
 
 ```
 + **resource "aws_s3_bucket" "this" {...} 블럭 생성 진행**
-- bucket
-  - 생성 진행할 bucket 설정
+  - bucket
+    - 생성 진행할 bucket 설정
 
 + **resource "aws_s3_bucket_versioning" "this" {...} 블럭 생성 진행**
-- bucket
-  - 위에서 생성한 bucket 설정
-- versioning_configuration
-  - Versioning 활성화 여부 확인 내부 블럭
-    - "Enabled" 진행
+  - bucket
+    - 위에서 생성한 bucket 설정
+  - versioning_configuration
+    - Versioning 활성화 여부 확인 내부 블럭
+      - "Enabled" 진행
 
 + **resource "aws_s3_bucket_acl" "this" {...} 블럭 생성 진행**
-- bucket
-  - 위에서 생성한 bucket 설정
-- acl
-  - bucket의 타입(public / private) 설정
-    - "private" 설정 진행
+  - bucket
+    - 위에서 생성한 bucket 설정
+  - acl
+    - bucket의 타입(public / private) 설정
+      - "private" 설정 진행
 + **resource "aws_s3_bucket_server_side_encryption_configuration" "this" {...} 블럭 생성 진행**
 + **resource "aws_dynamodb_table" "this" {...} 블럭 생성 진행**
 
