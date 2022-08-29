@@ -371,8 +371,7 @@ output "natgw_c_id" {
 + **output "pub_a_subnet_id" {...} 블럭 생성 진행**
   - value
     - aws_subnet.main_pub_a_subnet.id
-      - subnet.tf 파일 **resource "aws_subnet" "main_pub_a_subnet" {...} 블럭** 에서 생성된 정보를 **output**에 기록
-...(생략)
+      - subnet.tf 파일 **resource "aws_subnet" "main_pub_a_subnet" {...} 블럭** 에서 생성된 정보를 **output**에 기록       ...(생략)
 
 
 
