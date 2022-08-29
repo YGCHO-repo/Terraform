@@ -296,11 +296,11 @@ terraform {
   - registry.terraform.io/hashicorp/aws 에서 4.22.0 버전 사용
 
 - **backend**
-
 >  1. 위에서 생성한 S3 bucket을 활용하여 backend 설정 한다 
 >  2. 해당 설정을 진행하면 Local에 terraform.tfstate 이 생성되지 않는다
 >  3. terraform.tfstate 파일은 remote 위치인 AWS S3에 생성 된다. 
 
+- backend
   - bucket
     - 설정하고자 하는 S3 bucket 이름 설정
   - dynamodb_table
