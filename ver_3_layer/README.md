@@ -74,8 +74,10 @@
 ### 참고 사항
 ```
 S3 생성은 local backend
+- terraform.tfstate (local에 생성)
 
-나머지는 remote backend
+VPC/EC2/SG/RDS는 remote backend
+- terraform.tfstate (AWS S3에 생성)
 ```
 
 -----
@@ -294,5 +296,8 @@ terraform {
   - registry.terraform.io/hashicorp/aws 에서 4.22.0 버전 사용
 
 - backend
+  1. 위에서 생성한 S3 bucket을 활용하여 backend 설정을 진행한다. 
+  2. 해당 설정을 진행하면 Local에 terraform.tfstate 이 생성되지 않는다.
+  3. AWS S3에 state 파일 생성 된다. 
   - 
 
