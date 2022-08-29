@@ -438,10 +438,6 @@ terraform {
       - test-terraform-state-backend-yg/sg/terraform.tfstate 
         - "test-terraform-state-backend-yg" S3 bucket의 sg 폴더에 terraform.tfstate 파일 저장
 
-
-
-
-
 > 참고용 URL
 - https://www.terraform.io/language/state/remote-state-data
 - https://www.terraform.io/language/settings
@@ -473,6 +469,7 @@ data "terraform_remote_state" "vpc" {
           - 위에서 생성항 01_vpc 폴더의 *.tf 파일들의 생성값(output)값
           - 생성된 정보값은 **_terraform.tfstate_** 파일 참고
 
+-----
 
 
 
