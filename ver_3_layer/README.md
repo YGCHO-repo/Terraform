@@ -436,7 +436,7 @@ terraform {
   - key
     - S3 bucket의 위치/파일명 을 설정
       - test-terraform-state-backend-yg/sg/terraform.tfstate 
-        - "test-terraform-state-backend-yg" S3 bucket 에 sg 폴더에 terraform.tfstate 저장
+        - "test-terraform-state-backend-yg" S3 bucket의 sg 폴더에 terraform.tfstate 파일 저장
 
 
 
