@@ -308,7 +308,8 @@ terraform {
     - S3 bucket의 위치/파일명 을 설정
   - region
     - S3 bucket의 지역명(리전) 을 설정
-  - 
+  - encrypt
+    - encrypt 사용 여부 설정
 
 > 참고용 URL
 - https://www.terraform.io/language/state/remote-state-data
@@ -362,8 +363,12 @@ output "natgw_c_id" {
   value = aws_nat_gateway.natgw_c.id
 }
 ```
+- + **output "vpc_id" {...} 블럭 생성 진행**
+  - value
+    - vpc.tf 파일 **resource "aws_vpc" "this" {...} 블럭** 에서 생성된 정보를 output에 기록
 
 
+aws_vpc.this.id
 
 
 
@@ -373,3 +378,5 @@ output "natgw_c_id" {
 - https://www.terraform.io/language/values/outputs
 - https://www.terraform.io/language/state/remote
 - https://www.terraform.io/language/state/remote-state-data
+
+-----
