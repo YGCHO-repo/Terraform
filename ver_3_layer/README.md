@@ -282,11 +282,11 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "test-terraform-state-backend-yg"
-    dynamodb_table = "test-terraform-state-locks"
-    key            = "vpc/terraform.tfstate"
-    region         = "ap-northeast-2"
-    encrypt        = true
+    bucket         = "test-terraform-state-backend-yg"  # 어떠한 S3 bucket
+    dynamodb_table = "test-terraform-state-locks"       # 어떠한 Dynamo DB table
+    key            = "vpc/terraform.tfstate"            # 어디 S3 위치의 파일
+    region         = "ap-northeast-2"                   # 어디 Region(지역)
+    encrypt        = true                               # encrypt 사용 여부
   }
 }
 ```
@@ -309,3 +309,66 @@ terraform {
     - S3 bucket의 지역명(리전) 을 설정
   - 
 
+> 참고용 URL
+- https://www.terraform.io/language/state/remote-state-data
+- https://www.terraform.io/language/settings
+- https://www.terraform.io/language/settings/backends/s3
+- https://www.terraform.io/language/settings/backends/configuration
+
+-----
+### output.tf
+```hcl
+output "vpc_id" {
+  value = aws_vpc.this.id
+}
+
+output "pub_a_subnet_id" {
+  value = aws_subnet.main_pub_a_subnet.id
+}
+output "pub_c_subnet_id" {
+  value = aws_subnet.main_pub_c_subnet.id
+}
+
+output "web_a_subnet_id" {
+  value = aws_subnet.web_pri_a_subnet.id
+}
+output "web_c_subnet_id" {
+  value = aws_subnet.web_pri_c_subnet.id
+}
+
+output "was_a_subnet_id" {
+  value = aws_subnet.was_pri_a_subnet.id
+}
+output "was_c_subnet_id" {
+  value = aws_subnet.was_pri_c_subnet.id
+}
+
+output "rds_a_subnet_id" {
+  value = aws_subnet.rds_pri_a_subnet.id
+}
+output "rds_c_subnet_id" {
+  value = aws_subnet.rds_pri_c_subnet.id
+}
+
+output "igw_id" {
+  value = aws_internet_gateway.this.id
+}
+
+output "natgw_a_id" {
+  value = aws_nat_gateway.natgw_a.id
+}
+output "natgw_c_id" {
+  value = aws_nat_gateway.natgw_c.id
+}
+```
+
+
+
+
+
+
+
+> 참고용 URL
+- https://www.terraform.io/language/values/outputs
+- https://www.terraform.io/language/state/remote
+- https://www.terraform.io/language/state/remote-state-data
