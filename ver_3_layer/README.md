@@ -471,7 +471,7 @@ data "terraform_remote_state" "vpc" {
       - key
         - 참고하고자 하는 S3의 key값 설정
           - 위에서 생성항 01_vpc 폴더의 *.tf 파일들의 생성값(output)값
-          - 생성된 정보값은 **__terraform.tfstate__** 파일 참고
+          - 생성된 정보값은 **_terraform.tfstate_** 파일 참고
 
 
 
