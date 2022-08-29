@@ -113,8 +113,97 @@ $ terraform show
 
 -----
 
-## s3 folder
+## s3 Folder
 ### main.tf
 ```hcl
-
+terraform {
+  required_version = ">= 1.2.2"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "4.22.0"
+    }
+  }
+}
 ```
+- required_version
+    - 실행 위치 디바이스의 테라폼 버전 관련 설정
+
+- required_providers
+    - registry.terraform.io/hashicorp/aws 에서 4.22.0 버전 사용
+
+-----
+### provider.tf
+```hcl
+provider "aws" {
+  region = "ap-northeast-2"
+```
+- provider 는 "aws"로 사용, 리전은 "ap-northeast-2" Seoul 리전으로 사용을 설정
+
+-----
+### vpc.tf
+```hcl
+resource "aws_vpc" "this" {
+  cidr_block = "10.50.0.0/16"
+  tags       = { "Name" = "test-tf-vpc" }
+}
+```
++ **resource "aws_vpc" "this" {...} 블럭 생성 진행**
+- cidr_block
+    - "10.50.0.0/16"
+- tags
+    - { "Name" = "test-tf-vpc" }
+        - 기본 Name Tag 설정
+
+> 참고용 URL 
+- https://www.terraform.io/language/resources/syntax
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
+
+-----
+### subnet.tf
+```hcl
+resource "aws_subnet" "main_pub_a_subnet" {
+  vpc_id            = aws_vpc.this.id
+  cidr_block        = "10.50.10.0/24"
+  availability_zone = "ap-northeast-2a"
+  tags              = { Name = "test-tf-ap-northeast-2a-public-main-subnet" }
+}
+
+...(생략) (필요한 갯수 만큼 설정)
+```
++ **resource "aws_subnet" "main_pub_a_subnet" {...} 블럭 생성 진행**
+- vpc_id
+    - aws_vpc_.this.id
+    - 바로 위에 설정한 "resouce" "aws_vpc" "this" 의 코드 블럭(생성된 정보값)의 id 값을 참조하도록 설정
+- cidr_block
+    - "10.50.10.0/24"
+- availability_zone
+    - "ap-northeast-2a"
+- tags
+    - { Name = "test-tf-ap-northeast-2a-public-main-subnet" }
+        - 기본 Name Tag 설정
+
+> 참고용 URL 
+- https://www.terraform.io/language/resources/syntax
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
+
+-----
+### internet_gateway.tf
+```hcl
+resource "aws_internet_gateway" "this" {
+  vpc_id = aws_vpc.this.id
+  tags   = { Name = "test-tf-vpc-igw" }
+}
+```
++ **resource "aws_internet_gateway" "this" {...} 블럭 생성 진행**
+- vpc_id
+    - aws_vpc.this.id
+- tags
+    - { Name = "test-tf-vpc-igw" }
+
+> **위의 예제와 같이 설정된 "aws_vpc" "this"를 vpc_id 식별자에 표현값으로 참조 하거나, tags 처럼 사용자가 직접 설정 하여 Code를 작성한다.**
+
+> 참고용 URL 
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
+
+-----
