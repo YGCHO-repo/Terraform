@@ -115,7 +115,7 @@ $ terraform show
 
 -----
 
-## s3 Folder
+## S3 Folder
 > 폴더 항목
 ```
  00_S3
