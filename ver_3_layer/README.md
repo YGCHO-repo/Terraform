@@ -202,31 +202,45 @@ resource "aws_dynamodb_table" "this" {
 
 ```
 + **resource "aws_s3_bucket" "this" {...} 블럭 생성 진행**
-  - bucket
-    - 생성 진행할 bucket 설정
+- bucket
+  - 생성 진행할 bucket 설정
 
 + **resource "aws_s3_bucket_versioning" "this" {...} 블럭 생성 진행**
-  - bucket
-    - 위에서 생성한 bucket 설정
-  - versioning_configuration
-    - Versioning 활성화 여부 확인 내부 블럭
-      - "Enabled" 진행
+- bucket
+  - 위에서 생성한 bucket 설정
+- versioning_configuration
+  - Versioning 활성화 여부 확인 내부 블럭
+    - "Enabled" 설정
 
 + **resource "aws_s3_bucket_acl" "this" {...} 블럭 생성 진행**
-  - bucket
-    - 위에서 생성한 bucket 설정
-  - acl
-    - bucket의 타입(public / private) 설정
-      - "private" 설정 진행
+- bucket
+  - 위에서 생성한 bucket 설정
+- acl
+  - bucket의 타입(public / private) 설정
+    - "private" 설정
 + **resource "aws_s3_bucket_server_side_encryption_configuration" "this" {...} 블럭 생성 진행**
+- bucket
+  - 위에서 생성한 bucket 설정
+- rule
+  - apply_server_side_encryption_by_default 서버측 암호화 설정
+    - "AES256" 암호화 알고리즘으로 설정
 + **resource "aws_dynamodb_table" "this" {...} 블럭 생성 진행**
+- name
+  - 생성 진행할 DynamoDB table name 설정
+- billing_mode
+  - 빌링 방법 설정
+- hash_key
+  - 해쉬 키값 설정
+- attribute 내부 블럭
+  - hash_key의 속성 설정
 
 
-
-
-
-
-
+> 참고용 URL
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table
 
 
 
