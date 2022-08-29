@@ -295,7 +295,7 @@ terraform {
 - required_providers
   - registry.terraform.io/hashicorp/aws 에서 4.22.0 버전 사용
 
-- backend
+- **backend**
  ```
   1. 위에서 생성한 S3 bucket을 활용하여 backend 설정 한다 
   2. 해당 설정을 진행하면 Local에 terraform.tfstate 이 생성되지 않는다
