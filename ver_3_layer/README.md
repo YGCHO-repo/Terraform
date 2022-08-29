@@ -490,7 +490,46 @@ resource "aws_security_group" "bastion_sg" {
   tags = { Name = "test-tf-yg-bastion-sg" }
 }
 ```
++ **resource "aws_security_group" "bastion_sg" {...} 블럭 생성 진행**
+  - description
+    - 생성하고자 하는 SG의 설명문 항목
+  - name
+    - 생성하고자 하는 SG의 이름 항목
 
+
+
+  - vpc_id
+    - 생성하고자 하는 SG의 생성 영역 VPC기준
+    - SG의 경우 각각 VPC에 종속 되는 리소스
+
+
+
+- SG 블럭에서의 내부 블럭을 2개 작성, 1개 적용으로 작성 하였다. 
+  - 내부 블럭에서 ingress , egress 는 SG의 inbound , outbound 와 동일하다.
+    - ingress -> inbound
+    - egress -> outbound
+
+  
+- egress
+  - description
+    - 해당 SG의 inbound rule 의 설명문
+  - protocol
+    - "-1"
+      - 전체 프로토콜에 대해서 가능하게 설정
+      - "-1" 은 전체 프로토콜 범위를 뜻함
+  - (해당 rule을 설정시 Outbound는 전체 허용)
+  - from_port
+    - 포트 설정 : 어디서부터 (시작점)
+  - to_port
+    - 포트 설정 : 어디까지 (종료점)
+  - cidr_blocks
+    - **[ ]** 리스트 형식으로 입력
+    - "0.0.0.0/0" 전체 IP 영역
+
+> 참고용 URL 
+- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
+
+-----
 
 
 
