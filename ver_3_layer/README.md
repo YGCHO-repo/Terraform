@@ -701,7 +701,7 @@ resource "aws_instance" "bastion" {
 ...(생략) (필요한 인스턴스의 갯수 만큼 설정)
 ```
 
-+ **resource "aws_instance" "bastion" {...} 블럭 생성 진행**
++ **resource "aws_instance" "bastion" {...} 블럭 생성 진행**     
 ```data block 설명하기 위한 내용은 생략```
 
   - subnet_id
