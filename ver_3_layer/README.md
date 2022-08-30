@@ -136,7 +136,7 @@ $ terraform show
 > ```
 
 -----
-### 00_S3 / main.tf
+## 00_S3 / main.tf
 ```hcl
 terraform {
   required_version = ">= 1.2.2"
@@ -155,7 +155,7 @@ terraform {
   - registry.terraform.io/hashicorp/aws 에서 4.22.0 버전 사용
 
 -----
-### 00_S3 / provider.tf
+## 00_S3 / provider.tf
 ```hcl
 provider "aws" {
   region = "ap-northeast-2"
@@ -163,7 +163,7 @@ provider "aws" {
 - provider 는 "aws"로 사용, 리전은 "ap-northeast-2" Seoul 리전으로 사용을 설정
 
 -----
-### 00_S3 / state-backend.tf
+## 00_S3 / state-backend.tf
 ```hcl
 resource "aws_s3_bucket" "this" {
   bucket = "test-terraform-state-backend-yg"
@@ -259,7 +259,7 @@ resource "aws_dynamodb_table" "this" {
 
 -----
 
-##  VPC Folder
+#  VPC Folder
 > 폴더 항목
 > ```
 >  01_VPC
@@ -284,7 +284,7 @@ resource "aws_dynamodb_table" "this" {
 > ```
 
 -----
-### main.tf
+## 01_VPC / main.tf
 ```hcl
 terraform {
   required_version = ">= 1.2.2"
@@ -336,7 +336,7 @@ terraform {
 > - https://www.terraform.io/language/state/locking
 
 -----
-### output.tf
+## 01_VPC / output.tf
 ```hcl
 output "vpc_id" {
   value = aws_vpc.this.id
@@ -411,7 +411,7 @@ output "igw_id" {
 > - https://www.terraform.io/language/state/remote-state-data
 
 -----
-##  SG Folder
+#  SG Folder
 > 폴더 항목
 > ```
 >  02_SG
@@ -433,7 +433,7 @@ output "igw_id" {
 > ```
 
 -----
-### main.tf
+## 02_SG / main.tf
 ```hcl
 terraform {
   required_version = ">= 1.2.2"
@@ -467,7 +467,7 @@ terraform {
 > - https://www.terraform.io/language/state/locking
 
 -----
-### data.tf
+## 02_SG / data.tf
 ```hcl
 data "terraform_remote_state" "vpc" {
   backend = "s3"                                  # backend type
@@ -502,7 +502,7 @@ data "terraform_remote_state" "vpc" {
 
 
 -----
-### security_group.tf
+## 02_SG / security_group.tf
 ```hcl
 resource "aws_security_group" "bastion_sg" {
   description = "Bastion Server Security group"
@@ -545,7 +545,7 @@ resource "aws_security_group" "bastion_sg" {
 
 
 -----
-### output.tf
+## 02_SG / output.tf
 ```hcl
 output "bastion_sg_id" {
   description = "Bastion Security Group"
@@ -568,7 +568,7 @@ output "web_sg_id" {
     - security_group resource 블럭의 ID 값만 확인 가능
 
 -----
-##  EC2 Folder
+#  EC2 Folder
 > 폴더 항목
 > ```
 >  03_EC2
@@ -588,7 +588,7 @@ output "web_sg_id" {
 > $ terraform apply planfile
 > ```
 -----
-### main.tf
+## 03_EC2 / main.tf
 
 
 
