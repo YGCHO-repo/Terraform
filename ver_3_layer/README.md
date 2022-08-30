@@ -116,7 +116,7 @@ $ terraform show
 
 -----
 
-## S3 Folder
+# S3 Folder
 > 폴더 항목
 > ```
 >  00_S3
@@ -155,7 +155,7 @@ terraform {
   - registry.terraform.io/hashicorp/aws 에서 4.22.0 버전 사용
 
 -----
-### provider.tf
+### 00_S3 / provider.tf
 ```hcl
 provider "aws" {
   region = "ap-northeast-2"
@@ -163,7 +163,7 @@ provider "aws" {
 - provider 는 "aws"로 사용, 리전은 "ap-northeast-2" Seoul 리전으로 사용을 설정
 
 -----
-### state-backend.tf
+### 00_S3 / state-backend.tf
 ```hcl
 resource "aws_s3_bucket" "this" {
   bucket = "test-terraform-state-backend-yg"
