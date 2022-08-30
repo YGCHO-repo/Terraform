@@ -125,7 +125,7 @@ $ terraform show
 >  ├── provider.tf
 >  └── state-backend.tf
 > ```
-
+-----
 > 명령어
 > ```
 > $ cd 00_S3
@@ -273,8 +273,7 @@ resource "aws_dynamodb_table" "this" {
 >  ├── subnet.tf
 >  └── vpc.tf
 > ```
-
-
+-----
 > 명령어
 > ```
 > $ cd 01_VPC
@@ -414,23 +413,24 @@ output "igw_id" {
 -----
 ##  SG Folder
 > 폴더 항목
-```
- 02_SG
- ├── data.tf
- ├── main.tf
- ├── output.tf
- ├── provider.tf
- ├── security_group.tf
- └── security_group_rule.tf
-```
+> ```
+>  02_SG
+>  ├── data.tf
+>  ├── main.tf
+>  ├── output.tf
+>  ├── provider.tf
+>  ├── security_group.tf
+>  └── security_group_rule.tf
+> ```
+-----
 > 명령어
-```
-$ cd 02_SG
-
-$ terraform init 
-$ terraform plan -refresh=false -out=planfile
-$ terraform apply planfile
-```
+> ```
+> $ cd 02_SG
+> 
+> $ terraform init 
+> $ terraform plan -refresh=false -out=planfile
+> $ terraform apply planfile
+> ```
 
 -----
 ### main.tf
@@ -570,19 +570,25 @@ output "web_sg_id" {
 -----
 ##  EC2 Folder
 > 폴더 항목
-```
- 03_EC2
- ├── data.tf
- ├── ec2.tf
- ├── main.tf
- ├── output.tf
- └── provider.tf
-```
+> ```
+>  03_EC2
+>  ├── data.tf
+>  ├── ec2.tf
+>  ├── main.tf
+>  ├── output.tf
+>  └── provider.tf
+> ```
+-----
 > 명령어
-```
-$ cd 03_EC2
+> ```
+> $ cd 03_EC2
+> 
+> $ terraform init 
+> $ terraform plan -refresh=false -out=planfile
+> $ terraform apply planfile
+> ```
+-----
+### main.tf
 
-$ terraform init 
-$ terraform plan -refresh=false -out=planfile
-$ terraform apply planfile
-```
+
+
