@@ -248,11 +248,11 @@ resource "aws_dynamodb_table" "this" {
 
 
 > 참고용 URL
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table
+> > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
+> > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning
+> > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl
+> > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration
+> > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table
 
 -----
 
