@@ -120,7 +120,7 @@ $ terraform show
 ```
  00_S3
  ├── main.tf
- ├── outputs.tf
+ ├── output.tf
  ├── provider.tf
  └── state-backend.tf
 ```
@@ -236,6 +236,11 @@ resource "aws_dynamodb_table" "this" {
   - attribute 내부 블럭
     - hash_key의 속성 설정
 
+> S3 bucket as backend
+- 
+> DynamoDB Table for Lock
+
+
 
 > 참고용 URL
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
@@ -296,10 +301,6 @@ terraform {
   - registry.terraform.io/hashicorp/aws 에서 4.22.0 버전 사용
 
 - **backend**
->  1. 위에서 생성한 S3 bucket을 활용하여 backend 설정 한다 
->  2. 해당 설정을 진행하면 Local에 terraform.tfstate 이 생성되지 않는다
->  3. terraform.tfstate 파일은 remote 위치인 AWS S3에 생성 된다. 
-- 
   - bucket
     - 설정하고자 하는 S3 bucket 이름 설정
   - dynamodb_table
@@ -310,6 +311,10 @@ terraform {
     - S3 bucket의 지역명(리전)을 설정
   - encrypt
     - encrypt 사용 여부 설정
+>  1. 위에서 생성한 S3 bucket을 활용하여 backend 설정 한다 
+>  2. 해당 설정을 진행하면 Local에 terraform.tfstate 이 생성되지 않는다
+>  3. terraform.tfstate 파일은 remote 위치인 AWS S3에 생성 된다. 
+
 
 > 참고용 URL
 - https://www.terraform.io/language/state/remote-state-data
