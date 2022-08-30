@@ -702,7 +702,7 @@ resource "aws_instance" "bastion" {
 ```
 
 + **resource "aws_instance" "bastion" {...} 블럭 생성 진행**
-> data block 설명하기 위한 내용은 생략
+```data block 설명하기 위한 내용은 생략```
 
   - subnet_id
     - EC2 instance가 생성 되는 subnet 위치
