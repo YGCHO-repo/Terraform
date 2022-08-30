@@ -110,7 +110,7 @@ $ terraform show
 > 참고용 URL
 > - https://www.terraform.io/intro
 > - https://www.terraform.io/language
-> >- https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 
 -----
 
@@ -248,11 +248,11 @@ resource "aws_dynamodb_table" "this" {
 
 
 > 참고용 URL
-> > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
-> > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning
-> > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl
-> > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration
-> > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table
 
 -----
 
@@ -325,11 +325,11 @@ terraform {
 
 
 > 참고용 URL
-- https://www.terraform.io/language/state/remote-state-data
-- https://www.terraform.io/language/settings
-- https://www.terraform.io/language/settings/backends/s3
-- https://www.terraform.io/language/settings/backends/configuration
-- https://www.terraform.io/language/state/locking
+> - https://www.terraform.io/language/state/remote-state-data
+> - https://www.terraform.io/language/settings
+> - https://www.terraform.io/language/settings/backends/s3
+> - https://www.terraform.io/language/settings/backends/configuration
+> - https://www.terraform.io/language/state/locking
 
 -----
 ### output.tf
@@ -402,9 +402,9 @@ output "igw_id" {
 
 
 > 참고용 URL
-- https://www.terraform.io/language/values/outputs
-- https://www.terraform.io/language/state/remote
-- https://www.terraform.io/language/state/remote-state-data
+> - https://www.terraform.io/language/values/outputs
+> - https://www.terraform.io/language/state/remote
+> - https://www.terraform.io/language/state/remote-state-data
 
 -----
 ##  SG Folder
@@ -455,11 +455,11 @@ terraform {
         - "test-terraform-state-backend-yg" S3 bucket의 "sg" 폴더에 "terraform.tfstate" 파일 저장
 
 > 참고용 URL
-- https://www.terraform.io/language/state/remote-state-data
-- https://www.terraform.io/language/settings
-- https://www.terraform.io/language/settings/backends/s3
-- https://www.terraform.io/language/settings/backends/configuration
-- https://www.terraform.io/language/state/locking
+> - https://www.terraform.io/language/state/remote-state-data
+> - https://www.terraform.io/language/settings
+> - https://www.terraform.io/language/settings/backends/s3
+> - https://www.terraform.io/language/settings/backends/configuration
+> - https://www.terraform.io/language/state/locking
 
 -----
 ### data.tf
@@ -491,9 +491,9 @@ data "terraform_remote_state" "vpc" {
 
 
 > 참고용 URL
-- https://www.terraform.io/language/data-sources
-- https://www.terraform.io/language/state/remote
-- https://www.terraform.io/language/values/outputs
+> - https://www.terraform.io/language/data-sources
+> - https://www.terraform.io/language/state/remote
+> - https://www.terraform.io/language/values/outputs
 
 
 -----
@@ -545,7 +545,10 @@ resource "aws_security_group" "bastion_sg" {
     - **[ ]** 리스트 형식으로 입력
 
 > 참고용 URL 
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
+> - https://www.terraform.io/language/data-sources
+> - https://www.terraform.io/language/state/remote
+> - https://www.terraform.io/language/values/outputs
 
 -----
 
