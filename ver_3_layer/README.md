@@ -514,6 +514,7 @@ resource "aws_security_group" "bastion_sg" {
   }
   tags = { Name = "test-tf-yg-bastion-sg" }
 }
+...(생략)
 ```
 + **resource "aws_security_group" "bastion_sg" {...} 블럭 생성 진행**
   - vpc_id
@@ -537,23 +538,26 @@ resource "aws_security_group" "bastion_sg" {
 > - https://www.terraform.io/language/state/remote
 > - https://www.terraform.io/language/values/outputs
 
+
 -----
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### output.tf
+```hcl
+output "bastion_sg_id" {
+  description = "Bastion Security Group"
+  value       = aws_security_group.bastion_sg.id
+}
+output "web_sg_id" {
+  description = "WEB Security Group"
+  value       = aws_security_group.web_sg.id
+}
+...(생략)
+```
++ **output "bastion_sg_id" {...} 블럭 생성 진행**
+- value
+  - 생성된 security_group resource 블럭의 ID 정보 설정
+    - security_group resource 블럭의 ID 값만 확인 가능
+
++ **output "web_sg_id" {...} 블럭 생성 진행**
+- value
+  - 생성된 security_group resource 블럭의 ID 정보 설정
+    - security_group resource 블럭의 ID 값만 확인 가능
