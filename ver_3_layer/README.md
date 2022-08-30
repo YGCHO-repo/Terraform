@@ -107,8 +107,7 @@ $ terraform show
 5. data         block
 ```
 
-> 참고용 URL  
-> >테라폼 구조 관련
+> 참고용 URL
 - https://www.terraform.io/intro
 - https://www.terraform.io/language
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs
@@ -452,7 +451,7 @@ terraform {
   - key
     - S3 bucket의 위치/파일명을 설정
       - test-terraform-state-backend-yg/sg/terraform.tfstate 
-        - "test-terraform-state-backend-yg" S3 bucket의 sg 폴더에 terraform.tfstate 파일 저장
+        - "test-terraform-state-backend-yg" S3 bucket의 "sg" 폴더에 "terraform.tfstate" 파일 저장
 
 > 참고용 URL
 - https://www.terraform.io/language/state/remote-state-data
@@ -507,23 +506,15 @@ resource "aws_security_group" "bastion_sg" {
 }
 ```
 + **resource "aws_security_group" "bastion_sg" {...} 블럭 생성 진행**
-  - description
-    - 생성하고자 하는 SG의 설명문 항목
-  - name
-    - 생성하고자 하는 SG의 이름 항목
-
-
-
   - vpc_id
     - 생성하고자 하는 SG의 생성 영역 VPC기준
     - SG의 경우 각각 VPC에 종속 되는 리소스
 
 
 
-- SG 블럭에서의 내부 블럭을 2개 작성, 1개 적용으로 작성 하였다. 
-  - 내부 블럭에서 ingress , egress 는 SG의 inbound , outbound 와 동일하다.
-    - ingress -> inbound
-    - egress -> outbound
+>  내부 블럭에서 ingress , egress 는 SG의 inbound , outbound 와 동일하다.
+  - ingress -> inbound
+  - egress -> outbound
 
   
 - egress
