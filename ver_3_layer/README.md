@@ -513,8 +513,8 @@ resource "aws_security_group" "bastion_sg" {
 
 
 >  내부 블럭에서 ingress , egress 는 SG의 inbound , outbound 와 동일하다.
-  - ingress -> inbound
-  - egress -> outbound
+>  - ingress -> inbound
+>  - egress -> outbound
 
   
 - egress
