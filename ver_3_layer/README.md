@@ -118,21 +118,22 @@ $ terraform show
 
 ## S3 Folder
 > 폴더 항목
-```
- 00_S3
- ├── main.tf
- ├── output.tf
- ├── provider.tf
- └── state-backend.tf
-```
-> 명령어
-```
-$ cd 00_S3
+> ```
+>  00_S3
+>  ├── main.tf
+>  ├── output.tf
+>  ├── provider.tf
+>  └── state-backend.tf
+> ```
 
-$ terraform init 
-$ terraform plan -refresh=false -out=planfile
-$ terraform apply planfile
-```
+> 명령어
+> ```
+> $ cd 00_S3
+> 
+> $ terraform init 
+> $ terraform plan -refresh=false -out=planfile
+> $ terraform apply planfile
+> ```
 
 -----
 ### main.tf
@@ -260,26 +261,28 @@ resource "aws_dynamodb_table" "this" {
 
 ##  VPC Folder
 > 폴더 항목
-```
- 01_VPC
- ├── internat_gateway.tf
- ├── main.tf
- ├── nat_gateways.tf
- ├── output.tf
- ├── provider.tf
- ├── route_tables.tf
- ├── route_tables_rule.tf
- ├── subnet.tf
- └── vpc.tf
-```
-> 명령어
-```
-$ cd 01_VPC
+> ```
+>  01_VPC
+>  ├── internat_gateway.tf
+>  ├── main.tf
+>  ├── nat_gateways.tf
+>  ├── output.tf
+>  ├── provider.tf
+>  ├── route_tables.tf
+>  ├── route_tables_rule.tf
+>  ├── subnet.tf
+>  └── vpc.tf
+> ```
 
-$ terraform init 
-$ terraform plan -refresh=false -out=planfile
-$ terraform apply planfile
-```
+
+> 명령어
+> ```
+> $ cd 01_VPC
+> 
+> $ terraform init 
+> $ terraform plan -refresh=false -out=planfile
+> $ terraform apply planfile
+> ```
 
 -----
 ### main.tf
