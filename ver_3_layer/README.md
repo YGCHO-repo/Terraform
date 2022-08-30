@@ -523,8 +523,8 @@ resource "aws_security_group" "bastion_sg" {
 + **resource "aws_security_group" "bastion_sg" {...} 블럭 생성 진행**
   - vpc_id
     - data.terraform_remote_state.vpc.outputs.vpc_id
-      - 위에서 설정한 **data.tf** 파일의 **data "terraform_remote_state" "vpc" {...}** 참조 설정
-      - **01_VPC** 폴더 **vpc.tf** 파일 설정(생성) 값을 **output.tf** 파일의 **data "vpc_id"** 블럭값
+      - 위에서 설정한 ```**data.tf**``` 파일의 ```**data "terraform_remote_state" "vpc" {...}**``` 참조 설정
+      - ```**01_VPC**``` 폴더 ```**vpc.tf**``` 파일 설정(생성) 값을 ```**output.tf**``` 파일의 ```**data "vpc_id"**``` 블럭값
     - 생성하고자 하는 SG의 생성 영역 VPC기준
     - SG의 경우 각각 VPC에 종속 되는 리소스
 
@@ -704,7 +704,7 @@ resource "aws_instance" "bastion" {
 ```
 
 + **resource "aws_instance" "bastion" {...} 블럭 생성 진행**     
-```data block 설명하기 위한 내용은 생략```
+(```data block 설명하기 위한 내용은 생략```)
 
   - subnet_id
     - EC2 instance가 생성 되는 subnet 위치
@@ -722,7 +722,7 @@ resource "aws_instance" "bastion" {
     
   - key_name
     - EC2 instance 생성시 적용 *.pem key (key_pair)
-    - __**빠른 진행을 위해서 기존 AWS key_pair 사용**__
+    - ```__**빠른 진행을 위해서 기존 AWS key_pair 사용**__```
 
 > 참고용 URL  
 > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
