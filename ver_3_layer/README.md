@@ -524,14 +524,12 @@ resource "aws_security_group" "bastion_sg" {
     - "-1"
       - 전체 프로토콜에 대해서 가능하게 설정
       - "-1" 은 전체 프로토콜 범위를 뜻함
-  - (해당 rule을 설정시 Outbound는 전체 허용)
   - from_port
     - 포트 설정 : 어디서부터 (시작점)
   - to_port
     - 포트 설정 : 어디까지 (종료점)
   - cidr_blocks
     - **[ ]** 리스트 형식으로 입력
-    - "0.0.0.0/0" 전체 IP 영역
 
 > 참고용 URL 
 - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
