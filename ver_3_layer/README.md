@@ -238,9 +238,9 @@ resource "aws_dynamodb_table" "this" {
 
 
 > **S3 bucket as backend**
-> > - Terraform의 상태(terraform.tfstate)파일을 versioning하며 저장하기 위해 S3 bucket을 생성
+>  - Terraform의 상태(terraform.tfstate)파일을 versioning하며 저장하기 위해 S3 bucket을 생성
 > **DynamoDB Table for Lock**
-> > - 동시에 같은 파일을 수정하지 못하도록 하기 위해 DynamoDB에 작업에 대한 Lock을 생성
+>  - 동시에 같은 파일을 수정하지 못하도록 하기 위해 DynamoDB에 작업에 대한 Lock을 생성
 
 
 
