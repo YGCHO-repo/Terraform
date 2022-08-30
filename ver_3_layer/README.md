@@ -523,7 +523,7 @@ resource "aws_security_group" "bastion_sg" {
 + **resource "aws_security_group" "bastion_sg" {...} 블럭 생성 진행**
   - vpc_id
     - data.terraform_remote_state.vpc.outputs.vpc_id
-      - 위에서 설정한 ```**data.tf**``` 파일의 ```**data "terraform_remote_state" "vpc" {...}**``` 참조 설정
+      - 위에서 설정한 **```data.tf```** 파일의 **```data "terraform_remote_state" "vpc" {...}```** 참조 설정
       - ```**01_VPC**``` 폴더 ```**vpc.tf**``` 파일 설정(생성) 값을 ```**output.tf**``` 파일의 ```**data "vpc_id"**``` 블럭값
     - 생성하고자 하는 SG의 생성 영역 VPC기준
     - SG의 경우 각각 VPC에 종속 되는 리소스
