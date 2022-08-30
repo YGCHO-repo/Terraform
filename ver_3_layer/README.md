@@ -457,7 +457,7 @@ terraform {
   - key
     - S3 bucket의 위치/파일명을 설정
       - test-terraform-state-backend-yg/sg/terraform.tfstate 
-        - "test-terraform-state-backend-yg" S3 bucket의 "sg" 폴더에 "terraform.tfstate" 파일 저장
+        - "test-terraform-state-backend-yg" S3 bucket의 **"sg"** 폴더에 "terraform.tfstate" 파일 저장
 
 > 참고용 URL
 > - https://www.terraform.io/language/state/remote-state-data
@@ -492,8 +492,6 @@ data "terraform_remote_state" "vpc" {
           - 생성된 정보값은 **_terraform.tfstate_** 파일 참고
       - region
         - S3 bucket의 지역명(리전)을 설정
-
-
 
 > 참고용 URL
 > - https://www.terraform.io/language/data-sources
@@ -589,6 +587,99 @@ output "web_sg_id" {
 > ```
 -----
 ## 03_EC2 / main.tf
+ ```hcl
+terraform {
+  required_version = ">= 1.2.2"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "4.22.0"
+    }
+  }
+
+  backend "s3" {
+    bucket         = "test-terraform-state-backend-yg"
+    dynamodb_table = "test-terraform-state-locks"
+    key            = "ec2/terraform.tfstate"
+    region         = "ap-northeast-2"
+    encrypt        = true
+  }
+}
+ ```
+- **backend**
+  - key
+    - S3 bucket의 위치/파일명을 설정
+      - test-terraform-state-backend-yg/sg/terraform.tfstate 
+        - "test-terraform-state-backend-yg" S3 bucket의 **"ec2"** 폴더에 "terraform.tfstate" 파일 저장
+
+> 참고용 URL
+> - https://www.terraform.io/language/state/remote-state-data
+> - https://www.terraform.io/language/settings
+> - https://www.terraform.io/language/settings/backends/s3
+> - https://www.terraform.io/language/settings/backends/configuration
+> - https://www.terraform.io/language/state/locking
+
+-----
+## 03_EC2 / data.tf
+```hcl
+# EC2 생성 설정을 위해 필요한 VPC 정보
+data "terraform_remote_state" "vpc" {
+  backend = "s3"
+  config = {
+    bucket = "test-terraform-state-backend-yg"
+    key    = "vpc/terraform.tfstate"
+    region = "ap-northeast-2"
+  }
+}
+
+# EC2 생성 설정을 위해 필요한 SG 정보
+data "terraform_remote_state" "sg" {
+  backend = "s3"
+  config = {
+    bucket = "test-terraform-state-backend-yg"
+    key    = "sg/terraform.tfstate"
+    region = "ap-northeast-2"
+  }
+}
+```
++ **data "terraform_remote_state" "vpc" {...} 블럭 생성 진행**
+  - backend
+    - 백엔드는 S3로 설정
+  - config
+    - 백엔드의 설정값을 설정
+    - 설정용 내부 블럭
+      - bucket 
+        - 참고하고자 하는 S3를 설정
+      - key
+        - 참고하고자 하는 S3의 key값 설정
+          - **위에서 생성항 01_vpc 폴더의 *.tf 파일들의 생성값(output)값**
+          - 생성된 정보값은 **_terraform.tfstate_** 파일 참고
+      - region
+        - S3 bucket의 지역명(리전)을 설정
+
++ **data "terraform_remote_state" "sg" {...} 블럭 생성 진행**
+  - backend
+    - 백엔드는 S3로 설정
+  - config
+    - 백엔드의 설정값을 설정
+    - 설정용 내부 블럭
+      - bucket 
+        - 참고하고자 하는 S3를 설정
+      - key
+        - 참고하고자 하는 S3의 key값 설정
+          - **위에서 생성항 02_sg 폴더의 *.tf 파일들의 생성값(output)값**
+          - 생성된 정보값은 **_terraform.tfstate_** 파일 참고
+      - region
+        - S3 bucket의 지역명(리전)을 설정
+
+> **data block 왜! 2개 설정하엿을까?**
+>  1. EC2 instance를 생성(설정) 할때 필요한 값이 VPC 정보 와 SG 정보이다.
 
 
+> 참고용 URL
+> - https://www.terraform.io/language/data-sources
+> - https://www.terraform.io/language/state/remote
+> - https://www.terraform.io/language/values/outputs
 
+-----
+## 03_EC2 / ec2.tf
