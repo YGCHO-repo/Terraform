@@ -366,15 +366,15 @@ output "rds_c_subnet_id" {
   value = aws_subnet.rds_pri_c_subnet.id
 }
 
-output "igw_id" {
-  value = aws_internet_gateway.this.id
-}
-
 output "natgw_a_id" {
   value = aws_nat_gateway.natgw_a.id
 }
 output "natgw_c_id" {
   value = aws_nat_gateway.natgw_c.id
+}
+
+output "igw_id" {
+  value = aws_internet_gateway.this.id
 }
 ```
 + **output "vpc_id" {...} 블럭 생성 진행**
@@ -388,16 +388,18 @@ output "natgw_c_id" {
       - subnet.tf 파일 **resource "aws_subnet" "main_pub_a_subnet" {...} 블럭** 에서 생성된 정보중 id 값을 **output**에 기록
 > ...(동일 파일 내용 생략)
 
-+ **output "igw_id" {...} 블럭 생성 진행**
-  - value
-    - aws_internet_gateway.this.id
-      - intetnet_gateway.tf 파일 **resource "aws_internet_gateway" "this" {...} 블럭** 에서 생성된 정보중 id 값을 **output**에 기록
-
 + **output "natgw_a_id" {...} 블럭 생성 진행**
   - value
     - aws_nat_gateway.natgw_a.id
       - nat_gateway.tf 파일 **resource "aws_nat_gateway" "natgw_a" {...} 블럭** 에서 생성된 정보중 id 값을 **output**에 기록
 > ...(동일 파일 내용 생략)
+
++ **output "igw_id" {...} 블럭 생성 진행**
+  - value
+    - aws_internet_gateway.this.id
+      - intetnet_gateway.tf 파일 **resource "aws_internet_gateway" "this" {...} 블럭** 에서 생성된 정보중 id 값을 **output**에 기록
+
+
 
 > 참고용 URL
 - https://www.terraform.io/language/values/outputs
