@@ -329,6 +329,7 @@ terraform {
 - https://www.terraform.io/language/settings
 - https://www.terraform.io/language/settings/backends/s3
 - https://www.terraform.io/language/settings/backends/configuration
+- https://www.terraform.io/language/state/locking
 
 -----
 ### output.tf
@@ -458,15 +459,16 @@ terraform {
 - https://www.terraform.io/language/settings
 - https://www.terraform.io/language/settings/backends/s3
 - https://www.terraform.io/language/settings/backends/configuration
+- https://www.terraform.io/language/state/locking
 
 -----
 ### data.tf
 ```hcl
 data "terraform_remote_state" "vpc" {
-  backend = "s3"
+  backend = "s3"                                  # backend type
   config = {
-    bucket = "test-terraform-state-backend-yg"
-    key    = "vpc/terraform.tfstate"
+    bucket = "test-terraform-state-backend-yg"    # 어떤 bucket 에서
+    key    = "vpc/terraform.tfstate"              # 어디 위치의 폴더에 있는 어던 파일
     region = "ap-northeast-2"
   }
 }
@@ -485,6 +487,14 @@ data "terraform_remote_state" "vpc" {
           - 생성된 정보값은 **_terraform.tfstate_** 파일 참고
       - region
         - S3 bucket의 지역명(리전)을 설정
+
+
+
+> 참고용 URL
+- https://www.terraform.io/language/data-sources
+- https://www.terraform.io/language/state/remote
+- https://www.terraform.io/language/values/outputs
+
 
 -----
 ### security_group.tf
@@ -507,6 +517,9 @@ resource "aws_security_group" "bastion_sg" {
 ```
 + **resource "aws_security_group" "bastion_sg" {...} 블럭 생성 진행**
   - vpc_id
+    - data.terraform_remote_state.vpc.outputs.vpc_id
+      - 위에서 설정한 **_data.tf_** 파일의 **data "terraform_remote_state" "vpc" {...}** 참조 설정
+      - **_01_VPC_** 폴더의 **_vpc.tf_** 파일의 설정(생성) 값을 **_output.tf_** 파일의 **_data "vpc_id"_** 블럭값 참조
     - 생성하고자 하는 SG의 생성 영역 VPC기준
     - SG의 경우 각각 VPC에 종속 되는 리소스
 
