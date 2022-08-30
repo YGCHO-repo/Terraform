@@ -561,3 +561,23 @@ output "web_sg_id" {
 - value
   - 생성된 security_group resource 블럭의 ID 정보 설정
     - security_group resource 블럭의 ID 값만 확인 가능
+
+-----
+##  EC2 Folder
+> 폴더 항목
+```
+ 03_EC2
+ ├── data.tf
+ ├── ec2.tf
+ ├── main.tf
+ ├── output.tf
+ └── provider.tf
+```
+> 명령어
+```
+$ cd 03_EC2
+
+$ terraform init 
+$ terraform plan -refresh=false -out=planfile
+$ terraform apply planfile
+```
