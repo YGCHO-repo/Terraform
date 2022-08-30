@@ -237,10 +237,11 @@ resource "aws_dynamodb_table" "this" {
     - hash_key의 속성 설정
 
 
-> S3 bucket as backend
+> **S3 bucket as backend**
 - Terraform의 상태(terraform.tfstate)파일을 versioning하며 저장하기 위해 S3 bucket을 생성
-> DynamoDB Table for Lock
+> **DynamoDB Table for Lock**
 - 동시에 같은 파일을 수정하지 못하도록 하기 위해 DynamoDB에 작업에 대한 Lock을 생성
+
 
 
 
@@ -313,6 +314,8 @@ terraform {
     - S3 bucket의 지역명(리전)을 설정
   - encrypt
     - encrypt 사용 여부 설정
+
+> **Backend 설정을 하면?**
 >  1. 위에서 생성한 S3 bucket을 활용하여 backend 설정 한다 
 >  2. 해당 설정을 진행하면 Local에 terraform.tfstate 이 생성되지 않는다
 >  3. terraform.tfstate 파일은 remote 위치인 AWS S3에 생성 된다. 
