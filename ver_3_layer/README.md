@@ -108,8 +108,8 @@ $ terraform show
 ```
 
 > 참고용 URL
-> >- https://www.terraform.io/intro
-> >- https://www.terraform.io/language
+> - https://www.terraform.io/intro
+> - https://www.terraform.io/language
 > >- https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 
 -----
