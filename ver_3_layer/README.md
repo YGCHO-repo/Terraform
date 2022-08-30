@@ -721,3 +721,13 @@ resource "aws_instance" "bastion" {
   - key_name
     - EC2 instance 생성시 적용 *.pem key (key_pair)
     - __**빠른 진행을 위해서 기존 AWS key_pair 사용**__
+
+> 참고용 URL  
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair
+
+> 참고용 URL (AWS)
+> - https://aws.amazon.com/ko/amazon-linux-ami/
+> - https://aws.amazon.com/ko/ec2/instance-types/
+
+-----
