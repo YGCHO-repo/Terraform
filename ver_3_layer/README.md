@@ -519,7 +519,7 @@ resource "aws_security_group" "bastion_sg" {
   - vpc_id
     - data.terraform_remote_state.vpc.outputs.vpc_id
       - 위에서 설정한 **_data.tf_** 파일의 **data "terraform_remote_state" "vpc" {...}** 참조 설정
-      - **_01_VPC_** 폴더의 **_vpc.tf_** 파일의 설정(생성) 값을 **_output.tf_** 파일의 **_data "vpc_id"_** 블럭값 참조
+      - **_01_VPC_** 폴더 **_vpc.tf_** 파일 설정(생성) 값을 **_output.tf_** 파일의 **_data "vpc_id"_** 블럭값
     - 생성하고자 하는 SG의 생성 영역 VPC기준
     - SG의 경우 각각 VPC에 종속 되는 리소스
 
