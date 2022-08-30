@@ -136,7 +136,7 @@ $ terraform show
 > ```
 
 -----
-### main.tf
+### 00_S3 / main.tf
 ```hcl
 terraform {
   required_version = ">= 1.2.2"
