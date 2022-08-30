@@ -91,7 +91,9 @@ $ terraform plan -refresh=false -out=planfile
 
 적용
 $ terraform apply planfile
+```
 
+```
 적용 완료시 설정값 확인 (*.tfstate 파일)
 $ terraform refresh
 $ terraform show
