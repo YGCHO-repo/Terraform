@@ -8,6 +8,20 @@
 └── main.tf
 ```
 
+
+
+> **향후 생성 추가 되는 파일**
+> - terraform plan 명령어 적용시 생성 파일
+> ```
+> └── planfile
+> ```
+> 
+> - terraform apply 명령어 적용시
+> ```
+> ├── terraform.tfstate
+> └── terraform.tfstate.backup      
+> ```
+
 -----
 ### 테라폼 명령어 
 ```
@@ -29,11 +43,10 @@ $ terraform apply
 3. resource     block
 ```
 
-> 참고용 URL  
-> >테라폼 구조 관련
-- https://www.terraform.io/intro
-- https://www.terraform.io/language
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+> 참고용 URL
+> - https://www.terraform.io/intro
+> - https://www.terraform.io/language
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs
 
 -----
 ## main.tf 
@@ -79,7 +92,7 @@ resource "aws_vpc" "this" {
 }
 ```
 > 참고용 URL 
-- https://www.terraform.io/language
+> - https://www.terraform.io/language
 
 -----
 #### resource vpc 블럭
@@ -101,8 +114,8 @@ resource "aws_vpc" "this" {
         - { "Name" = "test-tf-vpc" }
 
 > 참고용 URL 
-- https://www.terraform.io/language/resources/syntax
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
+> - https://www.terraform.io/language/resources/syntax
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
 
 -----
 #### resource subnet 블럭
@@ -132,8 +145,8 @@ resource "aws_subnet" "main_pub_a_subnet" {
         - { Name = "test-tf-ap-northeast-2a-public-main-subnet" }
 
 > 참고용 URL 
-- https://www.terraform.io/language/resources/syntax
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
+> - https://www.terraform.io/language/resources/syntax
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
 
 -----
 #### resource igw(internet gateway) 블럭
@@ -155,7 +168,7 @@ resource "aws_internet_gateway" "this" {
 > **위의 예제와 같이 설정된 "aws_vpc" "this"를 vpc_id 식별자에 표현값으로 참조 하거나, tags 처럼 사용자가 직접 설정 하여 Code를 작성한다.**
 
 > 참고용 URL 
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/internet_gateway
 
 -----
 #### resource natgw(nat gateway) 블럭
@@ -194,7 +207,7 @@ resource "aws_nat_gateway" "natgw_a" {
     - 명시적으로 [aws_eip.natgw_a_eip] 생성이 정상적으로 이뤄진 후, 해당 리소스가 생성 되로록 설정
 
 > 참고용 URL 
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/nat_gateway
 
 -----
 #### resource route_table 블럭
@@ -251,8 +264,8 @@ resource "aws_route_table_association" "pub_a_main_rtb" {
     - 해당 항목은 subnet_id 와 중복하여 설정 불가.
 
 > 참고용 URL 
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/route_table_association
 
 -----
 #### Security_group 블럭
@@ -315,7 +328,7 @@ resource "aws_security_group" "bastion_sg" {
   - (해당 rule을 설정시 Outbound는 전체 허용)
 
 > 참고용 URL 
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
 
 -----
 #### Security_group_rule 블럭
@@ -357,7 +370,7 @@ resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {
       - Sample로 작성하였기에 Megazoen UTM 장비의 공인 IP도 작성
 
 > 참고용 URL  
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
 
 -----
 #### EC2(Instance) 블럭
@@ -417,12 +430,16 @@ resource "aws_eip" "bastion_eip" {
 
 
 > 참고용 URL  
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair
-
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair
+     
+     
+     
+     
+     
 > 참고용 URL (AWS)
-- https://aws.amazon.com/ko/amazon-linux-ami/
-- https://aws.amazon.com/ko/ec2/instance-types/
+> - https://aws.amazon.com/ko/amazon-linux-ami/
+> - https://aws.amazon.com/ko/ec2/instance-types/
 
 -----
 ### **ELB(Elastic Load Balancing)**
@@ -466,7 +483,7 @@ resource "aws_lb" "front_alb" {
     - 해당 ALB에서 사용 하고자 하는 SG 설정
 
 > 참고용 URL  
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb
 
 -----
 #### ALB Target_group 블럭
@@ -510,8 +527,8 @@ resource "aws_lb_target_group_attachment" "front_alb_tg_a_attch" {
       + **resource "aws_lb_target_group" "front_alb_tg" {...} 블럭** 에서 target_type 을 instance 로 설정 참조
 
 > 참고용 URL  
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group_attachment
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_target_group_attachment
 
 -----
 #### ALB listener 블럭
@@ -542,9 +559,9 @@ resource "aws_lb_listener" "front_alb_listener" {
         - 타입은 **"forward"**, **"redirect"**, **"fixed-response"**, **"authenticate-cognito"**, **"authenticate-oidc"** 가 있다.
 
 > 참고용 URL  
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_rule
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_certificate
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_rule
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb_listener_certificate
 
 -----
 ### **RDS(Relational Database Service)**
@@ -572,7 +589,7 @@ resource "aws_db_subnet_group" "this" {
       - A_zone(ap-northeast-2a) , C_zone(ap-northeast-2c)
 
 > 참고용 URL
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_subnet_group
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_subnet_group
 
 -----
 #### RDS parameter_group 블럭
@@ -616,14 +633,18 @@ resource "aws_db_parameter_group" "this" {
     - 해당 db_parameter_group의 family 설정
 
 > 참고용 URL  
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_parameter_group
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_parameter_group
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_parameter_group
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_parameter_group
+     
+     
+     
+     
 
 > 참고용 URL (AWS)
-- https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
-- https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
-- https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html (확인용)
-- https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html (확인용)
+> - https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
+> - https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
+> - https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-cluster-parameters.html (확인용)
+> - https://docs.aws.amazon.com/cli/latest/reference/rds/describe-db-parameters.html (확인용)
 
 -----
 #### RDS cluster(Aurora) 블럭
@@ -691,7 +712,7 @@ resource "aws_rds_cluster" "this" {
     - 위에서 생성한 파라미터 그룹을 설정
 
 > 참고용 URL
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster
 
 -----
 #### RDS db_instance (Aurora) 블럭
@@ -741,7 +762,10 @@ resource "aws_rds_cluster_instance" "this" {
         - **3.** - 5.7.mysql_aurora.2.03.2
 
 > 참고용 URL
-- https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance
-
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance
+     
+     
+     
+     
 > 참고용 URL (AWS)
-- https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html
+> - https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html
