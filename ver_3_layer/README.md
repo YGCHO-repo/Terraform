@@ -529,20 +529,7 @@ resource "aws_security_group" "bastion_sg" {
 >  - ingress -> inbound
 >  - egress -> outbound
 
-  
-- egress
-  - description
-    - 해당 SG의 inbound rule 의 설명문
-  - protocol
-    - "-1"
-      - 전체 프로토콜에 대해서 가능하게 설정
-      - "-1" 은 전체 프로토콜 범위를 뜻함
-  - from_port
-    - 포트 설정 : 어디서부터 (시작점)
-  - to_port
-    - 포트 설정 : 어디까지 (종료점)
-  - cidr_blocks
-    - **[ ]** 리스트 형식으로 입력
+
 
 > 참고용 URL 
 > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
