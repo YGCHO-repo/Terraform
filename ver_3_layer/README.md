@@ -531,8 +531,9 @@ resource "aws_security_group" "bastion_sg" {
 
 >  **내부 블럭에서 ingress , egress 는 SG의 inbound , outbound 와 동일하다.**
 > ```
->  - ingress -> inbound
->  - egress -> outbound
+>  ingress -> inbound
+>  
+>  egress -> outbound
 > ```
 
 
@@ -724,7 +725,7 @@ resource "aws_instance" "bastion" {
     - EC2 instance 생성시 적용 *.pem key (key_pair)
     - __**```빠른 진행을 위해서 기존 AWS key_pair 사용```**__
 
-> 참고용 URL  
+> 참고용 URL
 > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
 > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/key_pair
 
