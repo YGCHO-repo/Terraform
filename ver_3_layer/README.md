@@ -322,10 +322,11 @@ terraform {
     - encrypt 사용 여부 설정
 
 > **Backend 설정을 하면?**
+> ```
 >  1. 위에서 생성한 S3 bucket을 활용하여 backend 설정 한다 
 >  2. 해당 설정을 진행하면 Local에 terraform.tfstate 이 생성되지 않는다
 >  3. terraform.tfstate 파일은 remote 위치인 AWS S3에 생성 된다. 
-
+> ```
 
 
 > 참고용 URL
@@ -528,11 +529,11 @@ resource "aws_security_group" "bastion_sg" {
     - SG의 경우 각각 VPC에 종속 되는 리소스
 
 
-
->  내부 블럭에서 ingress , egress 는 SG의 inbound , outbound 와 동일하다.
+>  **내부 블럭에서 ingress , egress 는 SG의 inbound , outbound 와 동일하다.**
+> ```
 >  - ingress -> inbound
 >  - egress -> outbound
-
+> ```
 
 
 > 참고용 URL 
@@ -673,8 +674,9 @@ data "terraform_remote_state" "sg" {
         - S3 bucket의 지역명(리전)을 설정
 
 > **data block 왜! 2개 설정하였을까?**
+> ```
 >  1. EC2 instance를 생성(설정) 할때 필요한 값이 VPC 정보 와 SG 정보이다.
-
+> ```
 
 > 참고용 URL
 > - https://www.terraform.io/language/data-sources
