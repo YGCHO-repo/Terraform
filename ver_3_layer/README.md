@@ -460,7 +460,7 @@ terraform {
   - key
     - S3 bucket의 위치/파일명을 설정
       - test-terraform-state-backend-yg/sg/terraform.tfstate 
-        - "test-terraform-state-backend-yg" S3 bucket의 **"sg"** 폴더에 "terraform.tfstate" 파일 저장
+        -``` "test-terraform-state-backend-yg"``` S3 bucket의 **```"sg"```** 폴더에 ```"terraform.tfstate"``` 파일 저장
 
 > 참고용 URL
 > - https://www.terraform.io/language/state/remote-state-data
@@ -525,7 +525,7 @@ resource "aws_security_group" "bastion_sg" {
 + **resource "aws_security_group" "bastion_sg" {...} 블럭 생성 진행**
   - vpc_id
     - data.terraform_remote_state.vpc.outputs.vpc_id
-      - 위에서 설정한 **```data.tf```** 파일의 **```data "terraform_remote_state" "vpc" {...}```** 참조 설정
+      - 위에서 설정한 **```data.tf```** 파일의 **```data "terraform_remote_state" "vpc" {...}```** 블럭 참조
       - **```01_VPC```** 폴더 **```vpc.tf```** 파일 설정(생성) 값을 **```output.tf```** 파일의 **```data "vpc_id"```** 블럭값
     - 생성하고자 하는 SG의 생성 영역 VPC기준
     - SG의 경우 각각 VPC에 종속 되는 리소스
@@ -614,7 +614,7 @@ terraform {
   - key
     - S3 bucket의 위치/파일명을 설정
       - test-terraform-state-backend-yg/sg/terraform.tfstate 
-        - "test-terraform-state-backend-yg" S3 bucket의 **"ec2"** 폴더에 "terraform.tfstate" 파일 저장
+        - ```"test-terraform-state-backend-yg"``` S3 bucket의 **```"ec2"```** 폴더에 ```"terraform.tfstate" ```파일 저장
 
 > 참고용 URL
 > - https://www.terraform.io/language/state/remote-state-data
@@ -710,17 +710,14 @@ resource "aws_instance" "bastion" {
 (```data block 설명하기 위한 내용은 생략```)
 
   - subnet_id
-    - EC2 instance가 생성 되는 subnet 위치
-
     - data.terraform_remote_state.vpc.outputs.pub_a_subnet_id
-      - 위에서 설정한 **```data.tf```** 파일의 **```data "terraform_remote_state" "vpc" {...}```** 참조 설정
+      - 위에서 설정한 **```data.tf```** 파일의 **```data "terraform_remote_state" "vpc" {...}```** 블럭 참조
       - **```01_VPC```** 폴더 **```vpc.tf```** 파일 설정(생성) 값을 **```output.tf```** 파일의 **```data "pub_a_subnet_id"```** 블럭값
   
   - security_groups
-    - EC2 instance 생성시 Attach 진행 하는 SG
-    
+    - **[ ]** 리스트 형식으로 입력
     - data.terraform_remote_state.sg.outputs.bastion_sg_id
-      - 위에서 설정한 **```data.tf```** 파일의 **```data "terraform_remote_state" "sg" {...}```** 참조 설정
+      - 위에서 설정한 **```data.tf```** 파일의 **```data "terraform_remote_state" "sg" {...}```** 블럭 참조
       - **```02_SG```** 폴더 **```security_group.tf```** 파일 설정(생성) 값을 **```output.tf```** 파일의 **```data "bastion_sg_id"```** 블럭값
     
   - key_name
@@ -786,7 +783,7 @@ terraform {
   - key
     - S3 bucket의 위치/파일명을 설정
       - test-terraform-state-backend-yg/sg/terraform.tfstate 
-        - "test-terraform-state-backend-yg" S3 bucket의 **"alb"** 폴더에 "terraform.tfstate" 파일 저장
+        - ```"test-terraform-state-backend-yg"``` S3 bucket의 **```"alb"```** 폴더에 ```"terraform.tfstate"```파일 저장
 
 
 > 참고용 URL
@@ -840,12 +837,75 @@ data "terraform_remote_state" "ec2" {
 
 ## 04_ALB/elb_alb.tf
 ```hcl
+resource "aws_lb" "front_alb" {
+  name               = "test-tf-ext-front-alb"
+  internal           = false                      # Public
+  load_balancer_type = "application"              # ELB type
 
+  subnets = [
+    data.terraform_remote_state.vpc.outputs.pub_a_subnet_id,
+    data.terraform_remote_state.vpc.outputs.pub_c_subnet_id
+  ]
+
+  security_groups = [
+    data.terraform_remote_state.sg.outputs.alb_front_sg_id
+  ]
+}
 ```
++ **resource "aws_lb" "front_alb" {...} 블럭 생성 진행**
+  - name
+    - ALB의 Name 설정
+  - internal
+    - Public 설정 (bool type)
+  - load_balancer_type
+    - application 설정 
+
+  - subnets
+    - **[ ]** 리스트 형식으로 입력
+    - data.terraform_remote_state.vpc.outputs.{pub_a_subnet_id , pub_c_subnet_id}
+      - 위에서 설정한 **```data.tf```** 파일의 **```data "terraform_remote_state" "vpc" {...}```** 블럭 참조
+      - **```01_VPC```** 폴더 **```subnet.tf```** 파일 설정(생성) 값을 **```output.tf```** 파일의 **```data "pub_a_subnet_id"```** , **```data "pub_c_subnet_id"```** 블럭값
 
 
-## 04_ALB/elb_alb.tf
+  - security_groups
+    - **[ ]** 리스트 형식으로 입력
+    - data.terraform_remote_state.sg.outputs.alb_front_sg_id
+      - 위에서 설정한 **```data.tf```** 파일의 **```data "terraform_remote_state" "sg" {...}```** 블럭 참조
+      - **```02_SG```** 폴더 **```security_group.tf```** 파일 설정(생성) 값을 **```output.tf```** 파일의 **```data "alb_front_sg_id"```** 블럭값
+
+
+> 참고용 URL  
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb
+
+## 04_ALB/elb_alb_tg.tf
 ```hcl
+resource "aws_lb_target_group" "front_alb_tg" {
+  name        = "test-tf-front-alb-tg"
 
+  vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
+
+  target_type = "instance"
+  port        = 80
+  protocol    = "HTTP"
+}
+
+resource "aws_lb_target_group_attachment" "front_alb_tg_a_attch" {
+  target_group_arn = aws_lb_target_group.front_alb_tg.arn
+  port             = 80
+
+  target_id = data.terraform_remote_state.ec2.outputs.web_a_ec2_id
+
+}
 ```
++ **resource "aws_lb_target_group" "front_alb_tg" {...} 블럭 생성 진행**
+  - vpc_id
+    - data.terraform_remote_state.vpc.outputs.vpc_id
+      - 위에서 설정한 **```data.tf```** 파일의 **```data "terraform_remote_state" "vpc" {...}```** 블럭 참조
+      - **```01_VPC```** 폴더 **```vpc.tf```** 파일 설정(생성) 값을 **```output.tf```** 파일의 **```data "vpc_id"```** 블럭값
 
+
++ **resource "aws_lb_target_group_attachment" "front_alb_tg_a_attch" {...} 블럭 생성 진행**
+  - target_id
+    - data.terraform_remote_state.ec2.outputs.web_a_ec2_id
+      - 위에서 설정한 **```data.tf```** 파일의 **```data "terraform_remote_state" "ec2" {...}```** 블럭 참조
+      - **```03_EC2```** 폴더 **```ec2.tf```** 파일 설정(생성) 값을 **```output.tf```** 파일의 **```data "web_a_ec2_id"```** 블럭값
