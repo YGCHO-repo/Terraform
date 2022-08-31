@@ -47,7 +47,7 @@
 │   ├── output.tf
 │   └── provider.tf
 │
-└─── 05_RDS
+└── 05_RDS
     ├── data.tf
     ├── main.tf
     ├── output.tf
@@ -56,9 +56,21 @@
     ├── rds_aurora_pg.tf
     └── rds_aurora_subnet.tf
 ```
+
 > **향후 생성 추가 되는 파일**
+> - terraform init 명령어 적용시 생성 파일
+>   - 각각 폴더별 Terraform 실행은 가능하나, 각 폴더당 .terraform 폴더가 생성되어 용량 증가
+> ```
+> ├── .terraform
+> │   ├── modu
+> │   └── providers
+> │  
+> └── .terraform.lock.hcl
+> ```
+> 
 > - terraform plan 명령어 적용시 생성 파일
 > ```
+> │  
 > └── planfile
 > ```
 > 
@@ -835,6 +847,9 @@ data "terraform_remote_state" "ec2" {
 > - https://www.terraform.io/language/state/remote
 > - https://www.terraform.io/language/values/outputs
 
+
+-----
+
 ## 04_ALB/elb_alb.tf
 ```hcl
 resource "aws_lb" "front_alb" {
@@ -877,6 +892,10 @@ resource "aws_lb" "front_alb" {
 > 참고용 URL  
 > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb
 
+
+-----
+
+
 ## 04_ALB/elb_alb_tg.tf
 ```hcl
 resource "aws_lb_target_group" "front_alb_tg" {
@@ -909,3 +928,71 @@ resource "aws_lb_target_group_attachment" "front_alb_tg_a_attch" {
     - data.terraform_remote_state.ec2.outputs.web_a_ec2_id
       - 위에서 설정한 **```data.tf```** 파일의 **```data "terraform_remote_state" "ec2" {...}```** 블럭 참조
       - **```03_EC2```** 폴더 **```ec2.tf```** 파일 설정(생성) 값을 **```output.tf```** 파일의 **```data "web_a_ec2_id"```** 블럭값
+
+
+-----
+
+#  RDS Folder
+> 폴더 항목
+> ```
+> 05_RDS
+> ├── data.tf
+> ├── main.tf
+> ├── output.tf
+> ├── provider.tf
+> ├── rds_aurora.tf
+> ├── rds_aurora_pg.tf
+> └── rds_aurora_subnet.tf
+> ```
+-----
+> 명령어
+> ```
+> $ cd 05_RDS
+> 
+> $ terraform init 
+> $ terraform plan -refresh=false -out=planfile
+> $ terraform apply planfile
+> ```
+-----
+## 05_RDS/main.tf
+```hcl
+terraform {
+  required_version = ">= 1.2.2"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "4.22.0"
+    }
+  }
+  backend "s3" {
+    bucket         = "test-terraform-state-backend-yg"
+    dynamodb_table = "test-terraform-state-locks"
+
+    key            = "rds/terraform.tfstate"
+
+    region         = "ap-northeast-2"
+    encrypt        = true
+  }
+}
+```
+- **backend**
+  - key
+    - S3 bucket의 위치/파일명을 설정
+      - test-terraform-state-backend-yg/sg/terraform.tfstate 
+        - ```"test-terraform-state-backend-yg"``` S3 bucket의 **```"rds"```** 폴더에 ```"terraform.tfstate"```파일 저장
+
+
+> 참고용 URL
+> - https://www.terraform.io/language/state/remote-state-data
+> - https://www.terraform.io/language/settings
+> - https://www.terraform.io/language/settings/backends/s3
+> - https://www.terraform.io/language/settings/backends/configuration
+> - https://www.terraform.io/language/state/locking
+
+
+-----
+
+
+
+
+
