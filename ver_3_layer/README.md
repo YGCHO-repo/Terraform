@@ -136,7 +136,7 @@ $ terraform show
 > ```
 
 -----
-## 00_S3 / main.tf
+## 00_S3/main.tf
 ```hcl
 terraform {
   required_version = ">= 1.2.2"
@@ -155,7 +155,7 @@ terraform {
   - registry.terraform.io/hashicorp/aws 에서 4.22.0 버전 사용
 
 -----
-## 00_S3 / provider.tf
+## 00_S3/provider.tf
 ```hcl
 provider "aws" {
   region = "ap-northeast-2"
@@ -163,7 +163,7 @@ provider "aws" {
 - provider 는 "aws"로 사용, 리전은 "ap-northeast-2" Seoul 리전으로 사용을 설정
 
 -----
-## 00_S3 / state-backend.tf
+## 00_S3/state-backend.tf
 ```hcl
 resource "aws_s3_bucket" "this" {
   bucket = "test-terraform-state-backend-yg"
@@ -220,7 +220,7 @@ resource "aws_dynamodb_table" "this" {
   - bucket
     - 위에서 생성한 bucket 설정
   - acl
-    - bucket의 타입(public / private) 설정
+    - bucket의 타입(public/private) 설정
       - "private" 설정
 + **resource "aws_s3_bucket_server_side_encryption_configuration" "this" {...} 블럭 생성 진행**
   - bucket
@@ -284,7 +284,7 @@ resource "aws_dynamodb_table" "this" {
 > ```
 
 -----
-## 01_VPC / main.tf
+## 01_VPC/main.tf
 ```hcl
 terraform {
   required_version = ">= 1.2.2"
@@ -337,7 +337,7 @@ terraform {
 > - https://www.terraform.io/language/state/locking
 
 -----
-## 01_VPC / output.tf
+## 01_VPC/output.tf
 ```hcl
 output "vpc_id" {
   value = aws_vpc.this.id
@@ -434,7 +434,7 @@ output "igw_id" {
 > ```
 
 -----
-## 02_SG / main.tf
+## 02_SG/main.tf
 ```hcl
 terraform {
   required_version = ">= 1.2.2"
@@ -470,7 +470,7 @@ terraform {
 > - https://www.terraform.io/language/state/locking
 
 -----
-## 02_SG / data.tf
+## 02_SG/data.tf
 ```hcl
 data "terraform_remote_state" "vpc" {
   backend = "s3"                                  # backend type
@@ -503,7 +503,7 @@ data "terraform_remote_state" "vpc" {
 
 
 -----
-## 02_SG / security_group.tf
+## 02_SG/security_group.tf
 ```hcl
 resource "aws_security_group" "bastion_sg" {
   description = "Bastion Server Security group"
@@ -547,7 +547,7 @@ resource "aws_security_group" "bastion_sg" {
 
 
 -----
-## 02_SG / output.tf
+## 02_SG/output.tf
 ```hcl
 output "bastion_sg_id" {
   description = "Bastion Security Group"
@@ -590,7 +590,7 @@ output "web_sg_id" {
 > $ terraform apply planfile
 > ```
 -----
-## 03_EC2 / main.tf
+## 03_EC2/main.tf
  ```hcl
 terraform {
   required_version = ">= 1.2.2"
@@ -624,7 +624,7 @@ terraform {
 > - https://www.terraform.io/language/state/locking
 
 -----
-## 03_EC2 / data.tf
+## 03_EC2/data.tf
 ```hcl
 # EC2 생성 설정을 위해 필요한 VPC 정보
 data "terraform_remote_state" "vpc" {
@@ -678,7 +678,7 @@ data "terraform_remote_state" "sg" {
 
 > **data block 왜! 2개 설정하였을까?**
 > ```
->  1. EC2 instance를 생성(설정) 할때 필요한 값이 VPC 정보 와 SG 정보이다.
+>  1. EC2 instance를 생성(설정) 할때 필요한 VPC 정보 와 SG 정보 필요
 > ```
 
 > 참고용 URL
@@ -687,7 +687,7 @@ data "terraform_remote_state" "sg" {
 > - https://www.terraform.io/language/values/outputs
 
 -----
-## 03_EC2 / ec2.tf
+## 03_EC2/ec2.tf
 ```hcl
 resource "aws_instance" "bastion" {
  
@@ -760,7 +760,7 @@ resource "aws_instance" "bastion" {
 > $ terraform apply planfile
 > ```
 -----
-## 04_ALB / main.tf
+## 04_ALB/main.tf
 ```hcl
 terraform {
   required_version = ">= 1.2.2"
@@ -798,7 +798,7 @@ terraform {
 
 
 -----
-## 04_ALB / data.tf
+## 04_ALB/data.tf
 ```hcl
 data "terraform_remote_state" "vpc" {
   backend = "s3"
@@ -827,15 +827,24 @@ data "terraform_remote_state" "ec2" {
   }
 }
 ```
+> **data block 왜! 3개 설정하였을까?**
+> ```
+>  1. ALB를 생성(설정) 할때 필요한 VPC 정보 와 SG 정보 필요
+>  2. ALB를 구성시 TG의 대상이 되는 EC2 instance 설정에 필요
+> ```
 
+> 참고용 URL
+> - https://www.terraform.io/language/data-sources
+> - https://www.terraform.io/language/state/remote
+> - https://www.terraform.io/language/values/outputs
 
-## 04_ALB / elb_alb.tf
+## 04_ALB/elb_alb.tf
 ```hcl
 
 ```
 
 
-## 04_ALB / elb_alb.tf
+## 04_ALB/elb_alb.tf
 ```hcl
 
 ```
