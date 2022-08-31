@@ -119,11 +119,11 @@ $ terraform show
 # S3 Folder
 > 폴더 항목
 > ```
->  00_S3
->  ├── main.tf
->  ├── output.tf
->  ├── provider.tf
->  └── state-backend.tf
+> 00_S3
+> ├── main.tf
+> ├── output.tf
+> ├── provider.tf
+> └── state-backend.tf
 > ```
 -----
 > 명령어
@@ -262,16 +262,16 @@ resource "aws_dynamodb_table" "this" {
 #  VPC Folder
 > 폴더 항목
 > ```
->  01_VPC
->  ├── internat_gateway.tf
->  ├── main.tf
->  ├── nat_gateways.tf
->  ├── output.tf
->  ├── provider.tf
->  ├── route_tables.tf
->  ├── route_tables_rule.tf
->  ├── subnet.tf
->  └── vpc.tf
+> 01_VPC
+> ├── internat_gateway.tf
+> ├── main.tf
+> ├── nat_gateways.tf
+> ├── output.tf
+> ├── provider.tf
+> ├── route_tables.tf
+> ├── route_tables_rule.tf
+> ├── subnet.tf
+> └── vpc.tf
 > ```
 -----
 > 명령어
@@ -415,13 +415,13 @@ output "igw_id" {
 #  SG Folder
 > 폴더 항목
 > ```
->  02_SG
->  ├── data.tf
->  ├── main.tf
->  ├── output.tf
->  ├── provider.tf
->  ├── security_group.tf
->  └── security_group_rule.tf
+> 02_SG
+> ├── data.tf
+> ├── main.tf
+> ├── output.tf
+> ├── provider.tf
+> ├── security_group.tf
+> └── security_group_rule.tf
 > ```
 -----
 > 명령어
@@ -448,7 +448,9 @@ terraform {
   backend "s3" {
     bucket         = "test-terraform-state-backend-yg"
     dynamodb_table = "test-terraform-state-locks"
+    
     key            = "sg/terraform.tfstate"
+    
     region         = "ap-northeast-2"
     encrypt        = true
   }
@@ -571,12 +573,12 @@ output "web_sg_id" {
 #  EC2 Folder
 > 폴더 항목
 > ```
->  03_EC2
->  ├── data.tf
->  ├── ec2.tf
->  ├── main.tf
->  ├── output.tf
->  └── provider.tf
+> 03_EC2
+> ├── data.tf
+> ├── ec2.tf
+> ├── main.tf
+> ├── output.tf
+> └── provider.tf
 > ```
 -----
 > 명령어
@@ -734,3 +736,107 @@ resource "aws_instance" "bastion" {
 > - https://aws.amazon.com/ko/ec2/instance-types/
 
 -----
+
+#  ALB Folder
+> 폴더 항목
+> ```
+> 04_ALB
+> ├── data.tf
+> ├── elb_alb.tf
+> ├── elb_alb_listener.tf
+> ├── elb_alb_listener_rule.tf
+> ├── elb_alb_tg.tf
+> ├── main.tf
+> ├── output.tf
+> └── provider.tf
+> ```
+-----
+> 명령어
+> ```
+> $ cd 04_ALB
+> 
+> $ terraform init 
+> $ terraform plan -refresh=false -out=planfile
+> $ terraform apply planfile
+> ```
+-----
+## 04_ALB / main.tf
+```hcl
+terraform {
+  required_version = ">= 1.2.2"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "4.22.0"
+    }
+  }
+
+  backend "s3" {
+    bucket         = "test-terraform-state-backend-yg"
+    dynamodb_table = "test-terraform-state-locks"
+    
+    key            = "alb/terraform.tfstate"
+    
+    region         = "ap-northeast-2"
+    encrypt        = true
+  }
+}
+```
+- **backend**
+  - key
+    - S3 bucket의 위치/파일명을 설정
+      - test-terraform-state-backend-yg/sg/terraform.tfstate 
+        - "test-terraform-state-backend-yg" S3 bucket의 **"alb"** 폴더에 "terraform.tfstate" 파일 저장
+
+
+> 참고용 URL
+> - https://www.terraform.io/language/state/remote-state-data
+> - https://www.terraform.io/language/settings
+> - https://www.terraform.io/language/settings/backends/s3
+> - https://www.terraform.io/language/settings/backends/configuration
+> - https://www.terraform.io/language/state/locking
+
+
+-----
+## 04_ALB / data.tf
+```hcl
+data "terraform_remote_state" "vpc" {
+  backend = "s3"
+  config = {
+    bucket = "test-terraform-state-backend-yg"
+    key    = "vpc/terraform.tfstate"
+    region = "ap-northeast-2"
+  }
+}
+
+data "terraform_remote_state" "sg" {
+  backend = "s3"
+  config = {
+    bucket = "test-terraform-state-backend-yg"
+    key    = "sg/terraform.tfstate"
+    region = "ap-northeast-2"
+  }
+}
+
+data "terraform_remote_state" "ec2" {
+  backend = "s3"
+  config = {
+    bucket = "test-terraform-state-backend-yg"
+    key    = "ec2/terraform.tfstate"
+    region = "ap-northeast-2"
+  }
+}
+```
+
+
+## 04_ALB / elb_alb.tf
+```hcl
+
+```
+
+
+## 04_ALB / elb_alb.tf
+```hcl
+
+```
+
