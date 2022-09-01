@@ -62,7 +62,6 @@
 >   - 각각 폴더별 Terraform 실행은 가능하나, 각 폴더당 .terraform 폴더가 생성되어 용량 증가
 > ```
 > ├── .terraform
-> │   ├── modu
 > │   └── providers
 > │  
 > └── .terraform.lock.hcl
@@ -79,7 +78,9 @@
 >   - S3 제외 다른 폴더에 있는 리소스는 원격에 생성 (AWS S3 bucket)
 > ```
 > ├── terraform.tfstate
-> └── terraform.tfstate.backup (apply 2회 적용시 생성)      
+> └── terraform.tfstate.backup 
+> 
+> (apply 2회 적용시 생성)      
 > ```
 
 -----
@@ -232,7 +233,7 @@ resource "aws_dynamodb_table" "this" {
   - bucket
     - 위에서 생성한 bucket 설정
   - acl
-    - bucket의 타입(public/private) 설정
+    - bucket의 타입(public / private) 설정
       - "private" 설정
 + **resource "aws_s3_bucket_server_side_encryption_configuration" "this" {...} 블럭 생성 진행**
   - bucket
@@ -460,9 +461,7 @@ terraform {
   backend "s3" {
     bucket         = "test-terraform-state-backend-yg"
     dynamodb_table = "test-terraform-state-locks"
-    
     key            = "sg/terraform.tfstate"
-    
     region         = "ap-northeast-2"
     encrypt        = true
   }
@@ -549,6 +548,16 @@ resource "aws_security_group" "bastion_sg" {
 >  
 >  egress -> outbound
 > ```
+
+**dd**
+**_dd_**
+__gg__ ==kk==
+
+==hh==
+%%ddd%%%
+``` ```
+
+
 
 
 > 참고용 URL 
@@ -783,9 +792,7 @@ terraform {
   backend "s3" {
     bucket         = "test-terraform-state-backend-yg"
     dynamodb_table = "test-terraform-state-locks"
-    
     key            = "alb/terraform.tfstate"
-    
     region         = "ap-northeast-2"
     encrypt        = true
   }
@@ -967,9 +974,7 @@ terraform {
   backend "s3" {
     bucket         = "test-terraform-state-backend-yg"
     dynamodb_table = "test-terraform-state-locks"
-
     key            = "rds/terraform.tfstate"
-
     region         = "ap-northeast-2"
     encrypt        = true
   }
@@ -991,8 +996,103 @@ terraform {
 
 
 -----
+## 05_RDS/data.tf
+```hcl
+data "terraform_remote_state" "vpc" {
+  backend = "s3"
+  config = {
+    bucket = "test-terraform-state-backend-yg"
+    key    = "vpc/terraform.tfstate"
+    region = "ap-northeast-2"
+  }
+}
+
+data "terraform_remote_state" "sg" {
+  backend = "s3"
+  config = {
+    bucket = "test-terraform-state-backend-yg"
+    key    = "sg/terraform.tfstate"
+    region = "ap-northeast-2"
+  }
+}
+```
+> **data block 왜 설정하였을까?**
+> ```
+>  1. RDA(Aurora)를 생성(설정)시 필요한 VPC 정보 참조를 위함
+>  1. RDA(Aurora)를 생성(설정)시 필요한 SG 정보 참조를 위함
+> ```
+
+> 참고용 URL
+> - https://www.terraform.io/language/data-sources
+> - https://www.terraform.io/language/state/remote
+> - https://www.terraform.io/language/values/outputs
+
+-----
+
+## 05_RDS/rds_aurora_subnet.tf
+```hcl
+resource "aws_db_subnet_group" "this" {
+  description = "RDS Aurora Database subnet group"
+  name        = "test-tf-rds-subnet-group"
+
+  subnet_ids = [
+    data.terraform_remote_state.vpc.outputs.rds_a_subnet_id,
+    data.terraform_remote_state.vpc.outputs.rds_c_subnet_id
+  ]
+
+  tags = { Name = "test-tf-rds-subnet-group" }
+}
+```
++ **resource "aws_db_subnet_group" "this" {...} 블럭 생성 진행**
+  - subnet_ids
+    - **[ ]** 리스트 형식으로 입력
+    - data.terraform_remote_state.vpc.outputs.{rds_a_subnet_id / rds_c_subnet_id}
+      - 위에서 설정한 **```data.tf```** 파일의 **```data "terraform_remote_state" "vpc" {...}```** 블럭 참조
+      - **```01_VPC```** 폴더 **```subnet.tf```** 파일 설정(생성) 값을 **```output.tf```** 파일의 **```data "rds_a_subnet_id"```**, **```data "rds_c_subnet_id"```** 블럭값
+
+> 참고용 URL
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_subnet_group
+
+-----
+
+## 05_RDS/rds_aurora.tf
+```hcl
+resource "aws_rds_cluster" "this" {
+  cluster_identifier   = "test-tf-rds-aurora-cluster"
+  db_subnet_group_name = aws_db_subnet_group.this.id
+
+  engine         = "aurora-mysql"
+  engine_version = "8.0.mysql_aurora.3.02.0"
+
+  availability_zones = ["ap-northeast-2a", "ap-northeast-2c"]
+
+  database_name   = "testterraformdb"
+  master_username = "admin"
+  master_password = "DBAdmin1004"
+
+  port = 3306
+
+  vpc_security_group_ids = [
+    data.terraform_remote_state.sg.outputs.rds_sg_id
+  ]
+
+  skip_final_snapshot       = true
+
+  backup_retention_period = 1
+
+  db_cluster_parameter_group_name  = aws_rds_cluster_parameter_group.this.id
+  db_instance_parameter_group_name = aws_db_parameter_group.this.id
+}
+```
++ **resource "aws_rds_cluster" "this" {...} 블럭 생성 진행**
+  - vpc_security_group_ids
+    - **[ ]** 리스트 형식으로 입력
+    - data.terraform_remote_state.sg.outputs.rds_sg_id
+      - 위에서 설정한 **```data.tf```** 파일의 **```data "terraform_remote_state" "sg" {...}```** 블럭 참조
+      - **```02_SG```** 폴더 **```security_group.tf```** 파일 설정(생성) 값을 **```output.tf```** 파일의 **```data "rds_sg_id"```** 블럭값
 
 
+> 참고용 URL
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance
 
-
-
+-----
