@@ -179,8 +179,8 @@ provider "aws" {
 ## 00_S3/state-backend.tf
 ```hcl
 resource "aws_s3_bucket" "this" {
-  bucket = "test-terraform-state-backend-yg"
-  tags = {Name = "test-terraform-state-backend-yg"}
+  bucket = "test-terraform-state-backend-msc"
+  tags = {Name = "test-terraform-state-backend-msc"}
 }
 
 resource "aws_s3_bucket_versioning" "this" {
@@ -309,7 +309,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "test-terraform-state-backend-yg"  # 어떠한 S3 bucket
+    bucket         = "test-terraform-state-backend-msc"  # 어떠한 S3 bucket
     dynamodb_table = "test-terraform-state-locks"       # 어떠한 Dynamo DB table
     key            = "vpc/terraform.tfstate"            # 어디 S3 위치의 파일
     region         = "ap-northeast-2"                   # 어디 Region(지역)
@@ -459,7 +459,7 @@ terraform {
   }
  
   backend "s3" {
-    bucket         = "test-terraform-state-backend-yg"
+    bucket         = "test-terraform-state-backend-msc"
     dynamodb_table = "test-terraform-state-locks"
     key            = "sg/terraform.tfstate"
     region         = "ap-northeast-2"
@@ -470,8 +470,8 @@ terraform {
 - **backend**
   - key
     - S3 bucket의 위치/파일명을 설정
-      - test-terraform-state-backend-yg/sg/terraform.tfstate 
-        -``` "test-terraform-state-backend-yg"``` S3 bucket의 **```"sg"```** 폴더에 ```"terraform.tfstate"``` 파일 저장
+      - test-terraform-state-backend-msc/sg/terraform.tfstate 
+        -``` "test-terraform-state-backend-msc"``` S3 bucket의 **```"sg"```** 폴더에 ```"terraform.tfstate"``` 파일 저장
 
 > 참고용 URL
 > - https://www.terraform.io/language/state/remote-state-data
@@ -486,7 +486,7 @@ terraform {
 data "terraform_remote_state" "vpc" {
   backend = "s3"                                  # backend type
   config = {
-    bucket = "test-terraform-state-backend-yg"    # 어떤 bucket 에서
+    bucket = "test-terraform-state-backend-msc"    # 어떤 bucket 에서
     key    = "vpc/terraform.tfstate"              # 어디 위치의 폴더에 있는 어던 파일
     region = "ap-northeast-2"
   }
@@ -529,7 +529,7 @@ resource "aws_security_group" "bastion_sg" {
     to_port     = 0
     cidr_blocks = ["0.0.0.0/0", "10.50.0.0/16"]
   }
-  tags = { Name = "test-tf-yg-bastion-sg" }
+  tags = { Name = "test-tf-msc-bastion-sg" }
 }
 ...(생략)
 ```
@@ -548,17 +548,6 @@ resource "aws_security_group" "bastion_sg" {
 >  
 >  egress -> outbound
 > ```
-
-**dd**
-**_dd_**
-__gg__ ==kk==
-
-==hh==
-%%ddd%%%
-``` ```
-
-
-
 
 > 참고용 URL 
 > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
@@ -623,7 +612,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "test-terraform-state-backend-yg"
+    bucket         = "test-terraform-state-backend-msc"
     dynamodb_table = "test-terraform-state-locks"
     key            = "ec2/terraform.tfstate"
     region         = "ap-northeast-2"
@@ -634,8 +623,8 @@ terraform {
 - **backend**
   - key
     - S3 bucket의 위치/파일명을 설정
-      - test-terraform-state-backend-yg/sg/terraform.tfstate 
-        - ```"test-terraform-state-backend-yg"``` S3 bucket의 **```"ec2"```** 폴더에 ```"terraform.tfstate" ```파일 저장
+      - test-terraform-state-backend-msc/sg/terraform.tfstate 
+        - ```"test-terraform-state-backend-msc"``` S3 bucket의 **```"ec2"```** 폴더에 ```"terraform.tfstate" ```파일 저장
 
 > 참고용 URL
 > - https://www.terraform.io/language/state/remote-state-data
@@ -651,7 +640,7 @@ terraform {
 data "terraform_remote_state" "vpc" {
   backend = "s3"
   config = {
-    bucket = "test-terraform-state-backend-yg"
+    bucket = "test-terraform-state-backend-msc"
     key    = "vpc/terraform.tfstate"
     region = "ap-northeast-2"
   }
@@ -661,7 +650,7 @@ data "terraform_remote_state" "vpc" {
 data "terraform_remote_state" "sg" {
   backend = "s3"
   config = {
-    bucket = "test-terraform-state-backend-yg"
+    bucket = "test-terraform-state-backend-msc"
     key    = "sg/terraform.tfstate"
     region = "ap-northeast-2"
   }
@@ -790,7 +779,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "test-terraform-state-backend-yg"
+    bucket         = "test-terraform-state-backend-msc"
     dynamodb_table = "test-terraform-state-locks"
     key            = "alb/terraform.tfstate"
     region         = "ap-northeast-2"
@@ -801,8 +790,8 @@ terraform {
 - **backend**
   - key
     - S3 bucket의 위치/파일명을 설정
-      - test-terraform-state-backend-yg/sg/terraform.tfstate 
-        - ```"test-terraform-state-backend-yg"``` S3 bucket의 **```"alb"```** 폴더에 ```"terraform.tfstate"```파일 저장
+      - test-terraform-state-backend-msc/sg/terraform.tfstate 
+        - ```"test-terraform-state-backend-msc"``` S3 bucket의 **```"alb"```** 폴더에 ```"terraform.tfstate"```파일 저장
 
 
 > 참고용 URL
@@ -819,7 +808,7 @@ terraform {
 data "terraform_remote_state" "vpc" {
   backend = "s3"
   config = {
-    bucket = "test-terraform-state-backend-yg"
+    bucket = "test-terraform-state-backend-msc"
     key    = "vpc/terraform.tfstate"
     region = "ap-northeast-2"
   }
@@ -828,7 +817,7 @@ data "terraform_remote_state" "vpc" {
 data "terraform_remote_state" "sg" {
   backend = "s3"
   config = {
-    bucket = "test-terraform-state-backend-yg"
+    bucket = "test-terraform-state-backend-msc"
     key    = "sg/terraform.tfstate"
     region = "ap-northeast-2"
   }
@@ -837,7 +826,7 @@ data "terraform_remote_state" "sg" {
 data "terraform_remote_state" "ec2" {
   backend = "s3"
   config = {
-    bucket = "test-terraform-state-backend-yg"
+    bucket = "test-terraform-state-backend-msc"
     key    = "ec2/terraform.tfstate"
     region = "ap-northeast-2"
   }
@@ -972,7 +961,7 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         = "test-terraform-state-backend-yg"
+    bucket         = "test-terraform-state-backend-msc"
     dynamodb_table = "test-terraform-state-locks"
     key            = "rds/terraform.tfstate"
     region         = "ap-northeast-2"
@@ -983,8 +972,8 @@ terraform {
 - **backend**
   - key
     - S3 bucket의 위치/파일명을 설정
-      - test-terraform-state-backend-yg/sg/terraform.tfstate 
-        - ```"test-terraform-state-backend-yg"``` S3 bucket의 **```"rds"```** 폴더에 ```"terraform.tfstate"```파일 저장
+      - test-terraform-state-backend-msc/sg/terraform.tfstate 
+        - ```"test-terraform-state-backend-msc"``` S3 bucket의 **```"rds"```** 폴더에 ```"terraform.tfstate"```파일 저장
 
 
 > 참고용 URL
@@ -1001,7 +990,7 @@ terraform {
 data "terraform_remote_state" "vpc" {
   backend = "s3"
   config = {
-    bucket = "test-terraform-state-backend-yg"
+    bucket = "test-terraform-state-backend-msc"
     key    = "vpc/terraform.tfstate"
     region = "ap-northeast-2"
   }
@@ -1010,7 +999,7 @@ data "terraform_remote_state" "vpc" {
 data "terraform_remote_state" "sg" {
   backend = "s3"
   config = {
-    bucket = "test-terraform-state-backend-yg"
+    bucket = "test-terraform-state-backend-msc"
     key    = "sg/terraform.tfstate"
     region = "ap-northeast-2"
   }

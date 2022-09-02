@@ -2,14 +2,14 @@
 #            S3 Bucket 생성
 # ++++++++++++++++++++++++++++++++++++++
 resource "aws_s3_bucket" "this" {
-  bucket = "test-terraform-state-backend-yg"
+  bucket = "test-terraform-state-backend-msc"
 
   # Terraform destroy시 에러 및 삭제 불가
   # lifecycle {
   #   prevent_destroy = true
   # }
 
-  tags = {Name = "test-terraform-state-backend-yg"}
+  tags = {Name = "test-terraform-state-backend-msc"}
 }
 
 resource "aws_s3_bucket_versioning" "this" {

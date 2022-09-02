@@ -187,8 +187,8 @@ provider "aws" {
 ### state-backend.tf
 ```hcl
 resource "aws_s3_bucket" "this" {
-  bucket = "test-terraform-state-backend-yg"
-  tags = {Name = "test-terraform-state-backend-yg"}
+  bucket = "test-terraform-state-backend-msc"
+  tags = {Name = "test-terraform-state-backend-msc"}
 }
 
 resource "aws_s3_bucket_versioning" "this" {
@@ -316,7 +316,7 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "test-terraform-state-backend-yg"  # 어떠한 S3 bucket
+    bucket         = "test-terraform-state-backend-msc"  # 어떠한 S3 bucket
     dynamodb_table = "test-terraform-state-locks"       # 어떠한 Dynamo DB table
     key            = "vpc/terraform.tfstate"            # 어디 S3 위치의 파일
     region         = "ap-northeast-2"                   # 어디 Region(지역)
@@ -644,7 +644,7 @@ terraform {
   }
  
   backend "s3" {
-    bucket         = "test-terraform-state-backend-yg"
+    bucket         = "test-terraform-state-backend-msc"
     dynamodb_table = "test-terraform-state-locks"
     key            = "sg/terraform.tfstate"
     region         = "ap-northeast-2"
@@ -655,8 +655,8 @@ terraform {
 - **backend**
   - key
     - S3 bucket의 위치/파일명을 설정
-      - test-terraform-state-backend-yg/sg/terraform.tfstate 
-        - "test-terraform-state-backend-yg" S3 bucket의 "sg" 폴더에 "terraform.tfstate" 파일 저장
+      - test-terraform-state-backend-msc/sg/terraform.tfstate 
+        - "test-terraform-state-backend-msc" S3 bucket의 "sg" 폴더에 "terraform.tfstate" 파일 저장
 
 > 참고용 URL
 - https://www.terraform.io/language/state/remote-state-data
@@ -670,7 +670,7 @@ terraform {
 data "terraform_remote_state" "vpc" {
   backend = "s3"
   config = {
-    bucket = "test-terraform-state-backend-yg"
+    bucket = "test-terraform-state-backend-msc"
     key    = "vpc/terraform.tfstate"
     region = "ap-northeast-2"
   }
@@ -707,7 +707,7 @@ resource "aws_security_group" "bastion_sg" {
     to_port     = 0
     cidr_blocks = ["0.0.0.0/0", "10.50.0.0/16"]
   }
-  tags = { Name = "test-tf-yg-bastion-sg" }
+  tags = { Name = "test-tf-msc-bastion-sg" }
 }
 ```
 + **resource "aws_security_group" "bastion_sg" {...} 블럭 생성 진행**

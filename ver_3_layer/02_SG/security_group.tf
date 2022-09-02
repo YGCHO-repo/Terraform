@@ -31,7 +31,7 @@ resource "aws_security_group" "bastion_sg" {
     # cidr_blocks = ["10.50.0.0/16"]
 
   }
-  tags = { Name = "test-tf-yg-bastion-sg" }
+  tags = { Name = "test-tf-msc-bastion-sg" }
 }
 
 # WEB SVR SG
@@ -57,7 +57,7 @@ resource "aws_security_group" "web_sg" {
     cidr_blocks = ["10.50.0.0/16"]
 
   }
-  tags = { Name = "test-tf-yg-web-sg" }
+  tags = { Name = "test-tf-msc-web-sg" }
 }
 
 # WAS SVR SG
@@ -83,7 +83,7 @@ resource "aws_security_group" "was_sg" {
     cidr_blocks = ["10.50.0.0/16"]
 
   }
-  tags = { Name = "test-tf-yg-was-sg" }
+  tags = { Name = "test-tf-msc-was-sg" }
 }
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -112,7 +112,7 @@ resource "aws_security_group" "rds_sg" {
     cidr_blocks = ["10.50.0.0/16"]
     # cidr_blocks = ["${aws_security_group.was_sg.id}"]
   }
-  tags = { Name = "test-tf-yg-rds-sg" }
+  tags = { Name = "test-tf-msc-rds-sg" }
 }
 
 
@@ -143,7 +143,7 @@ resource "aws_security_group" "front_alb_sg" {
     cidr_blocks = ["10.50.0.0/16"]
 
   }
-  tags = { Name = "test-tf-yg-front-alb-sg" }
+  tags = { Name = "test-tf-msc-front-alb-sg" }
 }
 
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -171,5 +171,5 @@ resource "aws_security_group" "backend_alb_sg" {
     cidr_blocks = ["10.50.0.0/16"]
 
   }
-  tags = { Name = "test-tf-yg-backend-alb-sg" }
+  tags = { Name = "test-tf-msc-backend-alb-sg" }
 }
