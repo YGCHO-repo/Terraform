@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>README</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet"
+    href="file:////Users/ygcho/.vscode/extensions/shd101wyy.markdown-preview-enhanced-0.6.3/node_modules/@shd101wyy/mume/dependencies/katex/katex.min.css">
+
+
+
+
+
+
+
+
+
+  <style>
+    /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+    code[class*="language-"],
+    pre[class*="language-"] {
+      color: #333;
+      background: none;
+      font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+      text-align: left;
+      white-space: pre;
+      word-spacing: normal;
+      word-break: normal;
+      word-wrap: normal;
+      line-height: 1.4;
+
+      -moz-tab-size: 8;
+      -o-tab-size: 8;
+      tab-size: 8;
+
+      -webkit-hyphens: none;
+      -moz-hyphens: none;
+      -ms-hyphens: none;
+      hyphens: none;
+    }
+
+    /* Code blocks */
+    pre[class*="language-"] {
+      padding: .8em;
+      overflow: auto;
+      /* border: 1px solid #ddd; */
+      border-radius: 3px;
+      /* background: #fff; */
+      background: #f5f5f5;
+    }
+
+    /* Inline code */
+    :not(pre)>code[class*="language-"] {
+      padding: .1em;
+      border-radius: .3em;
+      white-space: normal;
+      background: #f5f5f5;
+    }
+
+    .token.comment,
+    .token.blockquote {
+      color: #969896;
+    }
+
+    .token.cdata {
+      color: #183691;
+    }
+
+    .token.doctype,
+    .token.punctuation,
+    .token.variable,
+    .token.macro.property {
+      color: #333;
+    }
+
+    .token.operator,
+    .token.important,
+    .token.keyword,
+    .token.rule,
+    .token.builtin {
+      color: #a71d5d;
+    }
+
+    .token.string,
+    .token.url,
+    .token.regex,
+    .token.attr-value {
+      color: #183691;
+    }
+
+    .token.property,
+    .token.number,
+    .token.boolean,
+    .token.entity,
+    .token.atrule,
+    .token.constant,
+    .token.symbol,
+    .token.command,
+    .token.code {
+      color: #0086b3;
+    }
+
+    .token.tag,
+    .token.selector,
+    .token.prolog {
+      color: #63a35c;
+    }
+
+    .token.function,
+    .token.namespace,
+    .token.pseudo-element,
+    .token.class,
+    .token.class-name,
+    .token.pseudo-class,
+    .token.id,
+    .token.url-reference .token.variable,
+    .token.attr-name {
+      color: #795da3;
+    }
+
+    .token.entity {
+      cursor: help;
+    }
+
+    .token.title,
+    .token.title .token.punctuation {
+      font-weight: bold;
+      color: #1d3e81;
+    }
+
+    .token.list {
+      color: #ed6a43;
+    }
+
+    .token.inserted {
+      background-color: #eaffea;
+      color: #55a532;
+    }
+
+    .token.deleted {
+      background-color: #ffecec;
+      color: #bd2c00;
+    }
+
+    .token.bold {
+      font-weight: bold;
+    }
+
+    .token.italic {
+      font-style: italic;
+    }
+
+
+    /* JSON */
+    .language-json .token.property {
+      color: #183691;
+    }
+
+    .language-markup .token.tag .token.punctuation {
+      color: #333;
+    }
+
+    /* CSS */
+    code.language-css,
+    .language-css .token.function {
+      color: #0086b3;
+    }
+
+    /* YAML */
+    .language-yaml .token.atrule {
+      color: #63a35c;
+    }
+
+    code.language-yaml {
+      color: #183691;
+    }
+
+    /* Ruby */
+    .language-ruby .token.function {
+      color: #333;
+    }
+
+    /* Markdown */
+    .language-markdown .token.url {
+      color: #795da3;
+    }
+
+    /* Makefile */
+    .language-makefile .token.symbol {
+      color: #795da3;
+    }
+
+    .language-makefile .token.variable {
+      color: #183691;
+    }
+
+    .language-makefile .token.builtin {
+      color: #0086b3;
+    }
+
+    /* Bash */
+    .language-bash .token.keyword {
+      color: #0086b3;
+    }
+
+    /* highlight */
+    pre[data-line] {
+      position: relative;
+      padding: 1em 0 1em 3em;
+    }
+
+    pre[data-line] .line-highlight-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: transparent;
+      display: block;
+      width: 100%;
+    }
+
+    pre[data-line] .line-highlight {
+      position: absolute;
+      left: 0;
+      right: 0;
+      padding: inherit 0;
+      margin-top: 1em;
+      background: hsla(24, 20%, 50%, .08);
+      background: linear-gradient(to right, hsla(24, 20%, 50%, .1) 70%, hsla(24, 20%, 50%, 0));
+      pointer-events: none;
+      line-height: inherit;
+      white-space: pre;
+    }
+
+    pre[data-line] .line-highlight:before,
+    pre[data-line] .line-highlight[data-end]:after {
+      content: attr(data-start);
+      position: absolute;
+      top: .4em;
+      left: .6em;
+      min-width: 1em;
+      padding: 0 .5em;
+      background-color: hsla(24, 20%, 50%, .4);
+      color: hsl(24, 20%, 95%);
+      font: bold 65%/1.5 sans-serif;
+      text-align: center;
+      vertical-align: .3em;
+      border-radius: 999px;
+      text-shadow: none;
+      box-shadow: 0 1px white;
+    }
+
+    pre[data-line] .line-highlight[data-end]:after {
+      content: attr(data-end);
+      top: auto;
+      bottom: .4em;
+    }
+
+    html body {
+      font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+      overflow: initial;
+      box-sizing: border-box;
+      word-wrap: break-word
+    }
+
+    html body>:first-child {
+      margin-top: 0
+    }
+
+    html body h1,
+    html body h2,
+    html body h3,
+    html body h4,
+    html body h5,
+    html body h6 {
+      line-height: 1.2;
+      margin-top: 1em;
+      margin-bottom: 16px;
+      color: #000
+    }
+
+    html body h1 {
+      font-size: 2.25em;
+      font-weight: 300;
+      padding-bottom: .3em
+    }
+
+    html body h2 {
+      font-size: 1.75em;
+      font-weight: 400;
+      padding-bottom: .3em
+    }
+
+    html body h3 {
+      font-size: 1.5em;
+      font-weight: 500
+    }
+
+    html body h4 {
+      font-size: 1.25em;
+      font-weight: 600
+    }
+
+    html body h5 {
+      font-size: 1.1em;
+      font-weight: 600
+    }
+
+    html body h6 {
+      font-size: 1em;
+      font-weight: 600
+    }
+
+    html body h1,
+    html body h2,
+    html body h3,
+    html body h4,
+    html body h5 {
+      font-weight: 600
+    }
+
+    html body h5 {
+      font-size: 1em
+    }
+
+    html body h6 {
+      color: #5c5c5c
+    }
+
+    html body strong {
+      color: #000
+    }
+
+    html body del {
+      color: #5c5c5c
+    }
+
+    html body a:not([href]) {
+      color: inherit;
+      text-decoration: none
+    }
+
+    html body a {
+      color: #08c;
+      text-decoration: none
+    }
+
+    html body a:hover {
+      color: #00a3f5;
+      text-decoration: none
+    }
+
+    html body img {
+      max-width: 100%
+    }
+
+    html body>p {
+      margin-top: 0;
+      margin-bottom: 16px;
+      word-wrap: break-word
+    }
+
+    html body>ul,
+    html body>ol {
+      margin-bottom: 16px
+    }
+
+    html body ul,
+    html body ol {
+      padding-left: 2em
+    }
+
+    html body ul.no-list,
+    html body ol.no-list {
+      padding: 0;
+      list-style-type: none
+    }
+
+    html body ul ul,
+    html body ul ol,
+    html body ol ol,
+    html body ol ul {
+      margin-top: 0;
+      margin-bottom: 0
+    }
+
+    html body li {
+      margin-bottom: 0
+    }
+
+    html body li.task-list-item {
+      list-style: none
+    }
+
+    html body li>p {
+      margin-top: 0;
+      margin-bottom: 0
+    }
+
+    html body .task-list-item-checkbox {
+      margin: 0 .2em .25em -1.8em;
+      vertical-align: middle
+    }
+
+    html body .task-list-item-checkbox:hover {
+      cursor: pointer
+    }
+
+    html body blockquote {
+      margin: 16px 0;
+      font-size: inherit;
+      padding: 0 15px;
+      color: #5c5c5c;
+      background-color: #f0f0f0;
+      border-left: 4px solid #d6d6d6
+    }
+
+    html body blockquote>:first-child {
+      margin-top: 0
+    }
+
+    html body blockquote>:last-child {
+      margin-bottom: 0
+    }
+
+    html body hr {
+      height: 4px;
+      margin: 32px 0;
+      background-color: #d6d6d6;
+      border: 0 none
+    }
+
+    html body table {
+      margin: 10px 0 15px 0;
+      border-collapse: collapse;
+      border-spacing: 0;
+      display: block;
+      width: 100%;
+      overflow: auto;
+      word-break: normal;
+      word-break: keep-all
+    }
+
+    html body table th {
+      font-weight: bold;
+      color: #000
+    }
+
+    html body table td,
+    html body table th {
+      border: 1px solid #d6d6d6;
+      padding: 6px 13px
+    }
+
+    html body dl {
+      padding: 0
+    }
+
+    html body dl dt {
+      padding: 0;
+      margin-top: 16px;
+      font-size: 1em;
+      font-style: italic;
+      font-weight: bold
+    }
+
+    html body dl dd {
+      padding: 0 16px;
+      margin-bottom: 16px
+    }
+
+    html body code {
+      font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+      font-size: .85em !important;
+      color: #000;
+      background-color: #f0f0f0;
+      border-radius: 3px;
+      padding: .2em 0
+    }
+
+    html body code::before,
+    html body code::after {
+      letter-spacing: -0.2em;
+      content: "\00a0"
+    }
+
+    html body pre>code {
+      padding: 0;
+      margin: 0;
+      font-size: .85em !important;
+      word-break: normal;
+      white-space: pre;
+      background: transparent;
+      border: 0
+    }
+
+    html body .highlight {
+      margin-bottom: 16px
+    }
+
+    html body .highlight pre,
+    html body pre {
+      padding: 1em;
+      overflow: auto;
+      font-size: .85em !important;
+      line-height: 1.45;
+      border: #d6d6d6;
+      border-radius: 3px
+    }
+
+    html body .highlight pre {
+      margin-bottom: 0;
+      word-break: normal
+    }
+
+    html body pre code,
+    html body pre tt {
+      display: inline;
+      max-width: initial;
+      padding: 0;
+      margin: 0;
+      overflow: initial;
+      line-height: inherit;
+      word-wrap: normal;
+      background-color: transparent;
+      border: 0
+    }
+
+    html body pre code:before,
+    html body pre tt:before,
+    html body pre code:after,
+    html body pre tt:after {
+      content: normal
+    }
+
+    html body p,
+    html body blockquote,
+    html body ul,
+    html body ol,
+    html body dl,
+    html body pre {
+      margin-top: 0;
+      margin-bottom: 16px
+    }
+
+    html body kbd {
+      color: #000;
+      border: 1px solid #d6d6d6;
+      border-bottom: 2px solid #c7c7c7;
+      padding: 2px 4px;
+      background-color: #f0f0f0;
+      border-radius: 3px
+    }
+
+    @media print {
+      html body {
+        background-color: #fff
+      }
+
+      html body h1,
+      html body h2,
+      html body h3,
+      html body h4,
+      html body h5,
+      html body h6 {
+        color: #000;
+        page-break-after: avoid
+      }
+
+      html body blockquote {
+        color: #5c5c5c
+      }
+
+      html body pre {
+        page-break-inside: avoid
+      }
+
+      html body table {
+        display: table
+      }
+
+      html body img {
+        display: block;
+        max-width: 100%;
+        max-height: 100%
+      }
+
+      html body pre,
+      html body code {
+        word-wrap: break-word;
+        white-space: pre
+      }
+    }
+
+    .markdown-preview {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box
+    }
+
+    .markdown-preview .pagebreak,
+    .markdown-preview .newpage {
+      page-break-before: always
+    }
+
+    .markdown-preview pre.line-numbers {
+      position: relative;
+      padding-left: 3.8em;
+      counter-reset: linenumber
+    }
+
+    .markdown-preview pre.line-numbers>code {
+      position: relative
+    }
+
+    .markdown-preview pre.line-numbers .line-numbers-rows {
+      position: absolute;
+      pointer-events: none;
+      top: 1em;
+      font-size: 100%;
+      left: 0;
+      width: 3em;
+      letter-spacing: -1px;
+      border-right: 1px solid #999;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none
+    }
+
+    .markdown-preview pre.line-numbers .line-numbers-rows>span {
+      pointer-events: none;
+      display: block;
+      counter-increment: linenumber
+    }
+
+    .markdown-preview pre.line-numbers .line-numbers-rows>span:before {
+      content: counter(linenumber);
+      color: #999;
+      display: block;
+      padding-right: .8em;
+      text-align: right
+    }
+
+    .markdown-preview .mathjax-exps .MathJax_Display {
+      text-align: center !important
+    }
+
+    .markdown-preview:not([for="preview"]) .code-chunk .btn-group {
+      display: none
+    }
+
+    .markdown-preview:not([for="preview"]) .code-chunk .status {
+      display: none
+    }
+
+    .markdown-preview:not([for="preview"]) .code-chunk .output-div {
+      margin-bottom: 16px
+    }
+
+    .scrollbar-style::-webkit-scrollbar {
+      width: 8px
+    }
+
+    .scrollbar-style::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background-color: transparent
+    }
+
+    .scrollbar-style::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      background-color: rgba(150, 150, 150, 0.66);
+      border: 4px solid rgba(150, 150, 150, 0.66);
+      background-clip: content-box
+    }
+
+    html body[for="html-export"]:not([data-presentation-mode]) {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      margin: 0;
+      padding: 0;
+      overflow: auto
+    }
+
+    html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview {
+      position: relative;
+      top: 0
+    }
+
+    @media screen and (min-width:914px) {
+      html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview {
+        padding: 2em calc(50% - 457px + 2em)
+      }
+    }
+
+    @media screen and (max-width:914px) {
+      html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview {
+        padding: 2em
+      }
+    }
+
+    @media screen and (max-width:450px) {
+      html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview {
+        font-size: 14px !important;
+        padding: 1em
+      }
+    }
+
+    @media print {
+      html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn {
+        display: none
+      }
+    }
+
+    html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn {
+      position: fixed;
+      bottom: 8px;
+      left: 8px;
+      font-size: 28px;
+      cursor: pointer;
+      color: inherit;
+      z-index: 99;
+      width: 32px;
+      text-align: center;
+      opacity: .4
+    }
+
+    html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn {
+      opacity: 1
+    }
+
+    html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 100%;
+      padding: 32px 0 48px 0;
+      font-size: 14px;
+      box-shadow: 0 0 4px rgba(150, 150, 150, 0.33);
+      box-sizing: border-box;
+      overflow: auto;
+      background-color: inherit
+    }
+
+    html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar {
+      width: 8px
+    }
+
+    html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background-color: transparent
+    }
+
+    html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      background-color: rgba(150, 150, 150, 0.66);
+      border: 4px solid rgba(150, 150, 150, 0.66);
+      background-clip: content-box
+    }
+
+    html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a {
+      text-decoration: none
+    }
+
+    html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul {
+      padding: 0 1.6em;
+      margin-top: .8em
+    }
+
+    html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li {
+      margin-bottom: .8em
+    }
+
+    html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul {
+      list-style-type: none
+    }
+
+    html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview {
+      left: 300px;
+      width: calc(100% - 300px);
+      padding: 2em calc(50% - 457px - 150px);
+      margin: 0;
+      box-sizing: border-box
+    }
+
+    @media screen and (max-width:1274px) {
+      html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview {
+        padding: 2em
+      }
+    }
+
+    @media screen and (max-width:450px) {
+      html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview {
+        width: 100%
+      }
+    }
+
+    html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview {
+      left: 50%;
+      transform: translateX(-50%)
+    }
+
+    html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc {
+      display: none
+    }
+
+    /* Please visit the URL below for more information: */
+    /*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+  </style>
+</head>
+
+<body for="html-export">
+  <div class="mume markdown-preview  ">
+    <h1 class="mume-header" id="code-guide">Code guide</h1>
+
+    <h2 class="mume-header"
+      id="aws-%EC%84%9C%EB%B9%84%EC%8A%A4-%EB%8B%A8%EC%9C%84-%ED%8F%B4%EB%8D%94-%EA%B5%AC%EC%84%B1-%EB%B0%8F-%EB%B3%80%EC%88%98%ED%95%A8%EC%88%98-%EC%82%AC%EC%9A%A9">
+      AWS &#xC11C;&#xBE44;&#xC2A4; &#xB2E8;&#xC704; &#xD3F4;&#xB354; &#xAD6C;&#xC131; &#xBC0F;
+      &#xBCC0;&#xC218;/&#xD568;&#xC218; &#xC0AC;&#xC6A9;</h2>
+
+    <hr>
+    <h3 class="mume-header" id="%ED%8F%B4%EB%8D%94-%EB%B0%8F-%ED%8C%8C%EC%9D%BC-%EA%B5%AC%EC%84%B1">&#xD3F4;&#xB354;
+      &#xBC0F; &#xD30C;&#xC77C; &#xAD6C;&#xC131;</h3>
+
+    <pre data-role="codeBlock" data-info class="language-"><code>.
+&#x251C;&#x2500;&#x2500; 00_S3
+&#x2502;   &#x251C;&#x2500;&#x2500; main.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; outputs.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; provider.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; state-backend.tf
+&#x2502;   &#x2514;&#x2500;&#x2500; variables.tf
+&#x2502;
+&#x251C;&#x2500;&#x2500; 01_VPC
+&#x2502;   &#x251C;&#x2500;&#x2500; internat_gateway.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; main.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; nat_gateways.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; output.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; provider.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; route_tables.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; route_tables_rule.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; subnets.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; variable.tf
+&#x2502;   &#x2514;&#x2500;&#x2500; vpc.tf
+&#x2502;
+&#x251C;&#x2500;&#x2500; 02_SG
+&#x2502;   &#x251C;&#x2500;&#x2500; data.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; main.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; output.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; provider.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; security_group.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; security_group_rule.tf
+&#x2502;   &#x2514;&#x2500;&#x2500; variables.tf
+&#x2502;
+&#x251C;&#x2500;&#x2500; 03_EC2_bastion
+&#x2502;   &#x251C;&#x2500;&#x2500; data.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; ec2.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; main.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; output.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; planfile
+&#x2502;   &#x251C;&#x2500;&#x2500; provider.tf
+&#x2502;   &#x2514;&#x2500;&#x2500; variable.tf
+&#x2502;
+&#x251C;&#x2500;&#x2500; 04_EC2_service
+&#x2502;   &#x251C;&#x2500;&#x2500; data.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; ec2.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; main.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; output.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; planfile
+&#x2502;   &#x251C;&#x2500;&#x2500; provider.tf
+&#x2502;   &#x2514;&#x2500;&#x2500; variable.tf
+&#x2502;
+&#x251C;&#x2500;&#x2500; 05_ALB
+&#x2502;   &#x251C;&#x2500;&#x2500; data.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; elb_alb.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; elb_alb_listener.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; elb_alb_listener_rule.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; elb_alb_tg.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; main.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; output.tf
+&#x2502;   &#x251C;&#x2500;&#x2500; planfile
+&#x2502;   &#x251C;&#x2500;&#x2500; provider.tf
+&#x2502;   &#x2514;&#x2500;&#x2500; variable.tf
+&#x2502;
+&#x2514;&#x2500;&#x2500; 06_RDS
+    &#x251C;&#x2500;&#x2500; data.tf
+    &#x251C;&#x2500;&#x2500; main.tf
+    &#x251C;&#x2500;&#x2500; output.tf
+    &#x251C;&#x2500;&#x2500; parameter_group.tf
+    &#x251C;&#x2500;&#x2500; provider.tf
+    &#x251C;&#x2500;&#x2500; rds_aurora.tf
+    &#x251C;&#x2500;&#x2500; subnet_group.tf
+    &#x2514;&#x2500;&#x2500; variable.tf
+</code></pre>
+    <blockquote>
+      <p><strong>&#xD5A5;&#xD6C4; &#xC0DD;&#xC131; &#xCD94;&#xAC00; &#xB418;&#xB294; &#xD30C;&#xC77C;</strong></p>
+      <ul>
+        <li>terraform init &#xBA85;&#xB839;&#xC5B4; &#xC801;&#xC6A9;&#xC2DC; &#xC0DD;&#xC131; &#xD30C;&#xC77C;
+          <ul>
+            <li>&#xAC01;&#xAC01; &#xD3F4;&#xB354;&#xBCC4; Terraform &#xC2E4;&#xD589;&#xC740;
+              &#xAC00;&#xB2A5;&#xD558;&#xB098;, &#xAC01; &#xD3F4;&#xB354;&#xB2F9; .terraform &#xD3F4;&#xB354;&#xAC00;
+              &#xC0DD;&#xC131;&#xB418;&#xC5B4; &#xC6A9;&#xB7C9; &#xC99D;&#xAC00;</li>
+          </ul>
+        </li>
+      </ul>
+      <pre data-role="codeBlock" data-info class="language-"><code>&#x251C;&#x2500;&#x2500; .terraform
+&#x2502;&#xA0;&#xA0; &#x2514;&#x2500;&#x2500; providers
+&#x2502;&#xA0;&#xA0;
+&#x2514;&#x2500;&#x2500; .terraform.lock.hcl
+</code></pre>
+      <ul>
+        <li>terraform plan &#xBA85;&#xB839;&#xC5B4; &#xC801;&#xC6A9;&#xC2DC; &#xC0DD;&#xC131; &#xD30C;&#xC77C;</li>
+      </ul>
+      <pre data-role="codeBlock" data-info class="language-"><code>&#x2502;&#xA0;&#xA0;
+&#x2514;&#x2500;&#x2500; planfile
+</code></pre>
+      <ul>
+        <li>terraform apply &#xBA85;&#xB839;&#xC5B4; &#xC801;&#xC6A9;&#xC2DC;
+          <ul>
+            <li>S3 &#xC0DD;&#xC131;&#xC2DC; local&#xC5D0; &#xC0DD;&#xC131;</li>
+            <li>S3 &#xC81C;&#xC678; &#xB2E4;&#xB978; &#xD3F4;&#xB354;&#xC5D0; &#xC788;&#xB294;
+              &#xB9AC;&#xC18C;&#xC2A4;&#xB294; &#xC6D0;&#xACA9;&#xC5D0; &#xC0DD;&#xC131; (AWS S3 bucket)</li>
+          </ul>
+        </li>
+      </ul>
+      <pre data-role="codeBlock" data-info class="language-"><code>&#x251C;&#x2500;&#x2500; terraform.tfstate
+&#x2514;&#x2500;&#x2500; terraform.tfstate.backup 
+
+(apply 2&#xD68C; &#xC801;&#xC6A9;&#xC2DC; &#xC0DD;&#xC131;)      
+</code></pre>
+    </blockquote>
+    <hr>
+    <h3 class="mume-header" id="%EC%B0%B8%EA%B3%A0-%EC%82%AC%ED%95%AD">&#xCC38;&#xACE0; &#xC0AC;&#xD56D;</h3>
+
+    <pre data-role="codeBlock" data-info class="language-"><code>S3 &#xC0DD;&#xC131;&#xC740; local backend
+- terraform.tfstate (local&#xC5D0; &#xC0DD;&#xC131;)
+
+VPC/EC2/SG/RDS&#xB294; remote backend
+- terraform.tfstate (AWS S3&#xC5D0; &#xC0DD;&#xC131;)
+</code></pre>
+    <hr>
+    <h3 class="mume-header" id="%ED%85%8C%EB%9D%BC%ED%8F%BC-%EB%AA%85%EB%A0%B9%EC%96%B4">&#xD14C;&#xB77C;&#xD3FC;
+      &#xBA85;&#xB839;&#xC5B4;</h3>
+
+    <pre data-role="codeBlock" data-info class="language-"><code>&#xC2E4;&#xD589;
+$ terraform init 
+
+&#xACC4;&#xD68D;
+$ terraform plan -refresh=false -out=planfile
+
+&#xC801;&#xC6A9;
+$ terraform apply planfile
+</code></pre>
+    <pre data-role="codeBlock" data-info class="language-"><code>&#xC801;&#xC6A9; &#xC644;&#xB8CC;&#xC2DC; &#xC124;&#xC815;&#xAC12; &#xD655;&#xC778; (*.tfstate &#xD30C;&#xC77C;)
+$ terraform refresh
+$ terraform show
+</code></pre>
+    <hr>
+    <h3 class="mume-header" id="%EC%82%AC%EC%9A%A9%EB%90%9C-%EB%A6%AC%EC%86%8C%EC%8A%A4-%EB%B8%94%EB%9F%AD">
+      &#xC0AC;&#xC6A9;&#xB41C; &#xB9AC;&#xC18C;&#xC2A4; &#xBE14;&#xB7ED;</h3>
+
+    <pre data-role="codeBlock" data-info class="language-"><code>1. terraform    block
+2. provider     block
+3. resource     block
+4. output       block
+5. data         block
+6. variable     block
+7. function     
+</code></pre>
+    <blockquote>
+      <p>&#xCC38;&#xACE0;&#xC6A9; URL</p>
+      <ul>
+        <li><a href="https://www.terraform.io/intro">https://www.terraform.io/intro</a></li>
+        <li><a href="https://www.terraform.io/language">https://www.terraform.io/language</a></li>
+        <li><a
+            href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs">https://registry.terraform.io/providers/hashicorp/aws/latest/docs</a>
+        </li>
+      </ul>
+    </blockquote>
+    <hr>
+    <h1 class="mume-header" id="s3-folder">S3 Folder</h1>
+
+    <blockquote>
+      <p>&#xD3F4;&#xB354; &#xD56D;&#xBAA9;</p>
+      <pre data-role="codeBlock" data-info class="language-"><code>00_S3
+&#x251C;&#x2500;&#x2500; main.tf
+&#x251C;&#x2500;&#x2500; outputs.tf
+&#x251C;&#x2500;&#x2500; provider.tf
+&#x251C;&#x2500;&#x2500; state-backend.tf
+&#x2514;&#x2500;&#x2500; variables.tf
+</code></pre>
+    </blockquote>
+    <hr>
+    <blockquote>
+      <p>&#xBA85;&#xB839;&#xC5B4;</p>
+      <pre data-role="codeBlock" data-info class="language-"><code>$ cd 00_S3
+
+$ terraform init 
+$ terraform plan -refresh=false -out=planfile
+$ terraform apply planfile
+</code></pre>
+    </blockquote>
+    <hr>
+    <blockquote>
+      <p><strong>&#xC55E;&#xC11C; &#xC124;&#xBA85; &#xB4DC;&#xB9B0; &#xB0B4;&#xC6A9;&#xC740; &#xBE60;&#xB974;&#xAC8C;
+          Skip &#xC9C4;&#xD589;&#xD558;&#xACE0; &#xCD94;&#xAC00;&#xB41C; &#xB0B4;&#xC6A9; &#xC548;&#xB0B4;
+          &#xB4DC;&#xB9BD;&#xB2C8;&#xB2E4;.</strong></p>
+    </blockquote>
+    <h2 class="mume-header" id="00_s3variabletf">00_S3/variable.tf</h2>
+
+    <pre data-role="codeBlock" data-info="hcl" class="language-hcl"><span class="token keyword keyword-variable&lt;span class=" token type variable"> &quot;region&quot; </span>&quot;&gt;variable<span class="token type variable"> &quot;region&quot; </span><span class="token punctuation">{</span>
+  <span class="token property">description</span> <span class="token punctuation">=</span> <span class="token string">&quot;AWS Region&quot;</span>
+  <span class="token property">type</span>        <span class="token punctuation">=</span> string
+  <span class="token property">default</span>     <span class="token punctuation">=</span> <span class="token string">&quot;ap-northeast-2&quot;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-variable&lt;span class=" token type variable"> &quot;s3_bucket&quot; </span>&quot;&gt;variable<span class="token type variable"> &quot;s3_bucket&quot; </span><span class="token punctuation">{</span>
+  <span class="token property">description</span> <span class="token punctuation">=</span> <span class="token string">&quot;S3 bucket for terraform-state-backend&quot;</span>
+  <span class="token property">type</span>        <span class="token punctuation">=</span> string
+  <span class="token property">default</span>     <span class="token punctuation">=</span> <span class="token string">&quot;test-terraform-state-backend-msc&quot;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-variable&lt;span class=" token type variable"> &quot;s3_acl&quot; </span>&quot;&gt;variable<span class="token type variable"> &quot;s3_acl&quot; </span><span class="token punctuation">{</span>
+  <span class="token property">description</span> <span class="token punctuation">=</span> <span class="token string">&quot;ACL of S3 Bucket&quot;</span>
+  <span class="token property">type</span>        <span class="token punctuation">=</span> string
+  <span class="token property">default</span>     <span class="token punctuation">=</span> <span class="token string">&quot;private&quot;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-variable&lt;span class=" token type variable"> &quot;dynamodb_table&quot; </span>&quot;&gt;variable<span class="token type variable"> &quot;dynamodb_table&quot; </span><span class="token punctuation">{</span>
+  <span class="token property">description</span> <span class="token punctuation">=</span> <span class="token string">&quot;DynamoDB table for terraform-state-backend&quot;</span>
+  <span class="token property">type</span>        <span class="token punctuation">=</span> string
+  <span class="token property">default</span>     <span class="token punctuation">=</span> <span class="token string">&quot;test-terraform-state-locks&quot;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-variable&lt;span class=" token type variable"> &quot;tags&quot; </span>&quot;&gt;variable<span class="token type variable"> &quot;tags&quot; </span><span class="token punctuation">{</span>
+  <span class="token property">description</span> <span class="token punctuation">=</span> <span class="token string">&quot;tag map&quot;</span>
+  <span class="token property">type</span>        <span class="token punctuation">=</span> map(string)
+  <span class="token property">default</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;CreatedByTerraform&quot;</span> <span class="token punctuation">=</span> <span class="token string">&quot;true&quot;</span>
+    <span class="token property">&quot;purpose&quot;</span>            <span class="token punctuation">=</span> <span class="token string">&quot;TerraformTest&quot;</span>
+    <span class="token property">&quot;owner&quot;</span>              <span class="token punctuation">=</span> <span class="token string">&quot;MSC&quot;</span>
+    <span class="token property">&quot;purpose&quot;</span>            <span class="token punctuation">=</span> <span class="token string">&quot;TEST&quot;</span>
+    <span class="token property">&quot;resource&quot;</span>           <span class="token punctuation">=</span> <span class="token string">&quot;backend_S3&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre>
+    <ul>
+      <li>
+        <p><strong>variable &quot;region&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131; &#xC9C4;&#xD589;</strong></p>
+        <ul>
+          <li>description
+            <ul>
+              <li>&#xBCC0;&#xC218;&#xC758; &#xBAA9;&#xC801;&#xC744; &#xAC04;&#xB2E8;&#xD558;&#xAC8C; &#xC791;&#xC131;
+              </li>
+            </ul>
+          </li>
+          <li>type
+            <ul>
+              <li>&#xBCC0;&#xC218;&#xC758; &#xD0C0;&#xC785;&#xC744; &#xC124;&#xC815;
+                <ul>
+                  <li><strong><code>string</code>, <code>number</code>, <code>bool</code>, <code>list(TYPE)</code>,
+                      <code>map(TYPE)</code></strong> &#xB4F1; &#xC788;&#xC74C;</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>default
+            <ul>
+              <li>&#xD3F4;&#xB354; &#xB0B4;&#xBD80;&#xC5D0;&#xC11C;
+                **<em><code>&quot; var.region &quot;</code></em>**&#xC744; &#xC124;&#xC815;&#xC2DC;
+                &#xC801;&#xC6A9;&#xB420; &#xB0B4;&#xC6A9;</li>
+              <li><strong><em><code>&quot;ap-northeast-2&quot;</code></em></strong> &#xC124;&#xC815;</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>variable &quot;s3_bucket&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131; &#xC9C4;&#xD589;</strong></p>
+        <ul>
+          <li>default
+            <ul>
+              <li>&#xD3F4;&#xB354; &#xB0B4;&#xBD80;&#xC5D0;&#xC11C;
+                **<em><code>&quot; var.s3_bucket &quot;</code></em>**&#xC744; &#xC124;&#xC815;&#xC2DC;
+                &#xC801;&#xC6A9;&#xB420; &#xB0B4;&#xC6A9;</li>
+              <li><strong><em><code>&quot;test-terraform-state-backend-msc&quot;</code></em></strong> &#xC124;&#xC815;
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>variable &quot;s3_acl&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131; &#xC9C4;&#xD589;</strong></p>
+        <ul>
+          <li>default
+            <ul>
+              <li>&#xD3F4;&#xB354; &#xB0B4;&#xBD80;&#xC5D0;&#xC11C;
+                **<em><code>&quot; var.s3_acl &quot;</code></em>**&#xC744; &#xC124;&#xC815;&#xC2DC;
+                &#xC801;&#xC6A9;&#xB420; &#xB0B4;&#xC6A9;</li>
+              <li><strong><em><code>&quot;private&quot;</code></em></strong> &#xC124;&#xC815;</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>variable &quot;dynamodb_table&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131; &#xC9C4;&#xD589;</strong>
+        </p>
+        <ul>
+          <li>default
+            <ul>
+              <li>&#xD3F4;&#xB354; &#xB0B4;&#xBD80;&#xC5D0;&#xC11C;
+                **<em><code>&quot; var.dynamodb_table &quot;</code></em>**&#xC744; &#xC124;&#xC815;&#xC2DC;
+                &#xC801;&#xC6A9;&#xB420; &#xB0B4;&#xC6A9;</li>
+              <li><strong><em><code>&quot;test-terraform-state-locks&quot;</code></em></strong> &#xC124;&#xC815;</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>variable &quot;tags&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131; &#xC9C4;&#xD589;</strong></p>
+        <ul>
+          <li>type
+            <ul>
+              <li>&#xBCC0;&#xC218;&#xC758; &#xD0C0;&#xC785;&#xC744; &#xC124;&#xC815;
+                <ul>
+                  <li><strong><code>map(string)</code></strong> &#xC124;&#xC815;</li>
+                  <li><strong><code>Key</code> = <code>value</code></strong> &#xC124;&#xC815;</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>default
+            <ul>
+              <li>&#xD3F4;&#xB354; &#xB0B4;&#xBD80;&#xC5D0;&#xC11C;
+                **<em><code>&quot; var.tags &quot;</code></em>**&#xC744; &#xC124;&#xC815;&#xC2DC;
+                &#xC801;&#xC6A9;&#xB420; &#xB0B4;&#xC6A9;</li>
+              <li></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <blockquote>
+      <p>&#xCC38;&#xACE0;&#xC6A9; URL</p>
+      <ul>
+        <li><a
+            href="https://www.terraform.io/language/values/variables">https://www.terraform.io/language/values/variables</a>
+        </li>
+      </ul>
+    </blockquote>
+    <hr>
+    <h2 class="mume-header" id="00_s3providertf">00_S3/provider.tf</h2>
+
+    <pre data-role="codeBlock" data-info="hcl" class="language-hcl"><span class="token keyword keyword-provider&lt;span class=" token type variable"> &quot;aws&quot; </span>&quot;&gt;provider<span class="token type variable"> &quot;aws&quot; </span><span class="token punctuation">{</span>
+  <span class="token property">region</span> <span class="token punctuation">=</span> var.region
+<span class="token punctuation">}</span>
+</pre>
+    <ul>
+      <li><strong>provider &quot;aws&quot; {...} &#xBE14;&#xB7ED; &#xC9C4;&#xD589;</strong>
+        <ul>
+          <li>region
+            <ul>
+              <li>var.region
+                <ul>
+                  <li><strong><code>variable.tf</code></strong> &#xD30C;&#xC77C;&#xC5D0;&#xC11C;
+                    &#xC0DD;&#xC131;&#xD55C; <strong><code>region</code></strong> &#xAC12; &#xCC38;&#xC870;</li>
+                  <li><code>region = var.region</code> <strong>or</strong>
+                    <code>region = &quot;ap-northeast-2&quot;</code> &#xB611;&#xAC19;&#xB2E4;</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <blockquote>
+      <p>&#xCC38;&#xACE0;&#xC6A9; URL</p>
+      <ul>
+        <li><a
+            href="https://www.terraform.io/language/providers/configuration">https://www.terraform.io/language/providers/configuration</a>
+        </li>
+        <li><a
+            href="https://www.terraform.io/language/providers/requirements">https://www.terraform.io/language/providers/requirements</a>
+        </li>
+        <li><a
+            href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs">https://registry.terraform.io/providers/hashicorp/aws/latest/docs</a>
+        </li>
+      </ul>
+    </blockquote>
+    <hr>
+    <h2 class="mume-header" id="00_s3state-backendtf">00_S3/state-backend.tf</h2>
+
+    <pre data-role="codeBlock" data-info="hcl" class="language-hcl"><span class="token keyword keyword-resource &lt;span class=" token type variable">&quot;aws_s3_bucket&quot;</span>&quot;&gt;resource <span class="token type variable">&quot;aws_s3_bucket&quot;</span> <span class="token string">&quot;terraform_state_backend&quot;</span> <span class="token punctuation">{</span>
+  <span class="token property">bucket</span> <span class="token punctuation">=</span> var.s3_bucket
+
+  <span class="token property">tags</span> <span class="token punctuation">=</span> merge(var.tags, tomap(<span class="token punctuation">{</span> <span class="token property">Name</span> <span class="token punctuation">=</span> format(<span class="token string">&quot;%s&quot;</span>, var.s3_bucket) <span class="token punctuation">}</span>))
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword keyword-resource &lt;span class=" token type variable">&quot;aws_s3_bucket_acl&quot;</span>&quot;&gt;resource <span class="token type variable">&quot;aws_s3_bucket_acl&quot;</span> <span class="token string">&quot;this&quot;</span> <span class="token punctuation">{</span>
+  <span class="token property">bucket</span> <span class="token punctuation">=</span> aws_s3_bucket.terraform_state_backend.id
+  
+  <span class="token property">acl</span>    <span class="token punctuation">=</span> var.s3_acl
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword keyword-resource &lt;span class=" token type variable">&quot;aws_dynamodb_table&quot;</span>&quot;&gt;resource <span class="token type variable">&quot;aws_dynamodb_table&quot;</span> <span class="token string">&quot;terraform_state_locks&quot;</span> <span class="token punctuation">{</span>
+  <span class="token property">name</span>         <span class="token punctuation">=</span> var.dynamodb_table
+  
+  <span class="token property">billing_mode</span> <span class="token punctuation">=</span> <span class="token string">&quot;PAY_PER_REQUEST&quot;</span>
+  <span class="token property">hash_key</span>     <span class="token punctuation">=</span> <span class="token string">&quot;LockID&quot;</span>
+
+  <span class="token keyword keyword-attribute">attribute</span> <span class="token punctuation">{</span>
+    <span class="token property">name</span> <span class="token punctuation">=</span> <span class="token string">&quot;LockID&quot;</span>
+    <span class="token property">type</span> <span class="token punctuation">=</span> <span class="token string">&quot;S&quot;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token property">tags</span> <span class="token punctuation">=</span> merge(var.tags, tomap(<span class="token punctuation">{</span> <span class="token property">Name</span> <span class="token punctuation">=</span> format(<span class="token string">&quot;%s&quot;</span>, var.dynamodb_table) <span class="token punctuation">}</span>))
+<span class="token punctuation">}</span>
+</pre>
+    <ul>
+      <li>
+        <p><strong>resource &quot;aws_s3_bucket&quot; &quot;terraform_state_backend&quot; {...} &#xBE14;&#xB7ED;
+            &#xC0DD;&#xC131; &#xC9C4;&#xD589;</strong></p>
+        <ul>
+          <li>bucket
+            <ul>
+              <li>var.s3_bucket
+                <ul>
+                  <li>
+                    <p><strong><code>variable.tf</code></strong> &#xD30C;&#xC77C;&#xC5D0;&#xC11C;
+                      &#xC0DD;&#xC131;&#xD55C; <strong><code>s3_bucket</code></strong> &#xAC12; &#xCC38;&#xC870;</p>
+                    <ul>
+                      <li><code>region = var.s3_bucket</code> <strong>or</strong>
+                        <code>region = &quot;test-terraform-state-backend-msc&quot;</code> &#xB611;&#xAC19;&#xB2E4;</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>tag
+            <ul>
+              <li>merge(var.tags, tomap({ Name = format(&quot;%s&quot;, var.s3_bucket) }))
+                <ul>
+                  <li><strong><code>merge</code></strong> . <strong><code>tomap</code></strong> .
+                    <strong><code>formet</code></strong> &#xD568;&#xC218; &#xC0AC;&#xC6A9;
+                    <ul>
+                      <li><strong><code>variable.tf</code></strong> &#xD30C;&#xC77C;&#xC5D0;&#xC11C;
+                        &#xC0DD;&#xC131;&#xD55C; <strong><code>s3_bucket</code></strong> &amp;
+                        <strong><code>tags</code></strong> &#xAC12; &#xCC38;&#xC870;
+                        <ul>
+                          <li>
+                            <ol>
+                              <li><code>format()</code> &#xD568;&#xC218; &#xC0AC;&#xC6A9; <code>s3_bucket</code>&#xC758;
+                                &#xAC12;&#xC744; <code>&quot;test-terraform-state-backend-msc&quot;</code>&#xB85C;
+                                &#xB9AC;&#xD134;</li>
+                            </ol>
+                          </li>
+                          <li>
+                            <ol start="2">
+                              <li><code>tomap()</code> &#xD568;&#xC218; &#xC0AC;&#xC6A9; <code>Name</code> ,
+                                <code>format()</code> &#xB9AC;&#xD134;</li>
+                            </ol>
+                          </li>
+                          <li>
+                            <ol start="3">
+                              <li><code>merge()</code> &#xD568;&#xC218; &#xC0AC;&#xC6A9; <code>var.tags</code> ,
+                                <code>var.s3_bucket</code> <strong>&#xBCD1;&#xD569;</strong></li>
+                            </ol>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>resource &quot;aws_s3_bucket_acl&quot; &quot;this&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131;
+            &#xC9C4;&#xD589;</strong></p>
+        <ul>
+          <li>acl
+            <ul>
+              <li>var.s3_acl
+                <ul>
+                  <li><strong><code>variable.tf</code></strong> &#xD30C;&#xC77C;&#xC5D0;&#xC11C;
+                    &#xC0DD;&#xC131;&#xD55C; <strong><code>s3_acl</code></strong> &#xAC12; &#xCC38;&#xC870;</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>resource &quot;aws_dynamodb_table&quot; &quot;terraform_state_backend&quot; {...} &#xBE14;&#xB7ED;
+            &#xC0DD;&#xC131; &#xC9C4;&#xD589;</strong></p>
+        <ul>
+          <li>name
+            <ul>
+              <li>var.dynamodb_table
+                <ul>
+                  <li><strong><code>variable.tf</code></strong> &#xD30C;&#xC77C;&#xC5D0;&#xC11C;
+                    &#xC0DD;&#xC131;&#xD55C; <strong><code>dynamodb_table</code></strong> &#xAC12; &#xCC38;&#xC870;</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <blockquote>
+      <p><strong>S3 bucket as backend</strong></p>
+      <ul>
+        <li>Terraform&#xC758; &#xC0C1;&#xD0DC;(terraform.tfstate)&#xD30C;&#xC77C;&#xC744; versioning&#xD558;&#xBA70;
+          &#xC800;&#xC7A5;&#xD558;&#xAE30; &#xC704;&#xD574; S3 bucket&#xC744; &#xC0DD;&#xC131;</li>
+      </ul>
+    </blockquote>
+    <blockquote>
+      <p><strong>DynamoDB Table for Lock</strong></p>
+      <ul>
+        <li>&#xB3D9;&#xC2DC;&#xC5D0; &#xAC19;&#xC740; &#xD30C;&#xC77C;&#xC744; &#xC218;&#xC815;&#xD558;&#xC9C0;
+          &#xBABB;&#xD558;&#xB3C4;&#xB85D; &#xD558;&#xAE30; &#xC704;&#xD574; DynamoDB&#xC5D0; &#xC791;&#xC5C5;&#xC5D0;
+          &#xB300;&#xD55C; Lock&#xC744; &#xC0DD;&#xC131;</li>
+      </ul>
+    </blockquote>
+    <blockquote>
+      <p>&#xCC38;&#xACE0;&#xC6A9; URL</p>
+      <ul>
+        <li><a
+            href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket">https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket</a>
+        </li>
+        <li>aws_s3_bucket_acl</li>
+        <li><a
+            href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning">https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning</a>
+        </li>
+        <li><a
+            href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration">https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration</a>
+        </li>
+        <li><a
+            href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table">https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/dynamodb_table</a>
+        </li>
+      </ul>
+    </blockquote>
+    <blockquote>
+      <ul>
+        <li><a
+            href="https://www.terraform.io/language/functions/merge">https://www.terraform.io/language/functions/merge</a>
+        </li>
+        <li><a
+            href="https://www.terraform.io/language/functions/tomap">https://www.terraform.io/language/functions/tomap</a>
+        </li>
+        <li><a
+            href="https://www.terraform.io/language/functions/format">https://www.terraform.io/language/functions/format</a>
+        </li>
+      </ul>
+    </blockquote>
+    <hr>
+    <h1 class="mume-header" id="vpc-folder">VPC Folder</h1>
+
+    <blockquote>
+      <p>&#xD3F4;&#xB354; &#xD56D;&#xBAA9;</p>
+      <pre data-role="codeBlock" data-info class="language-"><code>01_VPC
+&#x251C;&#x2500;&#x2500; internat_gateway.tf
+&#x251C;&#x2500;&#x2500; main.tf
+&#x251C;&#x2500;&#x2500; nat_gateways.tf
+&#x251C;&#x2500;&#x2500; output.tf
+&#x251C;&#x2500;&#x2500; provider.tf
+&#x251C;&#x2500;&#x2500; route_tables.tf
+&#x251C;&#x2500;&#x2500; route_tables_rule.tf
+&#x251C;&#x2500;&#x2500; subnets.tf
+&#x251C;&#x2500;&#x2500; variable.tf
+&#x2514;&#x2500;&#x2500; vpc.tf
+</code></pre>
+    </blockquote>
+    <hr>
+    <blockquote>
+      <p>&#xBA85;&#xB839;&#xC5B4;</p>
+      <pre data-role="codeBlock" data-info class="language-"><code>$ cd 00_VPC
+
+$ terraform init 
+$ terraform plan -refresh=false -out=planfile
+$ terraform apply planfile
+</code></pre>
+    </blockquote>
+    <hr>
+    <blockquote>
+      <p><strong>&#xC55E;&#xC11C; &#xC124;&#xBA85; &#xB4DC;&#xB9B0; &#xB0B4;&#xC6A9;&#xC740; &#xBE60;&#xB974;&#xAC8C;
+          Skip &#xC9C4;&#xD589;&#xD558;&#xACE0; &#xCD94;&#xAC00;&#xB41C; &#xB0B4;&#xC6A9; &#xC548;&#xB0B4;
+          &#xB4DC;&#xB9BD;&#xB2C8;&#xB2E4;.</strong></p>
+    </blockquote>
+    <hr>
+    <h2 class="mume-header" id="01_vpcvariabletf">01_VPC/variable.tf</h2>
+
+    <pre data-role="codeBlock" data-info="hcl" class="language-hcl"><span class="token keyword keyword-variable&lt;span class=" token type variable"> &quot;region&quot; </span>&quot;&gt;variable<span class="token type variable"> &quot;region&quot; </span><span class="token punctuation">{</span>
+  <span class="token property">type</span>        <span class="token punctuation">=</span> string
+  <span class="token property">default</span>     <span class="token punctuation">=</span> <span class="token string">&quot;ap-northeast-2&quot;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-variable&lt;span class=" token type variable"> &quot;prefix&quot; </span>&quot;&gt;variable<span class="token type variable"> &quot;prefix&quot; </span><span class="token punctuation">{</span>
+  <span class="token property">type</span>        <span class="token punctuation">=</span> string
+  <span class="token property">default</span>     <span class="token punctuation">=</span> <span class="token string">&quot;test&quot;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-variable&lt;span class=" token type variable"> &quot;azs&quot; </span>&quot;&gt;variable<span class="token type variable"> &quot;azs&quot; </span><span class="token punctuation">{</span>
+  <span class="token property">type</span>        <span class="token punctuation">=</span> map(string)
+  <span class="token property">default</span>     <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+    <span class="token property">a_zone</span> <span class="token punctuation">=</span> <span class="token string">&quot;ap-northeast-2a&quot;</span>
+    <span class="token property">c_zone</span> <span class="token punctuation">=</span> <span class="token string">&quot;ap-northeast-2c&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-variable&lt;span class=" token type variable"> &quot;vpc_name&quot; </span>&quot;&gt;variable<span class="token type variable"> &quot;vpc_name&quot; </span><span class="token punctuation">{</span>
+  <span class="token property">type</span>        <span class="token punctuation">=</span> string
+  <span class="token property">default</span>     <span class="token punctuation">=</span> <span class="token string">&quot;tf-vpc&quot;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-variable&lt;span class=" token type variable"> &quot;vpc_cidr&quot; </span>&quot;&gt;variable<span class="token type variable"> &quot;vpc_cidr&quot; </span><span class="token punctuation">{</span>
+  <span class="token property">type</span>        <span class="token punctuation">=</span> string
+  <span class="token property">default</span>     <span class="token punctuation">=</span> <span class="token string">&quot;10.50.0.0/16&quot;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-variable&lt;span class=" token type variable"> &quot;subnets&quot; </span>&quot;&gt;variable<span class="token type variable"> &quot;subnets&quot; </span><span class="token punctuation">{</span>
+  <span class="token property">type</span> <span class="token punctuation">=</span> map(any)
+  <span class="token property">default</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;pub_a&quot;</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+      <span class="token property">cidr</span> <span class="token punctuation">=</span> <span class="token string">&quot;10.50.10.0/24&quot;</span>
+      <span class="token property">az</span> <span class="token punctuation">=</span> <span class="token string">&quot;ap-northeast-2a&quot;</span>
+    <span class="token punctuation">}</span>,
+    <span class="token property">&quot;pub_c&quot;</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+      <span class="token property">cidr</span> <span class="token punctuation">=</span> <span class="token string">&quot;10.50.20.0/24&quot;</span>
+      <span class="token property">az</span> <span class="token punctuation">=</span> <span class="token string">&quot;ap-northeast-2c&quot;</span>
+    <span class="token punctuation">}</span>,
+    <span class="token property">&quot;web_a&quot;</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+      <span class="token property">cidr</span> <span class="token punctuation">=</span> <span class="token string">&quot;10.50.110.0/24&quot;</span>
+      <span class="token property">az</span> <span class="token punctuation">=</span> <span class="token string">&quot;ap-northeast-2a&quot;</span>
+    <span class="token punctuation">}</span>,
+    <span class="token property">&quot;web_c&quot;</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+      <span class="token property">cidr</span> <span class="token punctuation">=</span> <span class="token string">&quot;10.50.120.0/24&quot;</span>
+      <span class="token property">az</span> <span class="token punctuation">=</span> <span class="token string">&quot;ap-northeast-2c&quot;</span>
+    <span class="token punctuation">}</span>,
+    <span class="token property">&quot;was_a&quot;</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+      <span class="token property">cidr</span> <span class="token punctuation">=</span> <span class="token string">&quot;10.50.130.0/24&quot;</span>
+      <span class="token property">az</span> <span class="token punctuation">=</span> <span class="token string">&quot;ap-northeast-2a&quot;</span>
+    <span class="token punctuation">}</span>,
+    <span class="token property">&quot;was_c&quot;</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+      <span class="token property">cidr</span> <span class="token punctuation">=</span> <span class="token string">&quot;10.50.140.0/24&quot;</span>
+      <span class="token property">az</span> <span class="token punctuation">=</span> <span class="token string">&quot;ap-northeast-2c&quot;</span>
+    <span class="token punctuation">}</span>,
+    <span class="token property">&quot;rds_a&quot;</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+      <span class="token property">cidr</span> <span class="token punctuation">=</span> <span class="token string">&quot;10.50.210.0/24&quot;</span>
+      <span class="token property">az</span> <span class="token punctuation">=</span> <span class="token string">&quot;ap-northeast-2a&quot;</span>
+    <span class="token punctuation">}</span>,
+    <span class="token property">&quot;rds_c&quot;</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+      <span class="token property">cidr</span> <span class="token punctuation">=</span> <span class="token string">&quot;10.50.220.0/24&quot;</span>
+      <span class="token property">az</span> <span class="token punctuation">=</span> <span class="token string">&quot;ap-northeast-2c&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-variable&lt;span class=" token type variable"> &quot;tags&quot; </span>&quot;&gt;variable<span class="token type variable"> &quot;tags&quot; </span><span class="token punctuation">{</span>
+  <span class="token property">type</span>        <span class="token punctuation">=</span> map(string)
+  <span class="token property">default</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;CreatedByTerraform&quot;</span> <span class="token punctuation">=</span> <span class="token string">&quot;True&quot;</span>
+    <span class="token property">&quot;purpose&quot;</span>            <span class="token punctuation">=</span> <span class="token string">&quot;Test&quot;</span>
+    <span class="token property">&quot;owner&quot;</span>              <span class="token punctuation">=</span> <span class="token string">&quot;MSC&quot;</span>
+    <span class="token property">&quot;resource&quot;</span>           <span class="token punctuation">=</span> <span class="token string">&quot;VPC&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre>
+    <ul>
+      <li><strong>variable &quot;region&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131; &#xC9C4;&#xD589;</strong></li>
+      <li><strong>variable &quot;prefix&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131; &#xC9C4;&#xD589;</strong></li>
+      <li><strong>variable &quot;azs&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131; &#xC9C4;&#xD589;</strong></li>
+      <li><strong>variable &quot;vpc_name&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131; &#xC9C4;&#xD589;</strong></li>
+      <li><strong>variable &quot;vpc_cidr&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131; &#xC9C4;&#xD589;</strong></li>
+      <li><strong>variable &quot;subnets&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131; &#xC9C4;&#xD589;</strong></li>
+      <li><strong>variable &quot;tag&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131; &#xC9C4;&#xD589;</strong></li>
+    </ul>
+    <blockquote>
+      <p>&#xCC38;&#xACE0;&#xC6A9; URL</p>
+      <ul>
+        <li><a
+            href="https://www.terraform.io/language/values/variables">https://www.terraform.io/language/values/variables</a>
+        </li>
+      </ul>
+    </blockquote>
+    <hr>
+    <h2 class="mume-header" id="01_vpcvpctf">01_VPC/vpc.tf</h2>
+
+    <pre data-role="codeBlock" data-info="hcl" class="language-hcl"><span class="token keyword keyword-resource &lt;span class=" token type variable">&quot;aws_vpc&quot;</span>&quot;&gt;resource <span class="token type variable">&quot;aws_vpc&quot;</span> <span class="token string">&quot;this&quot;</span> <span class="token punctuation">{</span>
+  <span class="token property">cidr_block</span>           <span class="token punctuation">=</span> var.vpc_cidr
+    
+  <span class="token property">tags</span> <span class="token punctuation">=</span> merge(var.tags, tomap(<span class="token punctuation">{</span><span class="token property">Name</span> <span class="token punctuation">=</span> format(<span class="token string">&quot;%s-%s&quot;</span>,  var.prefix, var.vpc_name)<span class="token punctuation">}</span>))
+<span class="token punctuation">}</span>
+</pre>
+    <ul>
+      <li><strong>resource &quot;aws_vpc&quot; &quot;this&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131;
+          &#xC9C4;&#xD589;</strong>
+        <ul>
+          <li>cidr_block
+            <ul>
+              <li>var.vpc_cidr
+                <ul>
+                  <li><strong><code>variable.tf</code></strong> &#xD30C;&#xC77C;&#xC5D0;&#xC11C;
+                    &#xC0DD;&#xC131;&#xD55C; <strong><code>vpc_cidr</code></strong> &#xAC12; &#xCC38;&#xC870;
+                    <ul>
+                      <li><code>cidr_block = var.vpc_cidr</code> <strong>or</strong>
+                        <code>cidr_block = &quot;10.50.0.0/16&quot;&quot;</code> &#xB611;&#xAC19;&#xB2E4;</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>tag
+            <ul>
+              <li>merge(var.tags, tomap({Name = format(&quot;%s-%s&quot;, var.prefix, var.vpc_name)}))
+                <ul>
+                  <li><strong><code>merge</code></strong> . <strong><code>tomap</code></strong> .
+                    <strong><code>formet</code></strong> &#xD568;&#xC218; &#xC0AC;&#xC6A9;
+                    <ul>
+                      <li><strong><code>variable.tf</code></strong> &#xD30C;&#xC77C;&#xC5D0;&#xC11C;
+                        &#xC0DD;&#xC131;&#xD55C; <strong><code>prefix</code></strong> &amp;
+                        <strong><code>tags</code></strong> &amp; <strong><code>vpc_name</code></strong> &#xAC12;
+                        &#xCC38;&#xC870;
+                        <ul>
+                          <li>
+                            <ol>
+                              <li><code>merge()</code> &#xD568;&#xC218; &#xC0AC;&#xC6A9; <code>var.tags</code>
+                                &#xAC12;&#xACFC; <strong><code>tomap()</code></strong> &#xAC12;&#xC744;
+                                <strong>&#xBCD1;&#xD569;</strong></li>
+                            </ol>
+                          </li>
+                          <li>
+                            <ol start="2">
+                              <li><code>tomap()</code> &#xD568;&#xC218; &#xC0AC;&#xC6A9; <code>Name</code> ,
+                                <strong><code>format()</code></strong> &#xD568;&#xC218; &#xAC12; &#xB9AC;&#xD134;</li>
+                            </ol>
+                          </li>
+                          <li>
+                            <ol start="3">
+                              <li><code>format()</code> &#xD568;&#xC218; &#xC0AC;&#xC6A9; <code>var.prefix</code> ,
+                                <code>var.vpc_name</code> &#xAC12; &#xC124;&#xC815;</li>
+                            </ol>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <blockquote>
+      <p>&#xCC38;&#xACE0;&#xC6A9; URL</p>
+      <ul>
+        <li><a
+            href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc">https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc</a>
+        </li>
+        <li><a
+            href="https://www.terraform.io/language/functions/format">https://www.terraform.io/language/functions/format</a>
+        </li>
+        <li><a
+            href="https://www.terraform.io/language/functions/tomap">https://www.terraform.io/language/functions/tomap</a>
+        </li>
+        <li><a
+            href="https://www.terraform.io/language/functions/merge">https://www.terraform.io/language/functions/merge</a>
+        </li>
+      </ul>
+    </blockquote>
+    <hr>
+    <h2 class="mume-header" id="01_vpcsubnettf">01_VPC/subnet.tf</h2>
+
+    <pre data-role="codeBlock" data-info="hcl" class="language-hcl"><span class="token keyword keyword-resource &lt;span class=" token type variable">&quot;aws_subnet&quot;</span>&quot;&gt;resource <span class="token type variable">&quot;aws_subnet&quot;</span> <span class="token string">&quot;main_pub_a_subnet&quot;</span> <span class="token punctuation">{</span>
+  <span class="token property">vpc_id</span>            <span class="token punctuation">=</span> aws_vpc.this.id
+  <span class="token property">cidr_block</span>        <span class="token punctuation">=</span> var.subnets.pub_a.cidr
+  <span class="token property">availability_zone</span> <span class="token punctuation">=</span> var.subnets.pub_a.az
+  <span class="token property">tags</span>              <span class="token punctuation">=</span> merge(var.tags, tomap(<span class="token punctuation">{</span> <span class="token property">Name</span> <span class="token punctuation">=</span> format(<span class="token string">&quot;%s-%s-%s-public-main-subnet&quot;</span>, var.prefix, var.vpc_name, var.azs.a_zone)<span class="token punctuation">}</span>))
+<span class="token punctuation">}</span>
+<span class="token keyword keyword-resource &lt;span class=" token type variable">&quot;aws_subnet&quot;</span>&quot;&gt;resource <span class="token type variable">&quot;aws_subnet&quot;</span> <span class="token string">&quot;main_pub_c_subnet&quot;</span> <span class="token punctuation">{</span>
+  <span class="token property">vpc_id</span>            <span class="token punctuation">=</span> aws_vpc.this.id
+  <span class="token property">cidr_block</span>        <span class="token punctuation">=</span> var.subnets.pub_c.cidr
+  <span class="token property">availability_zone</span> <span class="token punctuation">=</span> var.subnets.pub_c.az
+  <span class="token property">tags</span>              <span class="token punctuation">=</span> merge(var.tags, tomap(<span class="token punctuation">{</span> <span class="token property">Name</span> <span class="token punctuation">=</span> format(<span class="token string">&quot;%s-%s-%s-public-main-subnet&quot;</span>, var.prefix, var.vpc_name, var.azs.c_zone)<span class="token punctuation">}</span>))
+<span class="token punctuation">}</span>
+</pre>
+    <ul>
+      <li>
+        <p><strong>resource &quot;aws_subnet&quot; &quot;main_pub_a_subnet&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131;
+            &#xC9C4;&#xD589;</strong></p>
+        <ul>
+          <li>cidr_block
+            <ul>
+              <li><strong><code>variable.tf</code></strong> &#xD30C;&#xC77C;&#xC5D0;&#xC11C; &#xC0DD;&#xC131;&#xD55C;
+                <strong><code>subnets</code></strong> . <strong><code>pub_a</code></strong> .
+                <strong><code>cidr</code></strong> &#xAC12; &#xCC38;&#xC870;
+                <ul>
+                  <li><code>cidr_block = var.subnets.pub_a.cidr</code> <strong>or</strong>
+                    <code>cidr_block = &quot;10.50.10.0/24&quot;</code> &#xB611;&#xAC19;&#xB2E4;</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>tag
+            <ul>
+              <li>merge(var.tags, tomap({ Name = format(&quot;%s-%s-%s-public-main-subnet&quot;, var.prefix,
+                var.vpc_name, var.azs.a_zone)}))
+                <ul>
+                  <li><strong><code>merge</code></strong> . <strong><code>tomap</code></strong> .
+                    <strong><code>formet</code></strong> &#xD568;&#xC218; &#xC0AC;&#xC6A9;
+                    <ul>
+                      <li><strong><code>variable.tf</code></strong> &#xD30C;&#xC77C;&#xC5D0;&#xC11C;
+                        &#xC0DD;&#xC131;&#xD55C; <strong><code>prefix</code></strong> &amp;
+                        <strong><code>tags</code></strong> &amp; <strong><code>vpc_name</code></strong> &amp;
+                        <strong><code>vpc_name</code></strong> &#xAC12; &#xCC38;&#xC870;
+                        <ul>
+                          <li>
+                            <ol>
+                              <li><code>merge()</code> &#xD568;&#xC218; &#xC0AC;&#xC6A9; <code>var.tags</code>
+                                &#xAC12;&#xACFC; <code>tomap()</code> &#xAC12;&#xC744; <strong>&#xBCD1;&#xD569;</strong>
+                              </li>
+                            </ol>
+                          </li>
+                          <li>
+                            <ol start="2">
+                              <li><code>tomap()</code> &#xD568;&#xC218; &#xC0AC;&#xC6A9; <code>Name</code> ,
+                                <strong><code>format()</code></strong> &#xD568;&#xC218; &#xAC12; &#xB9AC;&#xD134;</li>
+                            </ol>
+                          </li>
+                          <li>
+                            <ol start="3">
+                              <li><code>format()</code> &#xD568;&#xC218; &#xC0AC;&#xC6A9; <code>var.prefix</code> ,
+                                <code>var.vpc_name</code> , <code>var.azs</code> &#xAC12; &#xC124;&#xC815;</li>
+                            </ol>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p><strong>resource &quot;aws_subnet&quot; &quot;main_pub_c_subnet&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131;
+            &#xC9C4;&#xD589;</strong></p>
+        <ul>
+          <li>cidr_block
+            <ul>
+              <li><strong><code>variable.tf</code></strong> &#xD30C;&#xC77C;&#xC5D0;&#xC11C; &#xC0DD;&#xC131;&#xD55C;
+                <strong><code>subnets</code></strong> . <strong><code>pub_c</code></strong> .
+                <strong><code>cidr</code></strong> &#xAC12; &#xCC38;&#xC870;
+                <ul>
+                  <li><code>cidr_block = var.subnets.pub_a.cidr</code> <strong>or</strong>
+                    <code>cidr_block = &quot;10.50.20.0/24&quot;</code> &#xB611;&#xAC19;&#xB2E4;</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>tag
+            <ul>
+              <li>merge(var.tags, tomap({ Name = format(&quot;%s-%s-%s-public-main-subnet&quot;, var.prefix,
+                var.vpc_name, var.azs.c_zone)}))
+                <ul>
+                  <li><strong><code>merge</code></strong> . <strong><code>tomap</code></strong> .
+                    <strong><code>formet</code></strong> &#xD568;&#xC218; &#xC0AC;&#xC6A9;
+                    <ul>
+                      <li><strong><code>variable.tf</code></strong> &#xD30C;&#xC77C;&#xC5D0;&#xC11C;
+                        &#xC0DD;&#xC131;&#xD55C; <strong><code>prefix</code></strong> &amp;
+                        <strong><code>tags</code></strong> &amp; <strong><code>vpc_name</code></strong> &amp;
+                        <strong><code>vpc_name</code></strong> &#xAC12; &#xCC38;&#xC870;
+                        <ul>
+                          <li>
+                            <ol>
+                              <li><code>merge()</code> &#xD568;&#xC218; &#xC0AC;&#xC6A9; <code>var.tags</code>
+                                &#xAC12;&#xACFC; <code>tomap()</code> &#xAC12;&#xC744; <strong>&#xBCD1;&#xD569;</strong>
+                              </li>
+                            </ol>
+                          </li>
+                          <li>
+                            <ol start="2">
+                              <li><code>tomap()</code> &#xD568;&#xC218; &#xC0AC;&#xC6A9; <code>Name</code> ,
+                                <strong><code>format()</code></strong> &#xD568;&#xC218; &#xAC12; &#xB9AC;&#xD134;</li>
+                            </ol>
+                          </li>
+                          <li>
+                            <ol start="3">
+                              <li><code>format()</code> &#xD568;&#xC218; &#xC0AC;&#xC6A9; <code>var.prefix</code> ,
+                                <code>var.vpc_name</code> , <code>var.azs</code> &#xAC12; &#xC124;&#xC815;</li>
+                            </ol>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <blockquote>
+      <p>&#xCC38;&#xACE0;&#xC6A9; URL</p>
+      <ul>
+        <li><a
+            href="https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet">https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet</a>
+        </li>
+        <li><a
+            href="https://www.terraform.io/language/functions/format">https://www.terraform.io/language/functions/format</a>
+        </li>
+        <li><a
+            href="https://www.terraform.io/language/functions/tomap">https://www.terraform.io/language/functions/tomap</a>
+        </li>
+        <li><a
+            href="https://www.terraform.io/language/functions/merge">https://www.terraform.io/language/functions/merge</a>
+        </li>
+      </ul>
+    </blockquote>
+    <hr>
+    <h1 class="mume-header" id="sg-folder">SG Folder</h1>
+
+    <blockquote>
+      <p>&#xD3F4;&#xB354; &#xD56D;&#xBAA9;</p>
+      <pre data-role="codeBlock" data-info class="language-"><code>02_SG
+&#x251C;&#x2500;&#x2500; data.tf
+&#x251C;&#x2500;&#x2500; main.tf
+&#x251C;&#x2500;&#x2500; output.tf
+&#x251C;&#x2500;&#x2500; provider.tf
+&#x251C;&#x2500;&#x2500; security_group.tf
+&#x251C;&#x2500;&#x2500; security_group_rule.tf
+&#x2514;&#x2500;&#x2500; variables.tf
+</code></pre>
+    </blockquote>
+    <hr>
+    <blockquote>
+      <p>&#xBA85;&#xB839;&#xC5B4;</p>
+      <pre data-role="codeBlock" data-info class="language-"><code>$ cd 02_SG
+
+$ terraform init 
+$ terraform plan -refresh=false -out=planfile
+$ terraform apply planfile
+</code></pre>
+    </blockquote>
+    <hr>
+    <blockquote>
+      <p><strong>&#xC55E;&#xC11C; &#xC124;&#xBA85; &#xB4DC;&#xB9B0; &#xB0B4;&#xC6A9;&#xC740; &#xBE60;&#xB974;&#xAC8C;
+          Skip &#xC9C4;&#xD589;&#xD558;&#xACE0; &#xCD94;&#xAC00;&#xB41C; &#xB0B4;&#xC6A9; &#xC548;&#xB0B4;
+          &#xB4DC;&#xB9BD;&#xB2C8;&#xB2E4;.</strong></p>
+    </blockquote>
+    <hr>
+    <h2 class="mume-header" id="02_sgvariabletf">02_SG/variable.tf</h2>
+
+    <pre data-role="codeBlock" data-info="hcl" class="language-hcl"><span class="token keyword keyword-variable&lt;span class=" token type variable"> &quot;region&quot; </span>&quot;&gt;variable<span class="token type variable"> &quot;region&quot; </span><span class="token punctuation">{</span>
+  <span class="token property">type</span>        <span class="token punctuation">=</span> string
+  <span class="token property">default</span>     <span class="token punctuation">=</span> <span class="token string">&quot;ap-northeast-2&quot;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-variable&lt;span class=" token type variable"> &quot;prefix&quot; </span>&quot;&gt;variable<span class="token type variable"> &quot;prefix&quot; </span><span class="token punctuation">{</span>
+  <span class="token property">type</span>        <span class="token punctuation">=</span> string
+  <span class="token property">default</span>     <span class="token punctuation">=</span> <span class="token string">&quot;test&quot;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-variable&lt;span class=" token type variable"> &quot;name&quot; </span>&quot;&gt;variable<span class="token type variable"> &quot;name&quot; </span><span class="token punctuation">{</span>
+  <span class="token property">type</span>        <span class="token punctuation">=</span> string
+  <span class="token property">default</span>     <span class="token punctuation">=</span> <span class="token string">&quot;tf-msc&quot;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-variable&lt;span class=" token type variable"> &quot;tags&quot; </span>&quot;&gt;variable<span class="token type variable"> &quot;tags&quot; </span><span class="token punctuation">{</span>
+  <span class="token property">type</span>        <span class="token punctuation">=</span> map(string)
+  <span class="token property">default</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+    <span class="token property">&quot;CreatedByTerraform&quot;</span> <span class="token punctuation">=</span> <span class="token string">&quot;True&quot;</span>
+    <span class="token property">&quot;purpose&quot;</span>            <span class="token punctuation">=</span> <span class="token string">&quot;Test&quot;</span>
+    <span class="token property">&quot;owner&quot;</span>              <span class="token punctuation">=</span> <span class="token string">&quot;msc&quot;</span>
+    <span class="token property">&quot;resource&quot;</span>           <span class="token punctuation">=</span> <span class="token string">&quot;SG&quot;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword keyword-variable&lt;span class=" token type variable"> &quot;rules&quot; </span>&quot;&gt;variable<span class="token type variable"> &quot;rules&quot; </span><span class="token punctuation">{</span>
+  <span class="token property">type</span>        <span class="token punctuation">=</span> map(any)
+  <span class="token property">default</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+    <span class="token property">bastion</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+      <span class="token property">name</span>        <span class="token punctuation">=</span> <span class="token string">&quot;bastion&quot;</span>
+      <span class="token property">type</span>        <span class="token punctuation">=</span> <span class="token string">&quot;ingress&quot;</span>
+      <span class="token property">from_port</span>   <span class="token punctuation">=</span> <span class="token number">22</span>
+      <span class="token property">to_port</span>     <span class="token punctuation">=</span> <span class="token number">22</span>
+      <span class="token property">protocol</span>    <span class="token punctuation">=</span> <span class="token string">&quot;tcp&quot;</span>
+      <span class="token property">cidr_blocks</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>,
+    <span class="token property">web</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+      <span class="token property">name</span>        <span class="token punctuation">=</span> <span class="token string">&quot;web&quot;</span>
+      <span class="token property">type</span>        <span class="token punctuation">=</span> <span class="token string">&quot;ingress&quot;</span>
+      <span class="token property">from_port</span>   <span class="token punctuation">=</span> <span class="token number">22</span>
+      <span class="token property">to_port</span>     <span class="token punctuation">=</span> <span class="token number">22</span>
+      <span class="token property">protocol</span>    <span class="token punctuation">=</span> <span class="token string">&quot;tcp&quot;</span>
+      <span class="token property">cidr_blocks</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>,
+    <span class="token property">was</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+      <span class="token property">name</span>        <span class="token punctuation">=</span> <span class="token string">&quot;was&quot;</span>
+      <span class="token property">type</span>        <span class="token punctuation">=</span> <span class="token string">&quot;ingress&quot;</span>
+      <span class="token property">from_port</span>   <span class="token punctuation">=</span> <span class="token number">22</span>
+      <span class="token property">to_port</span>     <span class="token punctuation">=</span> <span class="token number">22</span>
+      <span class="token property">protocol</span>    <span class="token punctuation">=</span> <span class="token string">&quot;tcp&quot;</span>
+      <span class="token property">cidr_blocks</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>,
+    <span class="token property">rds</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+      <span class="token property">name</span>        <span class="token punctuation">=</span> <span class="token string">&quot;rds&quot;</span>
+      <span class="token property">type</span>        <span class="token punctuation">=</span> <span class="token string">&quot;ingress&quot;</span>
+      <span class="token property">from_port</span>   <span class="token punctuation">=</span> <span class="token number">3306</span>
+      <span class="token property">to_port</span>     <span class="token punctuation">=</span> <span class="token number">3306</span>
+      <span class="token property">protocol</span>    <span class="token punctuation">=</span> <span class="token string">&quot;tcp&quot;</span>
+      <span class="token property">cidr_blocks</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+    <span class="token property">front</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+      <span class="token property">name</span>        <span class="token punctuation">=</span> <span class="token string">&quot;front&quot;</span>
+      <span class="token property">type</span>        <span class="token punctuation">=</span> <span class="token string">&quot;ingress&quot;</span>
+      <span class="token property">from_port</span>   <span class="token punctuation">=</span> <span class="token number">80</span>
+      <span class="token property">to_port</span>     <span class="token punctuation">=</span> <span class="token number">80</span>
+      <span class="token property">protocol</span>    <span class="token punctuation">=</span> <span class="token string">&quot;tcp&quot;</span>
+      <span class="token property">cidr_blocks</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+    <span class="token property">backend</span> <span class="token punctuation">=</span> <span class="token punctuation">{</span>
+      <span class="token property">name</span>        <span class="token punctuation">=</span> <span class="token string">&quot;backend&quot;</span>
+      <span class="token property">type</span>        <span class="token punctuation">=</span> <span class="token string">&quot;ingress&quot;</span>
+      <span class="token property">from_port</span>   <span class="token punctuation">=</span> <span class="token number">8080</span>
+      <span class="token property">to_port</span>     <span class="token punctuation">=</span> <span class="token number">8080</span>
+      <span class="token property">protocol</span>    <span class="token punctuation">=</span> <span class="token string">&quot;tcp&quot;</span>
+      <span class="token property">cidr_blocks</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre>
+    <ul>
+      <li><strong>variable &quot;region&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131; &#xC9C4;&#xD589;</strong></li>
+      <li><strong>variable &quot;prefix&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131; &#xC9C4;&#xD589;</strong></li>
+      <li><strong>variable &quot;name&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131; &#xC9C4;&#xD589;</strong></li>
+      <li><strong>variable &quot;tags&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131; &#xC9C4;&#xD589;</strong></li>
+      <li><strong>variable &quot;rules&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131; &#xC9C4;&#xD589;</strong></li>
+    </ul>
+    <h2 class="mume-header" id="02_sgsecurity_group_ruletf">02_SG/security_group_rule.tf</h2>
+
+    <pre data-role="codeBlock" data-info="hcl" class="language-hcl"><span class="token keyword keyword-resource &lt;span class=" token type variable">&quot;aws_security_group_rule&quot;</span>&quot;&gt;resource <span class="token type variable">&quot;aws_security_group_rule&quot;</span> <span class="token string">&quot;bastion_ssh_ingress_rule&quot;</span> <span class="token punctuation">{</span>
+  <span class="token property">description</span> <span class="token punctuation">=</span> <span class="token string">&quot;SSH - Bastion Server inbound rule&quot;</span>
+  <span class="token property">type</span>        <span class="token punctuation">=</span> var.rules.bastion.type
+  <span class="token property">from_port</span>   <span class="token punctuation">=</span> var.rules.bastion.from_port
+  <span class="token property">to_port</span>     <span class="token punctuation">=</span> var.rules.bastion.to_port
+  <span class="token property">protocol</span>    <span class="token punctuation">=</span> var.rules.bastion.protocol
+
+  <span class="token property">security_group_id</span> <span class="token punctuation">=</span> aws_security_group.bastion_sg.id
+
+  <span class="token comment"># SSH &#xD1B5;&#xC2E0; &#xD5C8;&#xC6A9; IP &#xC785;&#xB825;</span>
+  <span class="token property">cidr_blocks</span> <span class="token punctuation">=</span> <span class="token punctuation">[</span><span class="token string">&quot;211.60.50.190/32&quot;</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</pre>
+    <ul>
+      <li><strong>resource &quot;aws_subnet&quot; &quot;main_pub_c_subnet&quot; {...} &#xBE14;&#xB7ED; &#xC0DD;&#xC131;
+          &#xC9C4;&#xD589;</strong>
+        <ul>
+          <li>type
+            <ul>
+              <li><strong><code>variable.tf</code></strong> &#xD30C;&#xC77C;&#xC5D0;&#xC11C; &#xC0DD;&#xC131;&#xD55C;
+                <strong><code>rules</code></strong> . <strong><code>bastion</code></strong> .
+                <strong><code>type</code></strong> &#xAC12; &#xCC38;&#xC870;</li>
+            </ul>
+          </li>
+          <li>from_port
+            <ul>
+              <li><strong><code>variable.tf</code></strong> &#xD30C;&#xC77C;&#xC5D0;&#xC11C; &#xC0DD;&#xC131;&#xD55C;
+                <strong><code>rules</code></strong> . <strong><code>bastion</code></strong> .
+                <strong><code>from_port</code></strong> &#xAC12; &#xCC38;&#xC870;</li>
+            </ul>
+          </li>
+          <li>to_port
+            <ul>
+              <li><strong><code>variable.tf</code></strong> &#xD30C;&#xC77C;&#xC5D0;&#xC11C; &#xC0DD;&#xC131;&#xD55C;
+                <strong><code>rules</code></strong> . <strong><code>bastion</code></strong> .
+                <strong><code>to_port</code></strong> &#xAC12; &#xCC38;&#xC870;</li>
+            </ul>
+          </li>
+          <li>protocol
+            <ul>
+              <li><strong><code>variable.tf</code></strong> &#xD30C;&#xC77C;&#xC5D0;&#xC11C; &#xC0DD;&#xC131;&#xD55C;
+                <strong><code>rules</code></strong> . <strong><code>bastion</code></strong> .
+                <strong><code>protocol</code></strong> &#xAC12; &#xCC38;&#xC870;</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <h1 class="mume-header" id="ec2bastion-folder">EC2(Bastion) Folder</h1>
+
+    <h1 class="mume-header" id="ec2service-folder">EC2(Service) Folder</h1>
+
+    <h1 class="mume-header" id="alb-folder">ALB Folder</h1>
+
+    <h1 class="mume-header" id="rds-folder">RDS Folder</h1>
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

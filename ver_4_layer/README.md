@@ -1,5 +1,5 @@
 # Code guide
-## AWS resource(서비스) 단위 폴더 구성 및 변수/함수 사용
+## AWS 서비스 단위 폴더 구성 및 변수/함수 사용
 
 -----
 ### 폴더 및 파일 구성
@@ -303,7 +303,7 @@ resource "aws_dynamodb_table" "terraform_state_locks" {
         - ```region = var.s3_bucket```   **or**   ```region = "test-terraform-state-backend-msc"``` 똑같다
   - tag
     - merge(var.tags, tomap({ Name = format("%s", var.s3_bucket) }))
-      - **```merge```**, **```tomap```**, **```formet```** 함수 사용
+      - **```merge```** . **```tomap```** . **```formet```** 함수 사용
         - **```variable.tf```** 파일에서 생성한 **```s3_bucket```** & **```tags```** 값 참조
           - 1. ```format()``` 함수 사용 ```s3_bucket```의 값을 ```"test-terraform-state-backend-msc"```로 리턴
           - 2. ```tomap()``` 함수 사용 ```Name``` , ```format()``` 리턴
@@ -340,13 +340,6 @@ resource "aws_dynamodb_table" "terraform_state_locks" {
 # VPC Folder
 > 폴더 항목
 > ```
-> 00_S3
-> ├── main.tf
-> ├── outputs.tf
-> ├── provider.tf
-> ├── state-backend.tf
-> └── variables.tf
-
 > 01_VPC
 > ├── internat_gateway.tf
 > ├── main.tf
@@ -363,7 +356,7 @@ resource "aws_dynamodb_table" "terraform_state_locks" {
 -----
 > 명령어
 > ```
-> $ cd 00_S3
+> $ cd 00_VPC
 > 
 > $ terraform init 
 > $ terraform plan -refresh=false -out=planfile
@@ -372,6 +365,7 @@ resource "aws_dynamodb_table" "terraform_state_locks" {
 
 -----
 > **앞서 설명 드린 내용은 빠르게 Skip 진행하고 추가된 내용 안내 드립니다.**
+-----
 
 ## 01_VPC/variable.tf
 ```hcl
@@ -479,34 +473,213 @@ resource "aws_vpc" "this" {
         - ```cidr_block = var.vpc_cidr```   **or**   ```cidr_block = "10.50.0.0/16""``` 똑같다
   - tag
     - merge(var.tags, tomap({Name = format("%s-%s",  var.prefix, var.vpc_name)}))
-      - **```merge```**, **```tomap```**, **```formet```** 함수 사용
+      - **```merge```** . **```tomap```** . **```formet```** 함수 사용
         - **```variable.tf```** 파일에서 생성한 **```prefix```** & **```tags```** & **```vpc_name```** 값 참조
-          - 1. ```format()``` 함수 사용 ```var.prefix``` , ```var.vpc_name``` 값 설정
+          - 1. ```merge()``` 함수 사용 ```var.tags``` , **```tomap()```** 값 **병합**
           - 2. ```tomap()``` 함수 사용 ```Name``` , **```format()```** 함수 값 리턴
-          - 3. ```merge()``` 함수 사용 ```var.tags``` 값과 ```tomap()``` 값을 **병합**
+          - 3. ```format()``` 함수 사용 ```var.prefix``` , ```var.vpc_name``` 값 설정
 
 
+> 참고용 URL
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc
+> - https://www.terraform.io/language/functions/format
+> - https://www.terraform.io/language/functions/tomap
+> - https://www.terraform.io/language/functions/merge
 
+-----
 
+## 01_VPC/subnet.tf
+```hcl
+resource "aws_subnet" "main_pub_a_subnet" {
+  vpc_id            = aws_vpc.this.id
+  cidr_block        = var.subnets.pub_a.cidr
+  availability_zone = var.subnets.pub_a.az
+  tags              = merge(var.tags, tomap({ Name = format("%s-%s-%s-public-main-subnet", var.prefix, var.vpc_name, var.azs.a_zone)}))
+}
+resource "aws_subnet" "main_pub_c_subnet" {
+  vpc_id            = aws_vpc.this.id
+  cidr_block        = var.subnets.pub_c.cidr
+  availability_zone = var.subnets.pub_c.az
+  tags              = merge(var.tags, tomap({ Name = format("%s-%s-%s-public-main-subnet", var.prefix, var.vpc_name, var.azs.c_zone)}))
+}
+```
++ **resource "aws_subnet" "main_pub_a_subnet" {...} 블럭 생성 진행**
+  - cidr_block
+    - **```variable.tf```** 파일에서 생성한 **```subnets```** . **```pub_a```** . **```cidr```** 값 참조
+      - ```cidr_block = var.subnets.pub_a.cidr```   **or**   ```cidr_block = "10.50.10.0/24"``` 똑같다
+  - tag
+    - merge(var.tags, tomap({ Name = format("%s-%s-%s-public-main-subnet", var.prefix, var.vpc_name, var.azs.a_zone)}))
+      - **```merge```** . **```tomap```** . **```formet```** 함수 사용
+        - **```variable.tf```** 파일에서 생성한 **```prefix```** & **```tags```** & **```vpc_name```** & **```vpc_name```** 값 참조
+          - 1. ```merge()``` 함수 사용 ```var.tags``` , ```tomap()``` 값 **병합**
+          - 2. ```tomap()``` 함수 사용 ```Name``` , **```format()```** 함수 값 리턴
+          - 3. ```format()``` 함수 사용 ```var.prefix``` , ```var.vpc_name``` , ```var.azs``` 값 설정
 
++ **resource "aws_subnet" "main_pub_c_subnet" {...} 블럭 생성 진행**
+  - cidr_block
+    - **```variable.tf```** 파일에서 생성한 **```subnets```** . **```pub_c```** . **```cidr```** 값 참조
+      - ```cidr_block = var.subnets.pub_a.cidr```   **or**   ```cidr_block = "10.50.20.0/24"``` 똑같다
+  - tag
+    - merge(var.tags, tomap({ Name = format("%s-%s-%s-public-main-subnet", var.prefix, var.vpc_name, var.azs.c_zone)}))
+      - **```merge```** . **```tomap```** . **```formet```** 함수 사용
+        - **```variable.tf```** 파일에서 생성한 **```prefix```** & **```tags```** & **```vpc_name```** & **```vpc_name```** 값 참조
+          - 1. ```merge()``` 함수 사용 ```var.tags``` , ```tomap()``` 값 **병합**
+          - 2. ```tomap()``` 함수 사용 ```Name``` , **```format()```** 함수 값 리턴
+          - 3. ```format()``` 함수 사용 ```var.prefix``` , ```var.vpc_name``` , ```var.azs``` 값 설정
 
+> 참고용 URL
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
+> - https://www.terraform.io/language/functions/format
+> - https://www.terraform.io/language/functions/tomap
+> - https://www.terraform.io/language/functions/merge
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-----
 # SG Folder
+> 폴더 항목
+> ```
+> 02_SG
+> ├── data.tf
+> ├── main.tf
+> ├── output.tf
+> ├── provider.tf
+> ├── security_group.tf
+> ├── security_group_rule.tf
+> └── variables.tf
+> ```
+
+-----
+> 명령어
+> ```
+> $ cd 02_SG
+> 
+> $ terraform init 
+> $ terraform plan -refresh=false -out=planfile
+> $ terraform apply planfile
+> ```
+
+-----
+> **앞서 설명 드린 내용은 빠르게 Skip 진행하고 추가된 내용 안내 드립니다.**
+-----
+## 02_SG/variable.tf
+```hcl
+variable "region" {
+  type        = string
+  default     = "ap-northeast-2"
+}
+
+variable "prefix" {
+  type        = string
+  default     = "test"
+}
+
+variable "name" {
+  type        = string
+  default     = "tf-msc"
+}
+
+variable "tags" {
+  type        = map(string)
+  default = {
+    "CreatedByTerraform" = "True"
+    "purpose"            = "Test"
+    "owner"              = "msc"
+    "resource"           = "SG"
+  }
+}
+
+variable "rules" {
+  type        = map(any)
+  default = {
+    bastion = {
+      name        = "bastion"
+      type        = "ingress"
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      cidr_blocks = []
+    },
+    web = {
+      name        = "web"
+      type        = "ingress"
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      cidr_blocks = []
+    },
+    was = {
+      name        = "was"
+      type        = "ingress"
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      cidr_blocks = []
+    },
+    rds = {
+      name        = "rds"
+      type        = "ingress"
+      from_port   = 3306
+      to_port     = 3306
+      protocol    = "tcp"
+      cidr_blocks = []
+    }
+    front = {
+      name        = "front"
+      type        = "ingress"
+      from_port   = 80
+      to_port     = 80
+      protocol    = "tcp"
+      cidr_blocks = []
+    }
+    backend = {
+      name        = "backend"
+      type        = "ingress"
+      from_port   = 8080
+      to_port     = 8080
+      protocol    = "tcp"
+      cidr_blocks = []
+    }
+  }
+}
+```
++ **variable "region" {...} 블럭 생성 진행**
++ **variable "prefix" {...} 블럭 생성 진행**
++ **variable "name" {...} 블럭 생성 진행**
++ **variable "tags" {...} 블럭 생성 진행**
++ **variable "rules" {...} 블럭 생성 진행**
+
+-----
+
+## 02_SG/security_group_rule.tf
+```hcl
+resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {
+  description = "SSH - Bastion Server inbound rule"
+  type        = var.rules.bastion.type
+  from_port   = var.rules.bastion.from_port
+  to_port     = var.rules.bastion.to_port
+  protocol    = var.rules.bastion.protocol
+
+  security_group_id = aws_security_group.bastion_sg.id
+
+  # SSH 통신 허용 IP 입력
+  cidr_blocks = ["211.60.50.190/32"]
+}
+```
++ **resource "aws_subnet" "main_pub_c_subnet" {...} 블럭 생성 진행**
+  - type
+    - **```variable.tf```** 파일에서 생성한 **```rules```** . **```bastion```** . **```type```** 값 참조
+  - from_port
+    - **```variable.tf```** 파일에서 생성한 **```rules```** . **```bastion```** . **```from_port```** 값 참조
+  - to_port
+    - **```variable.tf```** 파일에서 생성한 **```rules```** . **```bastion```** . **```to_port```** 값 참조
+  - protocol
+    - **```variable.tf```** 파일에서 생성한 **```rules```** . **```bastion```** . **```protocol```** 값 참조
+
+> 참고용 URL
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
+
+
+
+
 # EC2(Bastion) Folder
 # EC2(Service) Folder
 # ALB Folder
