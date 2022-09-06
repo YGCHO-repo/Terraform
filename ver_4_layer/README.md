@@ -1122,8 +1122,9 @@ resource "aws_lb" "front_alb" {
 + **resource "aws_lb" "front_alb" {...} 블럭 생성 진행**
   - name , tags
     - format("%s-tf-%s", var.prefix, var.add_alb.front.name)
-     - **```formet```** 함수 사용
-      - **```variable.tf```** 파일에서 생성한 **```prefix```** & **```add_alb_front.name```** 값 참조
+      - **```formet```** 함수 사용
+        - **```variable.tf```** 파일에서 생성한 **```prefix```** & **```add_alb_front```** . **```name```** 값 참조
+        - **```"test-tf-front-alb"```** 동일
 
 > 참고용 URL  
 > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb
@@ -1251,3 +1252,24 @@ resource "aws_rds_cluster" "this" {
   tags = merge(var.tags, tomap({ Name = format("%s-tf-%s-cluster", var.prefix, var.rds_name) }))
 }
 ```
++ **resource "aws_rds_cluster" "this" {...} 블럭 생성 진행**
+  - cluster_identifier
+    - format("%s-tf-%s-cluster", var.prefix, var.rds_name) //
+      - **```formet```** 함수 사용
+      - **```variable.tf```** 파일에서 생성한 **```prefix```** & **```rds_name```** 값 참조
+        - **```"test-tf-rds-aurora-cluster"```** 동일
+  - engine
+    - var.engine_info.engine
+      - **```variable.tf```** 파일에서 생성한 **```engine_info```** . **```engine```** 값 참조
+  - engine_version
+    - var.engine_info.engine_version
+      - **```variable.tf```** 파일에서 생성한 **```engine_info```** . **```engine_version```** 값 참조
+
+
+
+
+  - availability_zones
+  - database_name
+  - master_username
+  - master_password
+  - tags
