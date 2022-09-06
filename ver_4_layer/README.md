@@ -698,7 +698,7 @@ resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {
 -----
 > 명령어
 > ```
-> $ cd 03_EC2_
+> $ cd 03_EC2_bastion
 > 
 > $ terraform init 
 > $ terraform plan -refresh=false -out=planfile
@@ -846,7 +846,7 @@ resource "aws_instance" "bastion" {
   - key_name
     - var.key_name
       - **```variable.tf```** 파일에서 생성한 **```key_name```** 값 참조
-  - root_block_device ```(내부 블럭)```
+  - **root_block_device ```(내부 블럭)```**
     - volume_size
       - var.volume_size
         - **```variable.tf```** 파일에서 생성한 **```volume_size```** 값 참조 
@@ -862,25 +862,260 @@ resource "aws_instance" "bastion" {
 
 -----
 # EC2(Service) Folder
+> 폴더 항목
+> ```
+> 04_EC2_service
+> ├── data.tf
+> ├── ec2.tf
+> ├── main.tf
+> ├── output.tf
+> ├── planfile
+> ├── provider.tf
+> └── variable.tf
+> ```
+
+-----
+> 명령어
+> ```
+> $ cd 04_EC2_service
+> 
+> $ terraform init 
+> $ terraform plan -refresh=false -out=planfile
+> $ terraform apply planfile
+> ```
+
+-----
+> **앞서 설명 드린 내용은 빠르게 Skip 진행하고 추가된 내용 안내 드립니다.**
+-----
+## 04_EC2_service/variable.tf
+```hcl
+variable "region" {
+  type    = string
+  default = "ap-northeast-2"
+}
+
+variable "prefix" {
+  type    = string
+  default = "test"
+}
 
 
+variable "tags" {
+  type = map(string)
+  default = {
+    "CreatedByTerraform" = "True"
+    "purpose"            = "Test"
+    "owner"              = "msc"
+    "resource"           = "EC2"
+  }
+}
 
+variable "add_instance" {
+  description = "EC2 Create map list"
+  type        = map(any)
+  default = {
+    "web_a" = {
+      instance_name     = "web"
+      ami_id            = "ami-0fd0765afb77bcca7"
+      availability_zone = "ap-northeast-2a"
+      instance_type     = "t2.micro"
+      key_name          = "tf_test_key"
+      volume_size       = 8
+      volume_type       = "gp2"
+      sg_group = "web"
+    },
+    "web_c" = {
+      instance_name     = "web"
+      ami_id            = "ami-0fd0765afb77bcca7"
+      availability_zone = "ap-northeast-2c"
+      instance_type     = "t2.micro"
+      key_name          = "tf_test_key"
+      volume_size       = 8
+      volume_type       = "gp2"
+      sg_group = "web"
+    },
+    "was_a" = {
+      instance_name     = "was"
+      ami_id            = "ami-0fd0765afb77bcca7"
+      availability_zone = "ap-northeast-2a"
+      instance_type     = "t2.micro"
+      key_name          = "tf_test_key"
+      volume_size       = 8
+      volume_type       = "gp2"
+    },
+    "was_c" = {
+      instance_name     = "was"
+      ami_id            = "ami-0fd0765afb77bcca7"
+      availability_zone = "ap-northeast-2c"
+      instance_type     = "t2.micro"
+      key_name          = "tf_test_key"
+      volume_size       = 8
+      volume_type       = "gp2"
+    }
+  }
+}
+```
++ **variable "region" {...} 블럭 생성 진행**
++ **variable "prefix" {...} 블럭 생성 진행**
++ **variable "tags" {...} 블럭 생성 진행**
++ **variable "add_instance" {...} 블럭 생성 진행**
 
+-----
+## 04_EC2_service/ec2.tf
+```hcl
+resource "aws_instance" "web_a" {
+  ami               = data.aws_ami.amazon-linux-2.id
+  availability_zone = var.add_instance.web_a.availability_zone
+  instance_type     = var.add_instance.web_a.instance_type
+  key_name          = var.add_instance.web_a.key_name
+  security_groups   = [data.terraform_remote_state.sg.outputs.web_sg_id]
+  subnet_id         = data.terraform_remote_state.vpc.outputs.web_a_subnet_id
 
+  root_block_device {
+    volume_size = var.add_instance.web_a.volume_size
+    volume_type = var.add_instance.web_a.volume_type
+ 
+    tags = merge(var.tags, tomap({ Name = format("%s-tf-%s-%s-ebs", var.prefix, var.add_instance.web_a.availability_zone, var.add_instance.web_a.instance_name) }))
+  }
+  lifecycle { create_before_destroy = true }
+ 
+  tags = merge(var.tags, tomap({ Name = format("%s-tf-%s-%s", var.prefix, var.add_instance.web_a.availability_zone, var.add_instance.web_a.instance_name) }))
+}
+```
++ **resource "aws_instance" "web_a" {...} 블럭 생성 진행**
+  - ami
+    - data.aws_ami.amazon-linux-2.id
+      - 위에서 설정한 **```data.tf```** 파일의 **```data  "aws_ami" "amazon-linux-2" {...}```** 블럭 참조
+ 
+ 
+ 
+ 
+ 
+  - availability_zone
+    - var.add_instance.web_a.availability_zone
+      - **```variable.tf```** 파일에서 생성한 **```add_instance```** . **```web_a```** . **```availability_zone```** 값 참조
+  - instance_type
+    - var.add_instance.web_a.instance_type
+      - **```variable.tf```** 파일에서 생성한 **```add_instance```** . **```web_a```** . **```instance_type```** 값 참조
+  - key_name
+    - var.add_instance.web_a.key_name
+      - **```variable.tf```** 파일에서 생성한 **```add_instance```** . **```web_a```** . **```key_name```** 값 참조
+  
+  - **root_block_device ```(내부 블럭)```**
+    - volume_size
+      - **```variable.tf```** 파일에서 생성한 **```add_instance```** . **```web_a```** . **```volume_size```** 값 참조
+      
+    - volume_type
+      - var.volume_type
+        - **```variable.tf```** 파일에서 생성한 **```add_instance```** . **```web_a```** . **```volume_type```** 값 참조
 
+> 참고용 URL
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ami
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami_ids
 
-
-
-
-
-
-
-
-
-
-
-
+-----
 
 # ALB Folder
+> 폴더 항목
+> ```
+> 05_ALB
+> ├── data.tf
+> ├── elb_alb.tf
+> ├── elb_alb_listener.tf
+> ├── elb_alb_listener_rule.tf
+> ├── elb_alb_tg.tf
+> ├── main.tf
+> ├── output.tf
+> ├── planfile
+> ├── provider.tf
+> └── variable.tf
+> ```
+
+-----
+> 명령어
+> ```
+> $ cd 05_ALB
+> 
+> $ terraform init 
+> $ terraform plan -refresh=false -out=planfile
+> $ terraform apply planfile
+> ```
+
+-----
+> **앞서 설명 드린 내용은 빠르게 Skip 진행하고 추가된 내용 안내 드립니다.**
+-----
+## 05_ALB/variable.tf
+```hcl
+variable "region" {
+  type = string
+  default = "ap-northeast-2"
+}
+
+variable "prefix" {
+  type = string
+  default = "test"
+}
+
+variable "tags" {
+  type = map(string)
+  default = {
+    "CreatedByTerraform" = "True"
+    "purpose"            = "Test"
+    "owner"              = "msc"
+    "resource"           = "ALB"
+  }
+}
+
+variable "add_alb" {
+  type = map(any)
+  default = {
+    front = {
+      name = "front-alb"
+      target_type = "instance"
+      port = 80
+      protocol = "HTTP"
+    },
+    backend = {
+      name = "backend-alb"
+      target_type = "instance"
+      port = 8080
+      protocol = "HTTP"
+    }
+  }
+}
+```
++ **variable "region" {...} 블럭 생성 진행**
++ **variable "prefix" {...} 블럭 생성 진행**
++ **variable "tags" {...} 블럭 생성 진행**
++ **variable "add_alb" {...} 블럭 생성 진행**
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # RDS Folder
 
