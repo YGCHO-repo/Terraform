@@ -647,6 +647,9 @@ variable "rules" {
 + **variable "tags" {...} 블럭 생성 진행**
 + **variable "rules" {...} 블럭 생성 진행**
 
+> 참고용 URL
+> - https://www.terraform.io/language/values/variables
+
 -----
 
 ## 02_SG/security_group_rule.tf
@@ -809,6 +812,9 @@ variable "tags" {
 + **variable "volume_type" {...} 블럭 생성 진행**
 + **variable "tags" {...} 블럭 생성 진행**
 
+> 참고용 URL
+> - https://www.terraform.io/language/values/variables
+
 -----
 ## 03_EC2_bastion/variable.tf
 ```hcl
@@ -960,6 +966,9 @@ variable "add_instance" {
 + **variable "tags" {...} 블럭 생성 진행**
 + **variable "add_instance" {...} 블럭 생성 진행**
 
+> 참고용 URL
+> - https://www.terraform.io/language/values/variables
+
 -----
 ## 04_EC2_service/ec2.tf
 ```hcl
@@ -986,11 +995,6 @@ resource "aws_instance" "web_a" {
   - ami
     - data.aws_ami.amazon-linux-2.id
       - 위에서 설정한 **```data.tf```** 파일의 **```data  "aws_ami" "amazon-linux-2" {...}```** 블럭 참조
- 
- 
- 
- 
- 
   - availability_zone
     - var.add_instance.web_a.availability_zone
       - **```variable.tf```** 파일에서 생성한 **```add_instance```** . **```web_a```** . **```availability_zone```** 값 참조
@@ -1091,31 +1095,159 @@ variable "add_alb" {
 + **variable "tags" {...} 블럭 생성 진행**
 + **variable "add_alb" {...} 블럭 생성 진행**
 
+> 참고용 URL
+> - https://www.terraform.io/language/values/variables
 
+-----
+## 05_ALB/elb_alb.tf
+```hcl
+resource "aws_lb" "front_alb" {
+  name               = format("%s-tf-%s", var.prefix, var.add_alb.front.name)
+  internal           = false
+  load_balancer_type = "application"
 
+  subnets = [
+    data.terraform_remote_state.vpc.outputs.pub_a_subnet_id,
+    data.terraform_remote_state.vpc.outputs.pub_c_subnet_id
+  ]
 
+  security_groups = [
+    data.terraform_remote_state.sg.outputs.alb_front_sg_id
+  ]
 
+  # depends_on = [aws_lb_target_group.front_alb_tg]
+  tags = merge(var.tags, tomap({Name = format("%s-tf-%s", var.prefix, var.add_alb.front.name)}))
+}
+```
++ **resource "aws_lb" "front_alb" {...} 블럭 생성 진행**
+  - name , tags
+    - format("%s-tf-%s", var.prefix, var.add_alb.front.name)
+     - **```formet```** 함수 사용
+      - **```variable.tf```** 파일에서 생성한 **```prefix```** & **```add_alb_front.name```** 값 참조
 
+> 참고용 URL  
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-----
 
 # RDS Folder
+> 폴더 항목
+> ```
+> 06_RDS
+> ├── data.t
+> ├── main.t
+> ├── output.t
+> ├── parameter_group.t
+> ├── provider.t
+> ├── rds_aurora.t
+> ├── subnet_group.t
+> └── variable.tf
+> ```
 
+-----
+> 명령어
+> ```
+> $ cd 06_RDS
+> 
+> $ terraform init 
+> $ terraform plan -refresh=false -out=planfile
+> $ terraform apply planfile
+> ```
+
+-----
+> **앞서 설명 드린 내용은 빠르게 Skip 진행하고 추가된 내용 안내 드립니다.**
+-----
+## 06_RDS/variable.tf
+```hcl
+variable "region" {
+  type    = string
+  default = "ap-northeast-2"
+}
+
+variable "prefix" {
+  type    = string
+  default = "test"
+}
+
+variable "azs" {
+  type    = list(string)
+  default = ["ap-northeast-2a", "ap-northeast-2c"]
+}
+
+variable "rds_name" {
+  type    = string
+  default = "rds-aurora"
+
+}
+
+variable "engine_info" {
+  type = map(string)
+  default = {
+    engine          = "aurora-mysql"
+    engine_version = "8.0.mysql_aurora.3.02.0"
+  }
+}
+
+variable "rds_cluster_identifier" {
+  type = map(string)
+  default = {
+    database_name   = "testterraformdb"
+    master_username = "admin"
+    master_password = "DBAdmin1004"
+  }
+
+}
+
+variable "tags" {
+  type = map(string)
+  default = {
+    "CreatedByTerraform" = "True"
+    "purpose"            = "Test"
+    "owner"              = "msc"
+    "resource"           = "RDS"
+  }
+}
+```
++ **variable "region" {...} 블럭 생성 진행**
++ **variable "prefix" {...} 블럭 생성 진행**
++ **variable "azs" {...} 블럭 생성 진행**
++ **variable "rds_name" {...} 블럭 생성 진행**
++ **variable "engine_info" {...} 블럭 생성 진행**
++ **variable "rds_cluster_identifier" {...} 블럭 생성 진행**
++ **variable "tags" {...} 블럭 생성 진행**
+
+> 참고용 URL
+> - https://www.terraform.io/language/values/variables
+
+-----
+## 06_RDS/rds_aurora.tf
+```hcl
+resource "aws_rds_cluster" "this" {
+  cluster_identifier   = format("%s-tf-%s-cluster", var.prefix, var.rds_name) //"test-tf-rds-aurora-cluster"
+  db_subnet_group_name = aws_db_subnet_group.this.id
+
+  engine         = var.engine_info.engine
+  engine_version = var.engine_info.engine_version
+
+  availability_zones = var.azs
+
+  database_name   = var.rds_cluster_identifier.database_name
+  master_username = var.rds_cluster_identifier.master_username
+  master_password = var.rds_cluster_identifier.master_password
+
+  port = 3306
+
+  vpc_security_group_ids = [
+    data.terraform_remote_state.sg.outputs.rds_sg_id
+  ]
+
+  skip_final_snapshot = true
+
+  backup_retention_period = 1
+
+  db_cluster_parameter_group_name  = aws_rds_cluster_parameter_group.this.id
+  db_instance_parameter_group_name = aws_db_parameter_group.this.id
+
+  tags = merge(var.tags, tomap({ Name = format("%s-tf-%s-cluster", var.prefix, var.rds_name) }))
+}
+```
