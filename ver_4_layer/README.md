@@ -666,22 +666,221 @@ resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {
 ```
 + **resource "aws_subnet" "main_pub_c_subnet" {...} 블럭 생성 진행**
   - type
-    - **```variable.tf```** 파일에서 생성한 **```rules```** . **```bastion```** . **```type```** 값 참조
+    - var.rules.bastion.type
+      - **```variable.tf```** 파일에서 생성한 **```rules```** . **```bastion```** . **```type```** 값 참조
   - from_port
-    - **```variable.tf```** 파일에서 생성한 **```rules```** . **```bastion```** . **```from_port```** 값 참조
+    -  var.rules.bastion.from_port
+      - **```variable.tf```** 파일에서 생성한 **```rules```** . **```bastion```** . **```from_port```** 값 참조
   - to_port
-    - **```variable.tf```** 파일에서 생성한 **```rules```** . **```bastion```** . **```to_port```** 값 참조
+    - var.rules.bastion.to_port
+      - **```variable.tf```** 파일에서 생성한 **```rules```** . **```bastion```** . **```to_port```** 값 참조
   - protocol
-    - **```variable.tf```** 파일에서 생성한 **```rules```** . **```bastion```** . **```protocol```** 값 참조
+    - var.rules.bastion.protocol
+      - **```variable.tf```** 파일에서 생성한 **```rules```** . **```bastion```** . **```protocol```** 값 참조
 
 > 참고용 URL
 > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
 
-
-
-
+-----
 # EC2(Bastion) Folder
+> 폴더 항목
+> ```
+> 03_EC2_bastion
+> ├── data.tf
+> ├── ec2.tf
+> ├── main.tf
+> ├── output.tf
+> ├── planfile
+> ├── provider.tf
+> └── variable.tf
+> ```
+
+-----
+> 명령어
+> ```
+> $ cd 03_EC2_
+> 
+> $ terraform init 
+> $ terraform plan -refresh=false -out=planfile
+> $ terraform apply planfile
+> ```
+
+-----
+> **앞서 설명 드린 내용은 빠르게 Skip 진행하고 추가된 내용 안내 드립니다.**
+-----
+
+## 03_EC2_bastion/data.tf
+```hcl
+data "aws_ami" "amazon-linux-2" {
+  most_recent = true
+  owners      = ["amazon"]
+
+  filter {
+    name = "name"
+    # values = ["amzn2-ami-hvm*"]
+    values = ["amzn2-ami-kernel-5.10-hvm*"]
+  }
+}
+```
++ **data "aws_ami" "amazon-linux-2" {...} 블럭 생성 진행**
+  - most_recent
+    - data 블럭/필터 검색시 동일 항목의 경우 최신 버전 사용여부
+  - owners
+    - data 블럭의 owners 값 설정
+    - **_```"amazon"```_** 이 관리 하는 리소스
+  - filter
+    - 필터링 진행시 필요한 정보 설정
+    - Amazon linux 2 AMI 이미지를 찾기 위한 설정
+
+> 참고용 URL
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ami
+> - https://www.terraform.io/language/data-sources
+
+> 참고용 URL (AWS)
+> - https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html
+
+-----
+
+## 03_EC2_bastion/variable.tf
+```hcl
+variable "region" {
+  type    = string
+  default = "ap-northeast-2"
+}
+
+variable "prefix" {
+  type    = string
+  default = "test"
+}
+
+variable "az" {
+  description = "Created EC2-Bastion AZ"
+  type        = string
+  default     = "ap-northeast-2a"
+}
+
+variable "instance_name" {
+  description = "EC2 instance name"
+  type        = string
+  default     = "bastion"
+}
+
+variable "instance_type" {
+  description = "EC2 instance type"
+  type        = string
+  default     = "t2.micro"
+}
+
+variable "key_name" {
+  description = "Key name to use for EC2 instance"
+  type        = string
+  default     = "tf_test_key"
+}
+
+variable "volume_size" {
+  description = "The size of the volume in gigabytes"
+  type        = number
+  default     = 8
+}
+
+variable "volume_type" {
+  description = "The type of volume (gp2, gp3, io2, standard)"
+  type        = string
+  default     = "gp2"
+}
+
+variable "tags" {
+  type = map(string)
+  default = {
+    "CreatedByTerraform" = "True"
+    "purpose"            = "Test"
+    "owner"              = "msc"
+    "resource"           = "EC2"
+  }
+}
+```
++ **variable "region" {...} 블럭 생성 진행**
++ **variable "prefix" {...} 블럭 생성 진행**
++ **variable "az" {...} 블럭 생성 진행**
++ **variable "instance_name" {...} 블럭 생성 진행**
++ **variable "instance_type" {...} 블럭 생성 진행**
++ **variable "key_name" {...} 블럭 생성 진행**
++ **variable "volume_size" {...} 블럭 생성 진행**
++ **variable "volume_type" {...} 블럭 생성 진행**
++ **variable "tags" {...} 블럭 생성 진행**
+
+-----
+## 03_EC2_bastion/variable.tf
+```hcl
+resource "aws_instance" "bastion" {
+  ami               = data.aws_ami.amazon-linux-2.id
+  availability_zone = var.az
+  instance_type     = var.instance_type
+  key_name          = var.key_name
+  
+  subnet_id         = data.terraform_remote_state.vpc.outputs.pub_a_subnet_id
+  
+  security_groups   = [data.terraform_remote_state.sg.outputs.bastion_sg_id, ]
+
+  root_block_device {
+    volume_size = var.volume_size
+    volume_type = var.volume_type
+    tags        = merge(var.tags, tomap({ Name = format("%s-tf-%s-%s-ebs", var.prefix, var.az, var.instance_name)}))
+  }
+  
+  lifecycle { create_before_destroy = true }
+  
+  tags = merge(var.tags, tomap({ Name = format("%s-tf-%s-%s", var.prefix, var.az, var.instance_name)}))
+}
+```
++ **resource "aws_instance" "bastion" {...} 블럭 생성 진행**
+  - ami
+    - data.aws_ami.amazon-linux-2.id
+      - 위에서 설정한 **```data.tf```** 파일의 **```data  "aws_ami" "amazon-linux-2" {...}```** 블럭 참조
+  - availability_zone
+    - var.az
+      - **```variable.tf```** 파일에서 생성한 **```az```** 값 참조
+  - instance_type
+    - var.instance_type
+      - **```variable.tf```** 파일에서 생성한 **```instance_type```** 값 참조
+  - key_name
+    - var.key_name
+      - **```variable.tf```** 파일에서 생성한 **```key_name```** 값 참조
+  - root_block_device ```(내부 블럭)```
+    - volume_size
+      - var.volume_size
+        - **```variable.tf```** 파일에서 생성한 **```volume_size```** 값 참조 
+    - volume_type
+      - var.volume_type
+        - **```variable.tf```** 파일에서 생성한 **```volume_type```** 값 참조 
+
+> 참고용 URL
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ami
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/ami_ids
+
+-----
 # EC2(Service) Folder
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # ALB Folder
 # RDS Folder
 

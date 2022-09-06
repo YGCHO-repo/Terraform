@@ -768,9 +768,6 @@ resource "aws_rds_cluster_instance" "this" {
 
 > 참고용 URL
 > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance
-     
-     
-     
-     
+
 > 참고용 URL (AWS)
 > - https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html

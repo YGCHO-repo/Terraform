@@ -31,5 +31,4 @@ resource "aws_instance" "bastion" {
   lifecycle { create_before_destroy = true }
   # disable_api_termination = true
   tags = merge(var.tags, tomap({ Name = format("%s-tf-%s-%s", var.prefix, var.az, var.instance_name)}))
-
 }
