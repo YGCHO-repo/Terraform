@@ -1264,12 +1264,29 @@ resource "aws_rds_cluster" "this" {
   - engine_version
     - var.engine_info.engine_version
       - **```variable.tf```** 파일에서 생성한 **```engine_info```** . **```engine_version```** 값 참조
-
-
-
-
   - availability_zones
+    - var.azs
+      - **[ ]** 리스트 형식
+      - **```variable.tf```** 파일에서 생성한 **```azs```** 값 참조
   - database_name
+    - var.rds_cluster_identifier.database_name
+      - **```variable.tf```** 파일에서 생성한 **```rds_cluster_identifier```** . **```database_name```** 값 참조
   - master_username
+    - var.rds_cluster_identifier.master_username
+      - **```variable.tf```** 파일에서 생성한 **```rds_cluster_identifier```** . **```master_username```** 값 참조
   - master_password
+    - var.rds_cluster_identifier.master_password
+      - **```variable.tf```** 파일에서 생성한 **```rds_cluster_identifier```** . **```master_password```** 값 참조
   - tags
+    - merge(var.tags, tomap({ Name = format("%s-tf-%s-cluster", var.prefix, var.rds_name) }))
+      - **```merge```** . **```tomap```** . **```formet```** 함수 사용
+        - **```variable.tf```** 파일에서 생성한 **```prefix```** & **```rds_name```** 값 참조
+          - 1. ```format()``` 함수 사용 ```prefix``` . ```rds_name``` 값 리턴
+          - 2. ```tomap()``` 함수 사용 ```Name``` , ```format()``` 리턴
+          - 3. ```merge()``` 함수 사용 ```var.tags``` , ```var.s3_bucket``` **병합**
+
+> 참고용 URL
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster
+> - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster_instance
+
+-----
