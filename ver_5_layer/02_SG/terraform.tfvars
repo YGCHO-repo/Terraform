@@ -2,7 +2,7 @@ region = "ap-northeast-2"
 
 prefix = "test"
 
-name = "tf-yg"
+name = "tf-msc"
 
 tags = {
     "CreatedByTerraform" = "True"

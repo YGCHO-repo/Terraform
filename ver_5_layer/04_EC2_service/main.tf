@@ -14,7 +14,7 @@ terraform {
   #  다중 인원 및 원격 위치에서의 State 파일 참조를 위해서 설정
   # ++++++++++++++++++++++++++++++++++++++++++++++++++++
   backend "s3" {
-    bucket         = "test-terraform-state-backend-yg"
+    bucket         = "test-terraform-state-backend-msc"
     dynamodb_table = "test-terraform-state-locks"
     key            = "ec2/service/terraform.tfstate"
     region         = "ap-northeast-2"
