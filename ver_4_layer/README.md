@@ -852,7 +852,7 @@ resource "aws_instance" "bastion" {
   - key_name
     - var.key_name
       - **`variable.tf`** 파일에서 생성한 **`key_name`** 값 참조
-  - **root_block_device ```(내부 블럭)```**
+  - **root_block_device `(내부 블럭)`**
     - volume_size
       - var.volume_size
         - **`variable.tf`** 파일에서 생성한 **`volume_size`** 값 참조 
@@ -1005,7 +1005,7 @@ resource "aws_instance" "web_a" {
     - var.add_instance.web_a.key_name
       - **`variable.tf`** 파일에서 생성한 **`add_instance`** . **`web_a`** . **`key_name`** 값 참조
   
-  - **root_block_device ```(내부 블럭)```**
+  - **root_block_device `(내부 블럭)`**
     - volume_size
       - **`variable.tf`** 파일에서 생성한 **`add_instance`** . **`web_a`** . **`volume_size`** 값 참조
       
