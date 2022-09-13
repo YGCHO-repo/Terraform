@@ -12,6 +12,22 @@ tags = {
 }
 
 rules = {
+
+  # "bastion" = {
+  #   security_group_id        = ""
+  #   type                     = "ingress"
+  #   from_port                = 22
+  #   to_port                  = 22
+  #   protocol                 = "tcp"
+  #   cidr_blocks              = ["211.60.50.130/32", "0.0.0.0/0"]
+  #   source_security_group_id = ""
+  #   ipv6_cidr_blocks         = []
+  #   prefix_list_ids          = []
+  #   self                     = false
+  #   description              = "for test SG rules"
+  # }
+
+
   bastion = {
       name        = "bastion"
       type        = "ingress"

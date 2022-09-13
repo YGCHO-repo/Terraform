@@ -33,5 +33,5 @@ override.tf.json
 .history/
 .history/*
 
-
+# Apple Mac OS file 
 .DS_Store

@@ -14,25 +14,25 @@ enable_internet_gateway = "true"
 enable_nat_gateway      = "true"
 
 subnets = {
-  "main" = {
-    cidr  = ["10.50.10.0/24", "10.50.20.0/24"]
-    type  = "public"
-    natgw = "no"
+  main = {
+    "cidr"  = ["10.50.10.0/24", "10.50.20.0/24"]
+    "type"  = "public"
+    "natgw" = "no"
   },
   web = {
-    cidr  = ["10.50.110.0/24", "10.50.120.0/24"]
-    type  = "private"
-    natgw = "no"
+    "cidr"  = ["10.50.110.0/24", "10.50.120.0/24"]
+    "type"  = "private"
+    "natgw" = "no"
   },
   was = {
-    cidr  = ["10.50.130.0/24", "10.50.140.0/24"]
-    type  = "private"
-    natgw = "yes"
+    "cidr"  = ["10.50.130.0/24", "10.50.140.0/24"]
+    "type"  = "private"
+    "natgw" = "yes"
   },
   rds = {
-    cidr  = ["10.50.210.0/24", "10.50.220.0/24"]
-    type  = "private"
-    natgw = "no"
+    "cidr"  = ["10.50.210.0/24", "10.50.220.0/24"]
+    "type"  = "private"
+    "natgw" = "no"
   }
 }
 

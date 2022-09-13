@@ -1,34 +1,22 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # # Default SG Network Disable
 # resource "aws_default_security_group" "this" {
 #   vpc_id = data.terraform_remote_state.vpc.outputs.vpc_id
 #   tags   = merge(var.tags, tomap({ Name = format("%s-%s-default-sg", var.prefix, var.name) }))
 # }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 # #                        Bastion SVR SG
