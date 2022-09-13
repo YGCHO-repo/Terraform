@@ -98,7 +98,7 @@ terraform {
 - required_providers
     - registry.terraform.io/hashicorp/aws 에서 4.22.0 버전 사용
 
-```main.tf 파일은 향후 module 블럭 설정 파일로 사용 가능 ```
+`main.tf 파일은 향후 module 블럭 설정 파일로 사용 가능 `
 -----
 ## provider.tf
 ```hcl
@@ -393,7 +393,7 @@ resource "aws_eip" "bastion_eip" {
     - 표현값의 경우 "${aws_security_group.bastion_sg.id}" or aws_security_group.bastion_sg.id 사용가능
   - key_name
     - EC2 instance 생성시 적용 *.pem key (key_pair)
-    - __**```빠른 진행을 위해서 기존 AWS key_pair 사용```**__
+    - __**`빠른 진행을 위해서 기존 AWS key_pair 사용`**__
   - subnet_id
     - EC2 instance 가 생성 되는 subnet 위치
   

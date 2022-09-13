@@ -213,33 +213,33 @@ variable "tags" {
     - 변수의 목적을 간단하게 작성
   - type
     - 변수의 타입을 설정
-      - **```string```, ```number```, ```bool```, ```list(TYPE)```, ```map(TYPE)```** 등 있음
+      - **`string`, `number`, `bool`, `list(TYPE)`, `map(TYPE)`** 등 있음
   - default
-    - 폴더 내부에서 **_```" var.region "```_**을 설정시 적용될 내용
-    - **_```"ap-northeast-2"```_** 설정
+    - 폴더 내부에서 **_`" var.region "`_**을 설정시 적용될 내용
+    - **_`"ap-northeast-2"`_** 설정
 
 + **variable "s3_bucket" {...} 블럭 생성 진행**
   - default
-    - 폴더 내부에서 **_```" var.s3_bucket "```_**을 설정시 적용될 내용
-    - **_```"test-terraform-state-backend-msc"```_** 설정
+    - 폴더 내부에서 **_`"var.s3_bucket"`_**을 설정시 적용될 내용
+    - **_`"test-terraform-state-backend-msc"`_** 설정
 
 + **variable "s3_acl" {...} 블럭 생성 진행**
   - default
-    - 폴더 내부에서 **_```" var.s3_acl "```_**을 설정시 적용될 내용
-    - **_```"private"```_** 설정
+    - 폴더 내부에서 **_`"var.s3_acl"`_**을 설정시 적용될 내용
+    - **_`"private"```_** 설정
 
 + **variable "dynamodb_table" {...} 블럭 생성 진행**
   - default
-    - 폴더 내부에서 **_```" var.dynamodb_table "```_**을 설정시 적용될 내용
-    - **_```"test-terraform-state-locks"```_** 설정
+    - 폴더 내부에서 **_`"var.dynamodb_table"`_** 을 설정시 적용될 내용
+    - **_`"test-terraform-state-locks"`_** 설정
 
 + **variable "tags" {...} 블럭 생성 진행**
   - type
     - 변수의 타입을 설정
-      - **```map(string)```** 설정
-      - **```Key``` =  ```value```** 설정
+      - **`map(string)`** 설정
+      - **`Key` =  `value`** 설정
   - default
-    - 폴더 내부에서 **_```" var.tags "```_**을 설정시 적용될 내용
+    - 폴더 내부에서 **_`" var.tags "`_**을 설정시 적용될 내용
     - 
 
 > 참고용 URL
@@ -255,8 +255,8 @@ provider "aws" {
 + **provider "aws" {...} 블럭 진행**
   - region
     - var.region
-      - **```variable.tf```** 파일에서 생성한 **```region```** 값 참조
-      - ```region = var.region```   **or**   ```region = "ap-northeast-2"``` 똑같다
+      - **`variable.tf`** 파일에서 생성한 **`region`** 값 참조
+      - `region = var.region`   **or**   `region = "ap-northeast-2"` 똑같다
 
 
 > 참고용 URL
@@ -298,26 +298,26 @@ resource "aws_dynamodb_table" "terraform_state_locks" {
 + **resource "aws_s3_bucket" "terraform_state_backend" {...} 블럭 생성 진행**
   - bucket
     - var.s3_bucket
-      - **```variable.tf```** 파일에서 생성한 **```s3_bucket```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`s3_bucket`** 값 참조
       
-        - ```region = var.s3_bucket```   **or**   ```region = "test-terraform-state-backend-msc"``` 똑같다
+        - `region = var.s3_bucket`   **or**   `region = "test-terraform-state-backend-msc"` 똑같다
   - tag
     - merge(var.tags, tomap({ Name = format("%s", var.s3_bucket) }))
-      - **```merge```** . **```tomap```** . **```formet```** 함수 사용
-        - **```variable.tf```** 파일에서 생성한 **```s3_bucket```** & **```tags```** 값 참조
-          - 1. ```format()``` 함수 사용 ```s3_bucket```의 값을 ```"test-terraform-state-backend-msc"```로 리턴
-          - 2. ```tomap()``` 함수 사용 ```Name``` , ```format()``` 리턴
-          - 3. ```merge()``` 함수 사용 ```var.tags``` , ```var.s3_bucket``` **병합**
+      - **`merge`** . **`tomap`** . **`formet`** 함수 사용
+        - **`variable.tf`** 파일에서 생성한 **`s3_bucket`** & **`tags`** 값 참조
+          - 1. `format()` 함수 사용 `s3_bucket`의 값을 `"test-terraform-state-backend-msc"`로 리턴
+          - 2. `tomap()` 함수 사용 `Name` , `format()` 리턴
+          - 3. `merge()` 함수 사용 `var.tags` , `var.s3_bucket` **병합**
 
 + **resource "aws_s3_bucket_acl" "this" {...} 블럭 생성 진행**
   - acl
     - var.s3_acl
-      - **```variable.tf```** 파일에서 생성한 **```s3_acl```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`s3_acl`** 값 참조
 
 + **resource "aws_dynamodb_table" "terraform_state_backend" {...} 블럭 생성 진행**
   - name
     - var.dynamodb_table
-      - **```variable.tf```** 파일에서 생성한 **```dynamodb_table```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`dynamodb_table`** 값 참조
 
 > **S3 bucket as backend**
 >  - Terraform의 상태(terraform.tfstate)파일을 versioning하며 저장하기 위해 S3 bucket을 생성
@@ -469,15 +469,15 @@ resource "aws_vpc" "this" {
 + **resource "aws_vpc" "this" {...} 블럭 생성 진행**
   - cidr_block
     - var.vpc_cidr
-      - **```variable.tf```** 파일에서 생성한 **```vpc_cidr```** 값 참조
-        - ```cidr_block = var.vpc_cidr```   **or**   ```cidr_block = "10.50.0.0/16""``` 똑같다
+      - **`variable.tf`** 파일에서 생성한 **`vpc_cidr`** 값 참조
+        - `cidr_block = var.vpc_cidr`   **or**   `cidr_block = "10.50.0.0/16""` 똑같다
   - tag
     - merge(var.tags, tomap({Name = format("%s-%s",  var.prefix, var.vpc_name)}))
-      - **```merge```** . **```tomap```** . **```formet```** 함수 사용
-        - **```variable.tf```** 파일에서 생성한 **```prefix```** & **```tags```** & **```vpc_name```** 값 참조
-          - 1. ```merge()``` 함수 사용 ```var.tags``` , **```tomap()```** 값 **병합**
-          - 2. ```tomap()``` 함수 사용 ```Name``` , **```format()```** 함수 값 리턴
-          - 3. ```format()``` 함수 사용 ```var.prefix``` , ```var.vpc_name``` 값 설정
+      - **`merge`** . **`tomap`** . **`formet`** 함수 사용
+        - **`variable.tf`** 파일에서 생성한 **`prefix`** & **`tags`** & **`vpc_name`** 값 참조
+          - 1. `merge()` 함수 사용 `var.tags` , **`tomap()`** 값 **병합**
+          - 2. `tomap()` 함수 사용 `Name` , **`format()`** 함수 값 리턴
+          - 3. `format()` 함수 사용 `var.prefix` , `var.vpc_name` 값 설정
 
 
 > 참고용 URL
@@ -505,27 +505,27 @@ resource "aws_subnet" "main_pub_c_subnet" {
 ```
 + **resource "aws_subnet" "main_pub_a_subnet" {...} 블럭 생성 진행**
   - cidr_block
-    - **```variable.tf```** 파일에서 생성한 **```subnets```** . **```pub_a```** . **```cidr```** 값 참조
-      - ```cidr_block = var.subnets.pub_a.cidr```   **or**   ```cidr_block = "10.50.10.0/24"``` 똑같다
+    - **`variable.tf`** 파일에서 생성한 **`subnets`** . **`pub_a`** . **`cidr`** 값 참조
+      - `cidr_block = var.subnets.pub_a.cidr`   **or**   `cidr_block = "10.50.10.0/24"` 똑같다
   - tag
     - merge(var.tags, tomap({ Name = format("%s-%s-%s-public-main-subnet", var.prefix, var.vpc_name, var.azs.a_zone)}))
-      - **```merge```** . **```tomap```** . **```formet```** 함수 사용
-        - **```variable.tf```** 파일에서 생성한 **```prefix```** & **```tags```** & **```vpc_name```** & **```vpc_name```** 값 참조
-          - 1. ```merge()``` 함수 사용 ```var.tags``` , ```tomap()``` 값 **병합**
-          - 2. ```tomap()``` 함수 사용 ```Name``` , **```format()```** 함수 값 리턴
-          - 3. ```format()``` 함수 사용 ```var.prefix``` , ```var.vpc_name``` , ```var.azs``` 값 설정
+      - **`merge`** . **`tomap`** . **`formet`** 함수 사용
+        - **`variable.tf`** 파일에서 생성한 **`prefix`** & **`tags`** & **`vpc_name`** & **`vpc_name`** 값 참조
+          - 1. `merge()` 함수 사용 `var.tags` , `tomap()` 값 **병합**
+          - 2. `tomap()` 함수 사용 `Name` , **`format()`** 함수 값 리턴
+          - 3. `format()` 함수 사용 `var.prefix` , `var.vpc_name` , `var.azs` 값 설정
 
 + **resource "aws_subnet" "main_pub_c_subnet" {...} 블럭 생성 진행**
   - cidr_block
-    - **```variable.tf```** 파일에서 생성한 **```subnets```** . **```pub_c```** . **```cidr```** 값 참조
-      - ```cidr_block = var.subnets.pub_a.cidr```   **or**   ```cidr_block = "10.50.20.0/24"``` 똑같다
+    - **`variable.tf`** 파일에서 생성한 **`subnets`** . **`pub_c`** . **`cidr`** 값 참조
+      - `cidr_block = var.subnets.pub_a.cidr`   **or**   `cidr_block = "10.50.20.0/24"` 똑같다
   - tag
     - merge(var.tags, tomap({ Name = format("%s-%s-%s-public-main-subnet", var.prefix, var.vpc_name, var.azs.c_zone)}))
-      - **```merge```** . **```tomap```** . **```formet```** 함수 사용
-        - **```variable.tf```** 파일에서 생성한 **```prefix```** & **```tags```** & **```vpc_name```** & **```vpc_name```** 값 참조
-          - 1. ```merge()``` 함수 사용 ```var.tags``` , ```tomap()``` 값 **병합**
-          - 2. ```tomap()``` 함수 사용 ```Name``` , **```format()```** 함수 값 리턴
-          - 3. ```format()``` 함수 사용 ```var.prefix``` , ```var.vpc_name``` , ```var.azs``` 값 설정
+      - **`merge`** . **`tomap`** . **`formet`** 함수 사용
+        - **`variable.tf`** 파일에서 생성한 **`prefix`** & **`tags`** & **`vpc_name`** & **`vpc_name`** 값 참조
+          - 1. `merge()` 함수 사용 `var.tags` , `tomap()` 값 **병합**
+          - 2. `tomap()` 함수 사용 `Name` , **`format()`** 함수 값 리턴
+          - 3. `format()` 함수 사용 `var.prefix` , `var.vpc_name` , `var.azs` 값 설정
 
 > 참고용 URL
 > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/subnet
@@ -670,16 +670,16 @@ resource "aws_security_group_rule" "bastion_ssh_ingress_rule" {
 + **resource "aws_subnet" "main_pub_c_subnet" {...} 블럭 생성 진행**
   - type
     - var.rules.bastion.type
-      - **```variable.tf```** 파일에서 생성한 **```rules```** . **```bastion```** . **```type```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`rules`** . **`bastion`** . **`type`** 값 참조
   - from_port
     -  var.rules.bastion.from_port
-      - **```variable.tf```** 파일에서 생성한 **```rules```** . **```bastion```** . **```from_port```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`rules`** . **`bastion`** . **`from_port`** 값 참조
   - to_port
     - var.rules.bastion.to_port
-      - **```variable.tf```** 파일에서 생성한 **```rules```** . **```bastion```** . **```to_port```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`rules`** . **`bastion`** . **`to_port`** 값 참조
   - protocol
     - var.rules.bastion.protocol
-      - **```variable.tf```** 파일에서 생성한 **```rules```** . **```bastion```** . **```protocol```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`rules`** . **`bastion`** . **`protocol`** 값 참조
 
 > 참고용 URL
 > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
@@ -730,7 +730,7 @@ data "aws_ami" "amazon-linux-2" {
     - data 블럭/필터 검색시 동일 항목의 경우 최신 버전 사용여부
   - owners
     - data 블럭의 owners 값 설정
-    - **_```"amazon"```_** 이 관리 하는 리소스
+    - **_`"amazon"```_** 이 관리 하는 리소스
   - filter
     - 필터링 진행시 필요한 정보 설정
     - Amazon linux 2 AMI 이미지를 찾기 위한 설정
@@ -842,23 +842,23 @@ resource "aws_instance" "bastion" {
 + **resource "aws_instance" "bastion" {...} 블럭 생성 진행**
   - ami
     - data.aws_ami.amazon-linux-2.id
-      - 위에서 설정한 **```data.tf```** 파일의 **```data  "aws_ami" "amazon-linux-2" {...}```** 블럭 참조
+      - 위에서 설정한 **`data.tf`** 파일의 **`data  "aws_ami" "amazon-linux-2" {...}`** 블럭 참조
   - availability_zone
     - var.az
-      - **```variable.tf```** 파일에서 생성한 **```az```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`az`** 값 참조
   - instance_type
     - var.instance_type
-      - **```variable.tf```** 파일에서 생성한 **```instance_type```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`instance_type`** 값 참조
   - key_name
     - var.key_name
-      - **```variable.tf```** 파일에서 생성한 **```key_name```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`key_name`** 값 참조
   - **root_block_device ```(내부 블럭)```**
     - volume_size
       - var.volume_size
-        - **```variable.tf```** 파일에서 생성한 **```volume_size```** 값 참조 
+        - **`variable.tf`** 파일에서 생성한 **`volume_size`** 값 참조 
     - volume_type
       - var.volume_type
-        - **```variable.tf```** 파일에서 생성한 **```volume_type```** 값 참조 
+        - **`variable.tf`** 파일에서 생성한 **`volume_type`** 값 참조 
 
 > 참고용 URL
 > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
@@ -994,24 +994,24 @@ resource "aws_instance" "web_a" {
 + **resource "aws_instance" "web_a" {...} 블럭 생성 진행**
   - ami
     - data.aws_ami.amazon-linux-2.id
-      - 위에서 설정한 **```data.tf```** 파일의 **```data  "aws_ami" "amazon-linux-2" {...}```** 블럭 참조
+      - 위에서 설정한 **`data.tf`** 파일의 **`data  "aws_ami" "amazon-linux-2" {...}`** 블럭 참조
   - availability_zone
     - var.add_instance.web_a.availability_zone
-      - **```variable.tf```** 파일에서 생성한 **```add_instance```** . **```web_a```** . **```availability_zone```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`add_instance`** . **`web_a`** . **`availability_zone`** 값 참조
   - instance_type
     - var.add_instance.web_a.instance_type
-      - **```variable.tf```** 파일에서 생성한 **```add_instance```** . **```web_a```** . **```instance_type```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`add_instance`** . **`web_a`** . **`instance_type`** 값 참조
   - key_name
     - var.add_instance.web_a.key_name
-      - **```variable.tf```** 파일에서 생성한 **```add_instance```** . **```web_a```** . **```key_name```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`add_instance`** . **`web_a`** . **`key_name`** 값 참조
   
   - **root_block_device ```(내부 블럭)```**
     - volume_size
-      - **```variable.tf```** 파일에서 생성한 **```add_instance```** . **```web_a```** . **```volume_size```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`add_instance`** . **`web_a`** . **`volume_size`** 값 참조
       
     - volume_type
       - var.volume_type
-        - **```variable.tf```** 파일에서 생성한 **```add_instance```** . **```web_a```** . **```volume_type```** 값 참조
+        - **`variable.tf`** 파일에서 생성한 **`add_instance`** . **`web_a`** . **`volume_type`** 값 참조
 
 > 참고용 URL
 > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance
@@ -1122,9 +1122,9 @@ resource "aws_lb" "front_alb" {
 + **resource "aws_lb" "front_alb" {...} 블럭 생성 진행**
   - name , tags
     - format("%s-tf-%s", var.prefix, var.add_alb.front.name)
-      - **```formet```** 함수 사용
-        - **```variable.tf```** 파일에서 생성한 **```prefix```** & **```add_alb_front```** . **```name```** 값 참조
-        - **```"test-tf-front-alb"```** 동일
+      - **`formet`** 함수 사용
+        - **`variable.tf`** 파일에서 생성한 **`prefix`** & **`add_alb_front`** . **`name`** 값 참조
+        - **`"test-tf-front-alb"`** 동일
 
 > 참고용 URL  
 > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lb
@@ -1255,35 +1255,35 @@ resource "aws_rds_cluster" "this" {
 + **resource "aws_rds_cluster" "this" {...} 블럭 생성 진행**
   - cluster_identifier
     - format("%s-tf-%s-cluster", var.prefix, var.rds_name) //
-      - **```formet```** 함수 사용
-      - **```variable.tf```** 파일에서 생성한 **```prefix```** & **```rds_name```** 값 참조
-        - **```"test-tf-rds-aurora-cluster"```** 동일
+      - **`formet`** 함수 사용
+      - **`variable.tf`** 파일에서 생성한 **`prefix`** & **`rds_name`** 값 참조
+        - **`"test-tf-rds-aurora-cluster"`** 동일
   - engine
     - var.engine_info.engine
-      - **```variable.tf```** 파일에서 생성한 **```engine_info```** . **```engine```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`engine_info`** . **`engine`** 값 참조
   - engine_version
     - var.engine_info.engine_version
-      - **```variable.tf```** 파일에서 생성한 **```engine_info```** . **```engine_version```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`engine_info`** . **`engine_version`** 값 참조
   - availability_zones
     - var.azs
       - **[ ]** 리스트 형식
-      - **```variable.tf```** 파일에서 생성한 **```azs```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`azs`** 값 참조
   - database_name
     - var.rds_cluster_identifier.database_name
-      - **```variable.tf```** 파일에서 생성한 **```rds_cluster_identifier```** . **```database_name```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`rds_cluster_identifier`** . **`database_name`** 값 참조
   - master_username
     - var.rds_cluster_identifier.master_username
-      - **```variable.tf```** 파일에서 생성한 **```rds_cluster_identifier```** . **```master_username```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`rds_cluster_identifier`** . **`master_username`** 값 참조
   - master_password
     - var.rds_cluster_identifier.master_password
-      - **```variable.tf```** 파일에서 생성한 **```rds_cluster_identifier```** . **```master_password```** 값 참조
+      - **`variable.tf`** 파일에서 생성한 **`rds_cluster_identifier`** . **`master_password`** 값 참조
   - tags
     - merge(var.tags, tomap({ Name = format("%s-tf-%s-cluster", var.prefix, var.rds_name) }))
-      - **```merge```** . **```tomap```** . **```formet```** 함수 사용
-        - **```variable.tf```** 파일에서 생성한 **```prefix```** & **```rds_name```** 값 참조
-          - 1. ```format()``` 함수 사용 ```prefix``` . ```rds_name``` 값 리턴
-          - 2. ```tomap()``` 함수 사용 ```Name``` , ```format()``` 리턴
-          - 3. ```merge()``` 함수 사용 ```var.tags``` , ```var.s3_bucket``` **병합**
+      - **`merge`** . **`tomap`** . **`formet`** 함수 사용
+        - **`variable.tf`** 파일에서 생성한 **`prefix`** & **`rds_name`** 값 참조
+          - 1. `format()` 함수 사용 `prefix` . `rds_name` 값 리턴
+          - 2. `tomap()` 함수 사용 `Name` , `format()` 리턴
+          - 3. `merge()` 함수 사용 `var.tags` , `var.s3_bucket` **병합**
 
 > 참고용 URL
 > - https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/rds_cluster
