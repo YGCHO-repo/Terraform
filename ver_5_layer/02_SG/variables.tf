@@ -11,11 +11,17 @@ variable "prefix" {
   default     = ""
 }
 
-variable "name" {
+variable "sg_name" {
   description = "Security Group's name"
   type        = string
   default     = ""
 }
+
+# variable "sg_name" {
+#   description = "Security Group's name"
+#   type        = string
+#   default     = []
+# }
 
 variable "tags" {
   description = "AWS Default Tags"
