@@ -11,21 +11,27 @@ variable "prefix" {
   default     = ""
 }
 
-variable "sg_name" {
-  description = "Security Group's name"
-  type        = string
-  default     = ""
-}
-
 # variable "sg_name" {
 #   description = "Security Group's name"
 #   type        = string
+#   default     = ""
+# }
+
+# variable "sg_name" {
+#   description = "Security Group's name"
+#   type        = list(string)
 #   default     = []
 # }
 
 variable "tags" {
   description = "AWS Default Tags"
   type        = map(string)
+  default = {}
+}
+
+variable "sg_name" {
+  description = "Security Group's"
+  type = map(string)
   default = {}
 }
 
