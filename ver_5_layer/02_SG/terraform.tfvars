@@ -23,7 +23,7 @@ sg_name = {
 
 
 rules = {
-  bastion = {
+  bastion_in_22 = {
       sg_name                  = "bastion"
       security_group_id        = ""
       type                     = "ingress"
@@ -38,14 +38,14 @@ rules = {
       description              = "SSH for Bastion server"
     },
 
-    web = {
+    web_in_22 = {
       sg_name                  = "web"
       security_group_id        = ""
       type                     = "ingress"
       from_port                = 22
       to_port                  = 22
       protocol                 = "tcp"
-      cidr_blocks              = ["10.50.0.0/16", ]
+      cidr_blocks              = ["10.50.10.0/24", ]
       source_security_group_id = ""
       ipv6_cidr_blocks         = []
       prefix_list_ids          = []
@@ -53,14 +53,14 @@ rules = {
       description              = "Bastion to WEB"
     },
 
-    web_80 = {
+    web_in_80 = {
       sg_name                  = "web"
       security_group_id        = ""
       type                     = "ingress"
       from_port                = 80
       to_port                  = 80
       protocol                 = "tcp"
-      cidr_blocks              = ["10.50.0.0/16", ]
+      cidr_blocks              = ["10.50.10.0/24", "10.50.20.0/24", ]
       source_security_group_id = ""
       ipv6_cidr_blocks         = []
       prefix_list_ids          = []
@@ -68,14 +68,14 @@ rules = {
       description              = "Bastion to WEB"
     },
 
-    was = {
+    was_in_22 = {
       sg_name                  = "was"
       security_group_id        = ""
       type                     = "ingress"
       from_port                = 22
       to_port                  = 22
       protocol                 = "tcp"
-      cidr_blocks              = ["10.50.0.0/16", ]
+      cidr_blocks              = ["10.50.10.0/24", ]
       source_security_group_id = ""
       ipv6_cidr_blocks         = []
       prefix_list_ids          = []
@@ -83,14 +83,14 @@ rules = {
       description              = "Bastion to WAS"
     },
 
-    was_8080 = {
+    was_in_8080 = {
       sg_name                  = "was"
       security_group_id        = ""
       type                     = "ingress"
       from_port                = 8080
       to_port                  = 8080
       protocol                 = "tcp"
-      cidr_blocks              = ["10.50.0.0/16", ]
+      cidr_blocks              = ["10.50.110.0/24", "10.50.120.0/24", ]
       source_security_group_id = ""
       ipv6_cidr_blocks         = []
       prefix_list_ids          = []
@@ -98,14 +98,14 @@ rules = {
       description              = "Bastion to WAS"
     },
 
-    rds = {
+    rds_in_3306 = {
       sg_name                  = "rds"
       security_group_id        = ""
       type                     = "ingress"
       from_port                = 3306
       to_port                  = 3306
       protocol                 = "tcp"
-      cidr_blocks              = ["10.50.0.0/16", ]
+      cidr_blocks              = ["10.50.10.0/24", "10.50.130.0/24", "10.50.140.0/24" ]
       source_security_group_id = ""
       ipv6_cidr_blocks         = []
       prefix_list_ids          = []
@@ -113,14 +113,14 @@ rules = {
       description              = "AWS Aurora RDS"
     },
 
-    front = {
+    front_in_80 = {
       sg_name                  = "front"
       security_group_id        = ""
       type                     = "ingress"
       from_port                = 80
       to_port                  = 80
       protocol                 = "tcp"
-      cidr_blocks              = ["10.50.0.0/16", ]
+      cidr_blocks              = ["0.0.0.0/0" ]
       source_security_group_id = ""
       ipv6_cidr_blocks         = []
       prefix_list_ids          = []
@@ -128,14 +128,14 @@ rules = {
       description              = "Front ALB SG - HTTP"
     },
 
-    backend = {
+    backend_in_8080 = {
       sg_name                  = "backend"
       security_group_id        = ""
       type                     = "ingress"
       from_port                = 8080
       to_port                  = 8080
       protocol                 = "tcp"
-      cidr_blocks              = ["10.50.0.0/16", ]
+      cidr_blocks              = ["10.50.110.0/24", "10.50.120.0/24", "10.50.130.0/24", "10.50.140.0/24", ]
       source_security_group_id = ""
       ipv6_cidr_blocks         = []
       prefix_list_ids          = []
