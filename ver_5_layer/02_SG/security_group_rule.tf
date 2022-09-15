@@ -1,3 +1,4 @@
+# Rule source - CIDR / ingress
 resource "aws_security_group_rule" "cidr_ingress" {
     for_each          = { for i in local.cidr_ingress_rules : i.name => i }
     
@@ -14,6 +15,7 @@ resource "aws_security_group_rule" "cidr_ingress" {
     depends_on = [aws_security_group.this]
 }
 
+# Rule source - CIDR / egress
 resource "aws_security_group_rule" "cidr_egress" {
     for_each          = { for i in local.cidr_egress_rules : i.name => i }
     
@@ -30,10 +32,7 @@ resource "aws_security_group_rule" "cidr_egress" {
     depends_on = [aws_security_group.this]
 }
 
-###########################################################################################
-# 2-1. source - self / ingress
-###########################################################################################
-
+# Rule source - self / ingress
 resource "aws_security_group_rule" "self_ingress" {
     for_each          = { for i in local.self_ingress_rules : i.name => i }
     
@@ -49,10 +48,7 @@ resource "aws_security_group_rule" "self_ingress" {
     depends_on = [aws_security_group.this] 
 }
 
-###########################################################################################
-# 2-2. source - self / egress
-###########################################################################################
-
+# Rule source - self / egress
 resource "aws_security_group_rule" "self_egress" {
     for_each          = { for i in local.self_egress_rules : i.name => i }
 
@@ -68,9 +64,7 @@ resource "aws_security_group_rule" "self_egress" {
     depends_on = [aws_security_group.this]
 }
 
-###########################################################################################
-# 3-1. source - SG   / ingress
-###########################################################################################
+# Rule source - sg / ingress
 resource "aws_security_group_rule" "security_group_id_ingress" {
     for_each          = { for i in local.sg_ingress_rules : i.name => i}
     
@@ -86,9 +80,7 @@ resource "aws_security_group_rule" "security_group_id_ingress" {
     depends_on = [aws_security_group.this]
 }
 
-###########################################################################################
-# 3-2. source - SG   / egress
-###########################################################################################
+# Rule source - sg / egress
 resource "aws_security_group_rule" "security_group_id_egress" {
     for_each          = { for i in local.sg_egress_rules : i.name => i}
     
