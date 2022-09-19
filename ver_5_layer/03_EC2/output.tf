@@ -1,3 +1,4 @@
-# output "ec2_instance_id" {
-#     value = aws_instance.this
-# }
+output "ec2_instance" {
+    # value = aws_instance.this[*].id
+    value = aws_instance.this
+}
