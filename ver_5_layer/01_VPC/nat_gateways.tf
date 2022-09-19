@@ -5,7 +5,7 @@ resource "aws_eip" "this" {
   tags = merge(var.tags,
     tomap({
       Name = format(
-        "%s-%s-%s-eip", 
+        "%s-%s-%s-natgw-eip", 
         var.prefix, 
         var.vpc_name, 
         var.azs[count.index])

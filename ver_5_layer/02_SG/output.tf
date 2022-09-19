@@ -2,6 +2,7 @@
 #   value = data.terraform_remote_state.vpc.outputs.vpc_id
 # }
 
-# output "security_groups" {
-#   value = aws_security_group.this
-# }
+output "security_groups" {
+  value = aws_security_group.this
+}
+

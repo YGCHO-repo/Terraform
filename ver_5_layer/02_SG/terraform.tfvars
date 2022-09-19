@@ -2,14 +2,12 @@ region = "ap-northeast-2"
 
 prefix = "test"
 
-# sg_name = "tf-msc"
-# sg_name = ["bastion", "web", "was", "rds"]
-
 tags = {
-    "CreatedByTerraform" = "True"
-    "purpose"            = "Test"
-    "owner"              = "Megazone"
-    "resource"           = "SG"
+  "CreatedByTerraform" = "True"
+  "purpose"            = "Terraform_Test"
+  "owner"              = "MSC"
+  "purpose"            = "TEST"
+  "resource"           = "SG"
 }
 
 sg_name = {
@@ -36,6 +34,36 @@ rules = {
       prefix_list_ids          = []
       self                     = false
       description              = "SSH for Bastion server"
+    },
+
+    bastion_in_80 = {
+      sg_name                  = "bastion"
+      security_group_id        = ""
+      type                     = "ingress"
+      from_port                = 80
+      to_port                  = 80
+      protocol                 = "tcp"
+      cidr_blocks              = ["100.100.100.100/32", ]
+      source_security_group_id = ""
+      ipv6_cidr_blocks         = []
+      prefix_list_ids          = []
+      self                     = false
+      description              = "Monitoring HTTP 80 port"
+    },
+
+    bastion_out_all = {
+      sg_name                  = "bastion"
+      security_group_id        = ""
+      type                     = "egress"
+      from_port                = 0
+      to_port                  = 0
+      protocol                 = "-1"
+      cidr_blocks              = ["0.0.0.0/0", ]
+      source_security_group_id = ""
+      ipv6_cidr_blocks         = []
+      prefix_list_ids          = []
+      self                     = false
+      description              = "Default SG outbound rule"
     },
 
     web_in_22 = {
@@ -65,7 +93,22 @@ rules = {
       ipv6_cidr_blocks         = []
       prefix_list_ids          = []
       self                     = false
-      description              = "Bastion to WEB"
+      description              = "WEB HTTP 80 port"
+    },
+
+    web_out_all = {
+      sg_name                  = "web"
+      security_group_id        = ""
+      type                     = "egress"
+      from_port                = 0
+      to_port                  = 0
+      protocol                 = "-1"
+      cidr_blocks              = ["0.0.0.0/0", ]
+      source_security_group_id = ""
+      ipv6_cidr_blocks         = []
+      prefix_list_ids          = []
+      self                     = false
+      description              = "Default SG outbound rule"
     },
 
     was_in_22 = {
@@ -95,7 +138,22 @@ rules = {
       ipv6_cidr_blocks         = []
       prefix_list_ids          = []
       self                     = false
-      description              = "Bastion to WAS"
+      description              = "WAS 8080 port"
+    },
+
+    was_out_all = {
+      sg_name                  = "was"
+      security_group_id        = ""
+      type                     = "egress"
+      from_port                = 0
+      to_port                  = 0
+      protocol                 = "-1"
+      cidr_blocks              = ["0.0.0.0/0", ]
+      source_security_group_id = ""
+      ipv6_cidr_blocks         = []
+      prefix_list_ids          = []
+      self                     = false
+      description              = "Default SG outbound rule"
     },
 
     rds_in_3306 = {
@@ -110,7 +168,22 @@ rules = {
       ipv6_cidr_blocks         = []
       prefix_list_ids          = []
       self                     = false
-      description              = "AWS Aurora RDS"
+      description              = "AWS Aurora RDS 3306 port"
+    },
+
+    rds_out_all = {
+      sg_name                  = "rds"
+      security_group_id        = ""
+      type                     = "egress"
+      from_port                = 0
+      to_port                  = 0
+      protocol                 = "-1"
+      cidr_blocks              = ["0.0.0.0/0", ]
+      source_security_group_id = ""
+      ipv6_cidr_blocks         = []
+      prefix_list_ids          = []
+      self                     = false
+      description              = "Default SG outbound rule"
     },
 
     front_in_80 = {
@@ -125,7 +198,22 @@ rules = {
       ipv6_cidr_blocks         = []
       prefix_list_ids          = []
       self                     = false
-      description              = "Front ALB SG - HTTP"
+      description              = "Front ALB SG - HTTP 80 port"
+    },
+
+    front_out_all = {
+      sg_name                  = "front"
+      security_group_id        = ""
+      type                     = "egress"
+      from_port                = 0
+      to_port                  = 0
+      protocol                 = "-1"
+      cidr_blocks              = ["0.0.0.0/0", ]
+      source_security_group_id = ""
+      ipv6_cidr_blocks         = []
+      prefix_list_ids          = []
+      self                     = false
+      description              = "Default SG outbound rule"
     },
 
     backend_in_8080 = {
@@ -140,6 +228,21 @@ rules = {
       ipv6_cidr_blocks         = []
       prefix_list_ids          = []
       self                     = false
-      description              = "Backend ALB SG"
+      description              = "Backend ALB SG - 8080 port"
     },
+
+    backend_out_all = {
+      sg_name                  = "backend"
+      security_group_id        = ""
+      type                     = "egress"
+      from_port                = 0
+      to_port                  = 0
+      protocol                 = "-1"
+      cidr_blocks              = ["0.0.0.0/0", ]
+      source_security_group_id = ""
+      ipv6_cidr_blocks         = []
+      prefix_list_ids          = []
+      self                     = false
+      description              = "Default SG outbound rule"
+    }
 }

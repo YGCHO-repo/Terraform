@@ -37,8 +37,9 @@ subnets = {
 }
 
 tags = {
-  "CreatedByTerraform"  = "True"
-  "purpose"             = "Test"
-  "owner"               = "Megazone"
-  "resource"            = "VPC"
+  "CreatedByTerraform" = "True"
+  "purpose"            = "Terraform_Test"
+  "owner"              = "MSC"
+  "purpose"            = "TEST"
+  "resource"           = "VPC"
 }

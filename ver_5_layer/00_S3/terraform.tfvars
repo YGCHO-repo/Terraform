@@ -12,7 +12,7 @@ dynamodb_table = "test-terraform-state-locks"
 // 생성 리소스 기본 TAG 키/값
 tags = {
   "CreatedByTerraform" = "true"
-  "purpose"            = "TerraformTest"
+  "purpose"            = "Terraform_Test"
   "owner"              = "msc"
   "purpose"            = "TEST"
   "resource"           = "backend_S3"
