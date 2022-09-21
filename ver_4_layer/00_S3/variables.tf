@@ -28,7 +28,7 @@ variable "tags" {
   default = {
     "CreatedByTerraform" = "true"
     "purpose"            = "TerraformTest"
-    "owner"              = "msc"
+    "owner"              = "MSC"
     "purpose"            = "TEST"
     "resource"           = "backend_S3"
   }

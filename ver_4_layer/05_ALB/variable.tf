@@ -32,7 +32,7 @@ variable "tags" {
   default = {
     "CreatedByTerraform" = "True"
     "purpose"            = "Test"
-    "owner"              = "msc"
+    "owner"              = "MSC"
     "resource"           = "ALB"
   }
 }

@@ -10,7 +10,7 @@ terraform {
   backend "s3" {
     bucket         = "test-terraform-state-backend-msc"
     dynamodb_table = "test-terraform-state-locks"
-    key            = "rds/aurora/terraform.tfstate"
+    key            = "rds/terraform.tfstate"
     region         = "ap-northeast-2"
     encrypt        = true
   }

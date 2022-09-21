@@ -582,7 +582,7 @@ variable "tags" {
   default = {
     "CreatedByTerraform" = "True"
     "purpose"            = "Test"
-    "owner"              = "msc"
+    "owner"              = "MSC"
     "resource"           = "SG"
   }
 }
@@ -797,7 +797,7 @@ variable "tags" {
   default = {
     "CreatedByTerraform" = "True"
     "purpose"            = "Test"
-    "owner"              = "msc"
+    "owner"              = "MSC"
     "resource"           = "EC2"
   }
 }
@@ -911,7 +911,7 @@ variable "tags" {
   default = {
     "CreatedByTerraform" = "True"
     "purpose"            = "Test"
-    "owner"              = "msc"
+    "owner"              = "MSC"
     "resource"           = "EC2"
   }
 }
@@ -1067,7 +1067,7 @@ variable "tags" {
   default = {
     "CreatedByTerraform" = "True"
     "purpose"            = "Test"
-    "owner"              = "msc"
+    "owner"              = "MSC"
     "resource"           = "ALB"
   }
 }
@@ -1204,7 +1204,7 @@ variable "tags" {
   default = {
     "CreatedByTerraform" = "True"
     "purpose"            = "Test"
-    "owner"              = "msc"
+    "owner"              = "MSC"
     "resource"           = "RDS"
   }
 }

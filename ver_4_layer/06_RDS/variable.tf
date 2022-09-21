@@ -16,7 +16,6 @@ variable "azs" {
 variable "rds_name" {
   type    = string
   default = "rds-aurora"
-
 }
 
 # variable "engine" {
@@ -62,7 +61,7 @@ variable "tags" {
   default = {
     "CreatedByTerraform" = "True"
     "purpose"            = "Test"
-    "owner"              = "msc"
+    "owner"              = "MSC"
     "resource"           = "RDS"
   }
 }
