@@ -13,7 +13,6 @@ dynamodb_table = "test-terraform-state-locks"
 tags = {
   "CreatedByTerraform" = "true"
   "purpose"            = "Terraform_Test"
-  "owner"              = "msc"
-  "purpose"            = "TEST"
+  "owner"              = "MSC"
   "resource"           = "backend_S3"
 }

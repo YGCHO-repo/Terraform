@@ -422,7 +422,7 @@ resource "aws_security_group" "backend_alb_sg" {
 #                        SG rule Sample
 # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 /* 
- resource "aws_security_group_rule" "name" {
+resource "aws_security_group_rule" "name" {
     description = ""
     type = "ingress" & "egress"
     from_port = 443

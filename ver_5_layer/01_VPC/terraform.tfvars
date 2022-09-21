@@ -40,6 +40,5 @@ tags = {
   "CreatedByTerraform" = "True"
   "purpose"            = "Terraform_Test"
   "owner"              = "MSC"
-  "purpose"            = "TEST"
   "resource"           = "VPC"
 }
