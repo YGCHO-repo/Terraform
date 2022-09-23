@@ -1,13 +1,13 @@
-# ++++++++++++++++++++++++++++++++++++++++++++++
-#               RDS Subnet group
-# ++++++++++++++++++++++++++++++++++++++++++++++
+
 resource "aws_db_subnet_group" "this" {
-  description = "RDS Aurora Database subnet group"
-  name        = format("%s-tf-%s-subnet-group", var.prefix, var.rds_name)
+  for_each = { for i in local.subnet_group : i.name => i }
+
+  name = format("%s-tf-%s-subnet-group", var.prefix, each.value.rds_name)
+
   subnet_ids = [
-    data.terraform_remote_state.vpc.outputs.rds_a_subnet_id,
-    data.terraform_remote_state.vpc.outputs.rds_c_subnet_id
+    data.terraform_remote_state.vpc.outputs.subnet_ids[each.value.rds_subnet_group_cidr_a],
+    data.terraform_remote_state.vpc.outputs.subnet_ids[each.value.rds_subnet_group_cidr_c]
   ]
 
-  tags = merge(var.tags, tomap({Name = format("%s-tf-%s-subnet-group", var.prefix, var.rds_name)}))
+  tags = merge(var.tags, tomap({ Name = format("%s-tf-%s-subnet-group", var.prefix, each.value.rds_name) }))
 }

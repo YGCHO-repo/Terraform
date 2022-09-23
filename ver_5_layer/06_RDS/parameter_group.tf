@@ -1,34 +1,33 @@
 # Cluster PG type
 resource "aws_rds_cluster_parameter_group" "this" {
-  # description = 
-  # name   = "test-tf-rds-cluster-mysql3-01-0-cpg"
+  for_each = { for i in local.rds_parameter : i.name => i }
 
-  name   = "test-tf-aurora-mysql8-0"
-  family = "aurora-mysql8.0"
+  description = format("%s-tf-%s-parameter-group", var.prefix, each.value.parameter_group_name)
+  name        = format("%s-tf-%s-parameter-group", var.prefix, each.value.parameter_group_name)
+  family      = format("%s", each.value.parameter_group_family)
 
-  parameter {
-    name  = "character_set_server"
-    value = "utf8"
+
+  dynamic "parameter" {
+    for_each = var.add_parameter
+    iterator = item
+
+    content {
+      name  = item.value["name"]
+      value = item.value["value"]
+      # apply_method = "immediate" # //(Default)(즉시반영)  
+    }
   }
-
-  parameter {
-    name  = "character_set_client"
-    value = "utf8"
-  }
+  tags = merge(var.tags, tomap({ Name = format(format("%s-tf-%s--parameter-group", var.prefix, each.value.parameter_group_name)) }))
 }
 
 
 # PG type
 resource "aws_db_parameter_group" "this" {
-  # description = 
-  # name   = "test-tf-rds-cluster-mysql3-01-0-pg"
+  for_each = { for i in local.rds_parameter : i.name => i }
 
-  name   = "test-tf-aurora-mysql8-0"
-  family = "aurora-mysql8.0"
+  description = format("%s-tf-%s-parameter-group", var.prefix, each.value.parameter_group_name)
+  name        = format("%s-tf-%s-parameter-group", var.prefix, each.value.parameter_group_name)
+  family      = format("%s", each.value.parameter_group_family)
+
+  tags = merge(var.tags, tomap({ Name = format(format("%s-tf-%s--parameter-group", var.prefix, each.value.parameter_group_name)) }))
 }
-
-
-# RDS Option group
-# resource "aws_db_option_group" "this" {
-#
-# }
