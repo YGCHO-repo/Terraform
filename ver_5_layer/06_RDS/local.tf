@@ -34,16 +34,31 @@ locals {
   ])
 }
 
+# locals {
+#   rds_instance = flatten([
+#     for key, value in var.add_rds_aurora : {
+#       name     = key
+#       rds_name = value.rds_name
+#       engine         = value.engine
+#       engine_version = value.engine_version
+#       instance_class = value.instance_class
+#       instance_name_list = value.instance_name_list
+#     }
+#   ])
+# }
+
 locals {
   rds_instance = flatten([
-    for key, value in var.add_rds_aurora : {
-      name     = key
-      rds_name = value.rds_name
+    for key, value in var.add_rds_aurora : [
+      for item in value.instance_name_list: {
+        name     = key
+        instance_name_list = item
 
-      engine         = value.engine
-      engine_version = value.engine_version
-
-      instance_class = value.instance_class
-    }
+        rds_name = value.rds_name
+        engine         = value.engine
+        engine_version = value.engine_version
+        instance_class = value.instance_class
+      }
+    ]
   ])
 }

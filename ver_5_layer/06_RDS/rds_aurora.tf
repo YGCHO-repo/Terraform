@@ -36,9 +36,9 @@ resource "aws_rds_cluster" "this" {
 # 1. 변수(키값) 기준으로 생성 되도록 구성 할것!
 # 2. 옵션값 bool 값도? 전체 입/출력 처리 할것인지 고민하면서 작성해야됨 향후에 확인하자.
 resource "aws_rds_cluster_instance" "this" {
-  for_each = { for i in local.rds_instance : i.name => i }
+  for_each = { for i in local.rds_instance : i.instance_name_list => i }
 
-  identifier = format("%s-tf-%s-instance-%s", var.prefix, each.value.rds_name, count.index + 1)
+  identifier = format("%s-tf-%s-instance-%s", var.prefix, each.value.rds_name, each.value.instance_name_list)
 
   cluster_identifier   = aws_rds_cluster.this[each.value.name].id
   db_subnet_group_name = aws_db_subnet_group.this[each.value.name].id
@@ -56,5 +56,5 @@ resource "aws_rds_cluster_instance" "this" {
   apply_immediately     = false
   copy_tags_to_snapshot = false
 
-  tags = merge(var.tags, tomap({ Name = format("%s-tf-%s-%s", var.prefix, var.rds_name, count.index) }))
+  tags = merge(var.tags, tomap({ Name = format("%s-tf-%s-instance-%s", var.prefix, each.value.rds_name, each.value.instance_name_list)}))
 }
