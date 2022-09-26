@@ -177,3 +177,29 @@ $ terraform show
 > -
 
 ---
+
+# S3 Folder
+
+> 폴더 항목
+>
+> ```
+> 00_S3
+> ├── main.tf
+> ├── outputs.tf
+> ├── provider.tf
+> ├── state-backend.tf
+> ├── terraform.tfvars
+> └── variables.tf
+> ```
+
+---
+
+> 명령어
+>
+> ```
+> $ cd 00_S3
+>
+> $ terraform init
+> $ terraform plan -refresh=false -out=planfile -var-file=terraform.tfvars
+> $ terraform apply planfile
+> ```

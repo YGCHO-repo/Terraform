@@ -25,7 +25,7 @@ add_rds_aurora = {
     security_group_name = "rds"
 
     instance_class = "db.t3.medium"
-    instance_name_list = ["bule", "green", ]// "leman", "red"]
+    instance_name_list = ["bule", "green", ] #// "leman", "red"]
   },
 }
 
