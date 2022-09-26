@@ -141,7 +141,7 @@ VPC/EC2/SG/RDS는 remote backend
 $ terraform init
 
 계획
-$ terraform plan -refresh=false -out=planfile
+$ terraform plan -refresh=false -out=planfile -var-file=terraform.tfvars
 
 적용
 $ terraform apply planfile
