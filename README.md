@@ -14,8 +14,6 @@
 
 - Terraform 관련 도큐먼트 입니다.
 
----
-
 <pre>
 <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/README.md">DOCS</a>
     ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/00_Terraform/README.md">Terraform</a>
