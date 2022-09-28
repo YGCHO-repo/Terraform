@@ -1,8 +1,20 @@
-## Terraform
+# Terraform
 
-=======
+### MZC MSC Terraform document & code
 
-#### Terraform [DOCS](https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/README.md)
+---
+
+<!-- ### Terraform [CODE](https://github.com/YGCHO-repo/Terraform/blob/main/CODE/README.md) -->
+
+### 1. Terraform [CODE](https://github.com/YGCHO-repo/Terraform/blob/main/CODE/)
+
+- Terraform 예제 샘플 코드 입니다.
+
+### 2. Terraform [DOCS](https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/README.md)
+
+- Terraform 관련 도큐먼트 입니다.
+
+---
 
 <pre>
 <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/README.md">DOCS</a>
