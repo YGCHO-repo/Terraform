@@ -1,2 +1,0 @@
-# demo
-MSC Domo repository
