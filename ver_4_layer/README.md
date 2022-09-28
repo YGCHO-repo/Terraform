@@ -234,7 +234,6 @@ variable "tags" {
 ```
 
 - **variable "region" {...} 블럭 생성 진행**
-
   - description
     - 변수의 목적을 간단하게 작성
   - type
@@ -244,9 +243,9 @@ variable "tags" {
     - 폴더 내부에서 **_`" var.region "`_**을 설정시 적용될 내용
     - **_`"ap-northeast-2"`_** 설정
 
-- **variable "s3_bucket" {...} 블럭 생성 진행**
+* - **variable "s3_bucket" {...} 블럭 생성 진행**
 
-  - default
+  * default
     - 폴더 내부에서 **_`"var.s3_bucket"`_**을 설정시 적용될 내용
     - **_`"test-terraform-state-backend-msc"`_** 설정
 

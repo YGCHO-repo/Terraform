@@ -6,12 +6,14 @@ resource "aws_vpc" "this" {
   enable_dns_hostnames = var.enable_dns_hostnames
   enable_dns_support   = var.enable_dns_support
 
-  tags = merge(var.tags, 
-    tomap({
-      Name = format(
-        "%s-%s",  
-        var.prefix, 
-        var.vpc_name)
+  tags = merge(
+    var.tags, 
+      tomap({
+        Name = format(
+          "%s-%s",  
+          var.prefix, 
+          var.vpc_name
+      )
     })
   )
 }
