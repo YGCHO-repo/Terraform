@@ -243,25 +243,25 @@ variable "tags" {
     - 폴더 내부에서 **_`" var.region "`_**을 설정시 적용될 내용
     - **_`"ap-northeast-2"`_** 설정
 
-* - **variable "s3_bucket" {...} 블럭 생성 진행**
+* **variable "s3_bucket" {...} 블럭 생성 진행**
 
-  * default
+  - default
     - 폴더 내부에서 **_`"var.s3_bucket"`_**을 설정시 적용될 내용
     - **_`"test-terraform-state-backend-msc"`_** 설정
 
-- **variable "s3_acl" {...} 블럭 생성 진행**
+* **variable "s3_acl" {...} 블럭 생성 진행**
 
   - default
     - 폴더 내부에서 **_`"var.s3_acl"`_**을 설정시 적용될 내용
     - **_`"private"```_** 설정
 
-- **variable "dynamodb_table" {...} 블럭 생성 진행**
+* **variable "dynamodb_table" {...} 블럭 생성 진행**
 
   - default
     - 폴더 내부에서 **_`"var.dynamodb_table"`_** 을 설정시 적용될 내용
     - **_`"test-terraform-state-locks"`_** 설정
 
-- **variable "tags" {...} 블럭 생성 진행**
+* **variable "tags" {...} 블럭 생성 진행**
   - type
     - 변수의 타입을 설정
       - **`map(string)`** 설정

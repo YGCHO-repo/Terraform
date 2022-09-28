@@ -15,9 +15,6 @@ resource "aws_eip" "this" {
   )
 }
 
-
-
-
 resource "aws_instance" "this" {
 
   for_each = { for i in local.all_instance : i.name => i }
