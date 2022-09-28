@@ -37,6 +37,6 @@ terraform {
 
 ---
 
-### [다음 페이지](https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/07_Backends/02_Locking/README.md)
+### [다음 페이지](https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/07_Backends/02_State_Locking/README.md)
 
 ### [HOME](https://github.com/YGCHO-repo/Terraform/blob/main/README.md)
