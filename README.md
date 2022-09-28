@@ -13,6 +13,7 @@
 ### 2. Terraform [DOCS](https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/README.md)
 
 - Terraform 관련 도큐먼트 입니다.
+- 테스트
 
 <pre>
 <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/README.md">DOCS</a>
