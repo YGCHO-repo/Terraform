@@ -50,9 +50,11 @@
 
     - **Windows OS**
 
-      - 설치 파일 다운로드 및 설치
-        - https://www.terraform.io/downloads
-      - 패키지 매니저 사용 설치
+      - **[설치 파일 다운로드 및 설치](https://www.terraform.io/downloads) _(Link)_**
+
+        >
+
+      - **패키지 매니저 사용 설치**
 
         ```
         [실행창]
@@ -65,8 +67,8 @@
         ```
 
     - **MAC OS**
-      - Homebrew (설치 되어 있다면 Skip)
-      - 패키지 매니저 사용 설치
+      - **Homebrew _(설치 되어 있다면 Skip)_**
+      - **패키지 매니저 사용 설치**
         ```
           $ brew tap hashicorp/tap
           $ brew install hashicorp/tap/terraform
@@ -76,3 +78,7 @@
     - https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/getting-started-install.html
 
 ---
+
+#### [ 예제 Code 구성도 ]
+
+- ![3-Tier](https://github.com/YGCHO-repo/Terraform/blob/main/CODE/3-tier.png)
