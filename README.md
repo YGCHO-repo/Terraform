@@ -8,6 +8,19 @@
 
 - Terraform 예제 샘플 코드 입니다.
 
+<pre>
+<a href = "https://github.com/YGCHO-repo/Terraform/tree/main/CODE/">CODE</a>
+    ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/CODE/ver_1_plaintext">ver_1_plaintext</a>
+    │
+    ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/CODE/ver_2_plaintext">ver_2_plaintext</a>
+    │
+    ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/CODE/ver_3_hierarchy">ver_3_hierarchy</a>
+    │
+    ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/CODE/ver_4_ hierarchy">ver_4_hierarchy</a>
+    │
+    └── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/CODE/ver_5_ hierarchy">ver_5_hierarchy</a>
+</pre>
+
 ### 2. Terraform [DOCS](https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/README.md)
 
 - Terraform 관련 도큐먼트 입니다.
