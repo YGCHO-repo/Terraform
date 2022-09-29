@@ -81,4 +81,6 @@
 
 #### [ 예제 Code 구성도 ]
 
-- ![3-Tier](https://github.com/YGCHO-repo/Terraform/blob/main/CODE/3-Tier.png)
+![3-Tire](https://user-images.githubusercontent.com/41570538/192953204-975df47b-7881-46ff-a0a4-de3be6b77acb.png)
+
+<img src="https://user-images.githubusercontent.com/41570538/192953204-975df47b-7881-46ff-a0a4-de3be6b77acb.png"  width="1000" height="900">
