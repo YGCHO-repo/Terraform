@@ -8,6 +8,22 @@
 
 ---
 
+<pre>
+<b><a href = "https://github.com/YGCHO-repo/Terraform/tree/main/CODE/">CODE</a></b>
+    ├── <b><a href = "https://github.com/YGCHO-repo/Terraform/blob/main/CODE/ver_1_plaintext">ver_1_plaintext</a></b>
+    │
+    ├── <b><a href = "https://github.com/YGCHO-repo/Terraform/blob/main/CODE/ver_2_plaintext">ver_2_plaintext</a></b>
+    │
+    ├── <b><a href = "https://github.com/YGCHO-repo/Terraform/blob/main/CODE/ver_3_hierarchy">ver_3_hierarchy</a></b>
+    │
+    ├── <b><a href = "https://github.com/YGCHO-repo/Terraform/blob/main/CODE/ver_4_ hierarchy">ver_4_hierarchy</a></b>
+    │
+    └── <b><a href = "https://github.com/YGCHO-repo/Terraform/blob/main/CODE/ver_5_ hierarchy">ver_5_hierarchy</a></b>
+
+</pre>
+
+---
+
 #### [ 폴더구성 및 설명 ]
 
 1.  **`var_1_plaintext`**
