@@ -14,9 +14,10 @@
     ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/05_Modules/README.md">Modules</a>
     ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/06_State/README.md">State</a>
     │       ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/06_State/01_Purpose_of_Terraform_State/README.md">Purpose_of_Terraform_State</a>
-    │       ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/06_State/02_Remote_Terraform_State/README.md">Remote_State</a>
+    │       ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/06_State/02_Remote_State/README.md">Remote_State</a>
     │       └── <i><b><a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/06_State/03_State_Locking/README.md">State_Locking</a></b></i>
-    └── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/07_Backends/README.md">Backends</a>
+    ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/07_Backends/README.md">Backends</a>
+    └── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/08_Functions/README.md">Functions</a>
 </pre>
 
 ### State Locking
@@ -31,6 +32,6 @@
 
 ---
 
-### [이전 페이지](https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/06_State/02_Remote_Terraform_State/README.md))
+### [이전 페이지](https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/06_State/02_Remote_State/README.md))
 
 ### [HOME](https://github.com/YGCHO-repo/Terraform/blob/main/README.md)

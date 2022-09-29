@@ -14,8 +14,8 @@
     │               ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/02_Commands(CLI)/03_Destroy/README.md">Destroy</a>
     │               ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/02_Commands(CLI)/04_FMT/README.md">FMT</a>
     │               ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/02_Commands(CLI)/05_Graph/README.md">Graph</a>
-    │               ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/02_Commands(CLI)/06_Import/README.md">Import</a>
-    │               ├── <i><b><a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/02_Commands(CLI)/07_Init/README.md">Init</a></b></i>
+    │               ├── <i><b><a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/02_Commands(CLI)/06_Import/README.md">Import</a></b></i>
+    │               ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/02_Commands(CLI)/07_Init/README.md">Init</a>
     │               ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/02_Commands(CLI)/08_Output/README.md">Output</a>
     │               ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/02_Commands(CLI)/09_Plan/README.md">Plan</a>
     │               ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/02_Commands(CLI)/10_Providers/README.md">Providers</a>
@@ -24,7 +24,8 @@
     ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/04_Provisioners/README.md">Provisioners</a>
     ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/05_Modules/README.md">Modules</a>
     ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/06_State/README.md">State</a>
-    └── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/07_Backends/README.md">Backends</a>
+    ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/07_Backends/README.md">Backends</a>
+    └── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/08_Functions/README.md">Functions</a>
 
 </pre>
 

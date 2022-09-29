@@ -15,7 +15,8 @@
     │         ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/05_Modules/01_Module_Sources/README.md">Module_Sources</a>
     │         └── <i><b><a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/05_Modules/02_Module_Composition/README.md">Module_Composition</a></b></i>
     ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/06_State/README.md">State</a>
-    └── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/07_Backends/README.md">Backends</a>
+    ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/07_Backends/README.md">Backends</a>
+    └── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/08_Functions/README.md">Functions</a>
 
 </pre>
 

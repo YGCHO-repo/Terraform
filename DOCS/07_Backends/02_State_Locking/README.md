@@ -13,9 +13,10 @@
     ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/04_Provisioners/README.md">Provisioners</a>
     ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/05_Modules/README.md">Modules</a>
     ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/06_State/README.md">State</a>
-    └── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/07_Backends/README.md">Backends</a>
-               ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/07_Backends/01_Backends_Configuration/README.md">Remote_State</a>
-               └── <i><b><a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/07_Backends/02_State_Locking/README.md">State_Locking</a></b></i>
+    ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/07_Backends/README.md">Backends</a>
+    │          ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/07_Backends/01_Backends_Configuration/README.md">Remote_State</a>
+    │          └── <i><b><a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/07_Backends/02_State_Locking/README.md">State_Locking</a></b></i>
+    └── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/08_Functions/README.md">Functions</a>
 </pre>
 
 ### Locking

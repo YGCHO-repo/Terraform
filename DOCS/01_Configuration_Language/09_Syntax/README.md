@@ -1,4 +1,8 @@
-### Syntax
+### [HOME](https://github.com/YGCHO-repo/Terraform/blob/main/README.md) / [DOCS](https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/README.md) / [01.Configuration Language](https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/01_Configuration_Language/README.md) / [09.Syntax](https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/01_Configuration_Language/09_Syntax/README.md)
+
+---
+
+#### DOCS TREE
 
 <pre>
 <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/README.md">DOCS</a>
@@ -18,7 +22,8 @@
     ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/04_Provisioners/README.md">Provisioners</a>
     ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/05_Modules/README.md">Modules</a>
     ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/06_State/README.md">State</a>
-    └── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/07_Backends/README.md">Backends</a>
+    ├── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/07_Backends/README.md">Backends</a>
+    └── <a href = "https://github.com/YGCHO-repo/Terraform/blob/main/DOCS/08_Functions/README.md">Functions</a>
 </pre>
 
 ---
