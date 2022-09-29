@@ -81,4 +81,4 @@
 
 #### [ 예제 Code 구성도 ]
 
-- ![3-Tier](https://github.com/YGCHO-repo/Terraform/blob/main/CODE/3-tier.png)
+- ![3-Tier](https://github.com/YGCHO-repo/Terraform/blob/main/CODE/3-Tier.png)
