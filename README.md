@@ -4,7 +4,7 @@
 
 ---
 
-### 1. Terraform [CODE](https://github.com/YGCHO-repo/Terraform/blob/main/CODE/README.md)
+### 1. Terraform [CODE](https://github.com/YGCHO-repo/Terraform/tree/main/CODE)
 
 - Terraform 예제 샘플 코드 입니다.
 
