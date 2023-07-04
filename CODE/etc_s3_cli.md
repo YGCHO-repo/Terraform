@@ -60,8 +60,11 @@ aws s3 rb s3://test-terraform-state-backend-msc
 
 # For 문으로 돌려서 versions / markets 처리...
 
+#!/bin/bash
 
-BUCKET_NAME="test-terraform-state-backend-msc"
+echo "Bucket Name Input and Enter"
+read input_name
+BUCKET_NAME=${input_name}
 
 
 aws s3 rm s3://${BUCKET_NAME}/ --recursive --include "*.*"
